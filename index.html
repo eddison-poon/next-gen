@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent Hub | Testing Intelligence</title>
+  <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+<body>
+  <aside class="app-rail" aria-label="Dashboard sections">
+    <div class="brand-mark">AH</div>
+    <button class="rail-link active" data-tab="release"><span>◎</span><b>Release<br>Focus</b></button>
+    <button class="rail-link" data-tab="regression"><span>↻</span><b>Regression<br>Automation</b></button>
+    <button class="rail-link" data-tab="performance"><span>⌁</span><b>Performance<br>Testing</b></button>
+  </aside>
+
+  <main class="app-main">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Engineering Intelligence Platform</p>
+        <h1>Testing Dashboard</h1>
+      </div>
+      <div class="snapshot-chip" id="snapshotChip">Snapshot —</div>
+    </header>
+
+    <section class="tab-panel active" id="releaseTab">
+      <div class="section-title-row">
+        <div>
+          <p class="eyebrow dark">Release Focus</p>
+          <h2>Release Testing Overview</h2>
+        </div>
+        <button class="ghost-button" id="refreshButton">Refresh data</button>
+      </div>
+
+      <section class="context-bar" aria-label="Selected release context">
+        <label><span>Release Stream</span><select id="streamSelect"></select></label>
+        <label><span>Release</span><select id="releaseSelect"></select></label>
+        <label><span>Build</span><select id="buildSelect"></select></label>
+        <div class="context-note"><span>Current scope</span><strong id="scopeCount">—</strong></div>
+      </section>
+
+      <section class="kpi-grid" id="kpiGrid"></section>
+
+      <section class="progress-card" id="executionProgress"></section>
+
+      <section class="environment-card">
+        <div class="subheading-row">
+          <div><p class="eyebrow dark">Release Gate</p><h3>Environment Status</h3></div>
+          <span class="muted">Pass rate is calculated from completed Manual scenarios in each environment</span>
+        </div>
+        <div class="environment-grid" id="environmentGrid"></div>
+      </section>
+
+      <section class="explorer-shell release-explorer">
+        <aside class="navigator-panel">
+          <div class="panel-heading">
+            <div><p class="eyebrow dark">Navigator</p><h3>Release Items</h3></div>
+            <span class="count-pill" id="releaseItemCount">0</span>
+          </div>
+          <div class="search-wrap"><input id="releaseSearch" type="search" placeholder="Search Jira key or summary…"></div>
+          <div class="release-items" id="releaseItems"></div>
+        </aside>
+
+        <section class="detail-panel" id="releaseDetail"></section>
+      </section>
+    </section>
+
+    <section class="tab-panel" id="regressionTab">
+      <div class="placeholder-shell">
+        <p class="eyebrow dark">Regression / Automation</p>
+        <h2>Capability Explorer</h2>
+        <p>This tab will retain the Capability Explorer interaction model and focus only on automation/regression coverage. Automation is a supporting signal and does not gate release readiness.</p>
+        <div class="placeholder-grid"><div>Capability coverage</div><div>Feature automation status</div><div>Scenario regression status by environment</div></div>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="performanceTab">
+      <div class="placeholder-shell">
+        <p class="eyebrow dark">Performance Testing</p>
+        <h2>Release Performance View</h2>
+        <p>This tab will use the same Release Stream → Release → Build context and display only performance results belonging to that selection.</p>
+        <div class="placeholder-grid"><div>Latency / P95</div><div>TPS / Throughput</div><div>Error Rate / Peak Users</div></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/js/dashboard.js" defer></script>
+</body>
+</html>

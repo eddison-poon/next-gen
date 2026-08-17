@@ -1,0 +1,47 @@
+{
+  "schema_version": "ng-manual-definition-index-0.2",
+  "definitions": [
+    {
+      "manual_test_id": "M-12442-01",
+      "scenario_id": "SC-12442-01",
+      "title": "Verify trace log in GCP",
+      "jira_key": "ETIVAI-12442"
+    },
+    {
+      "manual_test_id": "M-12442-02",
+      "scenario_id": "SC-12442-02",
+      "title": "Verify trace log in Azure",
+      "jira_key": "ETIVAI-12442"
+    },
+    {
+      "manual_test_id": "M-12442-03",
+      "scenario_id": "SC-12442-03",
+      "title": "Verify trace log in local storage",
+      "jira_key": "ETIVAI-12442"
+    },
+    {
+      "manual_test_id": "M-12626-01",
+      "scenario_id": "SC-12626-01",
+      "title": "Verify liveness during blocking retrieval",
+      "jira_key": "ETIVAI-12626"
+    },
+    {
+      "manual_test_id": "M-12920-01",
+      "scenario_id": "SC-12920-01",
+      "title": "Verify x-auh-type DI header",
+      "jira_key": "ETIVAI-12920"
+    },
+    {
+      "manual_test_id": "M-12638-01",
+      "scenario_id": "SC-12638-01",
+      "title": "Verify runtime stability fix",
+      "jira_key": "ETIVAI-12638"
+    },
+    {
+      "manual_test_id": "M-10649-01",
+      "scenario_id": "SC-10649-01",
+      "title": "Verify automatic renewal",
+      "jira_key": "ETIVAI-10649"
+    }
+  ]
+}

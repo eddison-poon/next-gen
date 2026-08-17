@@ -1,0 +1,744 @@
+{
+  "schema_version": "ng-release-focus-snapshot-0.3",
+  "generated_at": "2026-08-17T14:30:00+08:00",
+  "selected": {
+    "stream_id": "agent-runtime",
+    "release_id": "runtime-2.8",
+    "build": "2.8.4"
+  },
+  "snapshots": [
+    {
+      "stream": {
+        "id": "agent-runtime",
+        "name": "Agent Runtime"
+      },
+      "release": {
+        "id": "runtime-2.8",
+        "name": "Release 2.8",
+        "build": "2.8.4",
+        "available_builds": [
+          "2.8.4",
+          "2.8.3"
+        ],
+        "release_item_count": 5
+      },
+      "kpis": {
+        "overall_health": "RED",
+        "release_test_coverage": 66.7,
+        "execution_progress": 66.7,
+        "pass_rate": 93.3,
+        "executed": 16,
+        "passed": 14,
+        "failed": 1,
+        "blocked": 1,
+        "not_executed": 8,
+        "total_applicable_gates": 24
+      },
+      "environment_health": [
+        {
+          "environment": "DEV",
+          "applicable": 0,
+          "executed": 0,
+          "passed": 0,
+          "failed": 0,
+          "blocked": 0,
+          "not_executed": 0,
+          "pass_rate": null,
+          "readiness": "N/A"
+        },
+        {
+          "environment": "SIT",
+          "applicable": 7,
+          "executed": 7,
+          "passed": 7,
+          "failed": 0,
+          "blocked": 0,
+          "not_executed": 0,
+          "pass_rate": 100.0,
+          "readiness": "READY"
+        },
+        {
+          "environment": "UAT",
+          "applicable": 7,
+          "executed": 5,
+          "passed": 4,
+          "failed": 1,
+          "blocked": 0,
+          "not_executed": 2,
+          "pass_rate": 80.0,
+          "readiness": "IN_PROGRESS"
+        },
+        {
+          "environment": "PPD",
+          "applicable": 7,
+          "executed": 3,
+          "passed": 2,
+          "failed": 0,
+          "blocked": 1,
+          "not_executed": 4,
+          "pass_rate": 100.0,
+          "readiness": "IN_PROGRESS"
+        },
+        {
+          "environment": "PROD",
+          "applicable": 3,
+          "executed": 1,
+          "passed": 1,
+          "failed": 0,
+          "blocked": 0,
+          "not_executed": 2,
+          "pass_rate": 100.0,
+          "readiness": "IN_PROGRESS"
+        }
+      ],
+      "release_items": [
+        {
+          "jira_key": "ETIVAI-12442",
+          "summary": "Agent schedule Job - add trace log for run record",
+          "issue_type": "Story",
+          "jira_url": "#",
+          "health": "RED",
+          "environment_gate": {
+            "DEV": "N/A",
+            "SIT": "PASSED",
+            "UAT": "FAILED",
+            "PPD": "NOT_EXECUTED",
+            "PROD": "N/A"
+          },
+          "features": [
+            {
+              "id": "F-12442-01",
+              "name": "GCP trace log",
+              "scenario": {
+                "id": "SC-12442-01",
+                "title": "Verify trace log in GCP",
+                "manual_test_id": "M-12442-01",
+                "jira_key": "ETIVAI-12442"
+              },
+              "applicable_environments": [
+                "SIT",
+                "UAT",
+                "PPD"
+              ],
+              "environment_status": {
+                "DEV": "N/A",
+                "SIT": "PASSED",
+                "UAT": "PASSED",
+                "PPD": "PASSED",
+                "PROD": "N/A"
+              }
+            },
+            {
+              "id": "F-12442-02",
+              "name": "Azure trace log",
+              "scenario": {
+                "id": "SC-12442-02",
+                "title": "Verify trace log in Azure",
+                "manual_test_id": "M-12442-02",
+                "jira_key": "ETIVAI-12442"
+              },
+              "applicable_environments": [
+                "SIT",
+                "UAT",
+                "PPD"
+              ],
+              "environment_status": {
+                "DEV": "N/A",
+                "SIT": "PASSED",
+                "UAT": "FAILED",
+                "PPD": "NOT_EXECUTED",
+                "PROD": "N/A"
+              }
+            },
+            {
+              "id": "F-12442-03",
+              "name": "Local storage trace log",
+              "scenario": {
+                "id": "SC-12442-03",
+                "title": "Verify trace log in local storage",
+                "manual_test_id": "M-12442-03",
+                "jira_key": "ETIVAI-12442"
+              },
+              "applicable_environments": [
+                "SIT",
+                "UAT",
+                "PPD"
+              ],
+              "environment_status": {
+                "DEV": "N/A",
+                "SIT": "PASSED",
+                "UAT": "NOT_EXECUTED",
+                "PPD": "NOT_EXECUTED",
+                "PROD": "N/A"
+              }
+            }
+          ]
+        },
+        {
+          "jira_key": "ETIVAI-12626",
+          "summary": "Prevent tenant-foundation liveness restarts during blocking RAG retrieval",
+          "issue_type": "Bug",
+          "jira_url": "#",
+          "health": "GREEN",
+          "environment_gate": {
+            "DEV": "N/A",
+            "SIT": "PASSED",
+            "UAT": "PASSED",
+            "PPD": "PASSED",
+            "PROD": "PASSED"
+          },
+          "features": [
+            {
+              "id": "F-12626-01",
+              "name": "RAG retrieval liveness",
+              "scenario": {
+                "id": "SC-12626-01",
+                "title": "Verify liveness during blocking retrieval",
+                "manual_test_id": "M-12626-01",
+                "jira_key": "ETIVAI-12626"
+              },
+              "applicable_environments": [
+                "SIT",
+                "UAT",
+                "PPD",
+                "PROD"
+              ],
+              "environment_status": {
+                "DEV": "N/A",
+                "SIT": "PASSED",
+                "UAT": "PASSED",
+                "PPD": "PASSED",
+                "PROD": "PASSED"
+              }
+            }
+          ]
+        },
+        {
+          "jira_key": "ETIVAI-12920",
+          "summary": "swb api add x-auh-type=di header",
+          "issue_type": "Story",
+          "jira_url": "#",
+          "health": "AMBER",
+          "environment_gate": {
+            "DEV": "N/A",
+            "SIT": "PASSED",
+            "UAT": "PASSED",
+            "PPD": "BLOCKED",
+            "PROD": "NOT_EXECUTED"
+          },
+          "features": [
+            {
+              "id": "F-12920-01",
+              "name": "DI header handling",
+              "scenario": {
+                "id": "SC-12920-01",
+                "title": "Verify x-auh-type DI header",
+                "manual_test_id": "M-12920-01",
+                "jira_key": "ETIVAI-12920"
+              },
+              "applicable_environments": [
+                "SIT",
+                "UAT",
+                "PPD",
+                "PROD"
+              ],
+              "environment_status": {
+                "DEV": "N/A",
+                "SIT": "PASSED",
+                "UAT": "PASSED",
+                "PPD": "BLOCKED",
+                "PROD": "NOT_EXECUTED"
+              }
+            }
+          ]
+        },
+        {
+          "jira_key": "ETIVAI-12638",
+          "summary": "agenthub runtime violation fix and stability enhancement",
+          "issue_type": "Bug",
+          "jira_url": "#",
+          "health": "AMBER",
+          "environment_gate": {
+            "DEV": "N/A",
+            "SIT": "PASSED",
+            "UAT": "PASSED",
+            "PPD": "NOT_EXECUTED",
+            "PROD": "N/A"
+          },
+          "features": [
+            {
+              "id": "F-12638-01",
+              "name": "Runtime stability",
+              "scenario": {
+                "id": "SC-12638-01",
+                "title": "Verify runtime stability fix",
+                "manual_test_id": "M-12638-01",
+                "jira_key": "ETIVAI-12638"
+              },
+              "applicable_environments": [
+                "SIT",
+                "UAT",
+                "PPD"
+              ],
+              "environment_status": {
+                "DEV": "N/A",
+                "SIT": "PASSED",
+                "UAT": "PASSED",
+                "PPD": "NOT_EXECUTED",
+                "PROD": "N/A"
+              }
+            }
+          ]
+        },
+        {
+          "jira_key": "ETIVAI-10649",
+          "summary": "MCP Enhancement - Entra ID Automatic renew",
+          "issue_type": "Story",
+          "jira_url": "#",
+          "health": "AMBER",
+          "environment_gate": {
+            "DEV": "N/A",
+            "SIT": "PASSED",
+            "UAT": "NOT_EXECUTED",
+            "PPD": "NOT_EXECUTED",
+            "PROD": "NOT_EXECUTED"
+          },
+          "features": [
+            {
+              "id": "F-10649-01",
+              "name": "Entra ID renewal",
+              "scenario": {
+                "id": "SC-10649-01",
+                "title": "Verify automatic renewal",
+                "manual_test_id": "M-10649-01",
+                "jira_key": "ETIVAI-10649"
+              },
+              "applicable_environments": [
+                "SIT",
+                "UAT",
+                "PPD",
+                "PROD"
+              ],
+              "environment_status": {
+                "DEV": "N/A",
+                "SIT": "PASSED",
+                "UAT": "NOT_EXECUTED",
+                "PPD": "NOT_EXECUTED",
+                "PROD": "NOT_EXECUTED"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stream": {
+        "id": "agent-runtime",
+        "name": "Agent Runtime"
+      },
+      "release": {
+        "id": "runtime-2.8",
+        "name": "Release 2.8",
+        "build": "2.8.3",
+        "available_builds": [
+          "2.8.4",
+          "2.8.3"
+        ],
+        "release_item_count": 5
+      },
+      "kpis": {
+        "overall_health": "GREEN",
+        "release_test_coverage": 0.0,
+        "execution_progress": 0.0,
+        "pass_rate": null,
+        "executed": 0,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 0,
+        "not_executed": 24,
+        "total_applicable_gates": 24
+      },
+      "environment_health": [
+        {
+          "environment": "DEV",
+          "applicable": 0,
+          "executed": 0,
+          "passed": 0,
+          "failed": 0,
+          "blocked": 0,
+          "not_executed": 0,
+          "pass_rate": null,
+          "readiness": "N/A"
+        },
+        {
+          "environment": "SIT",
+          "applicable": 7,
+          "executed": 0,
+          "passed": 0,
+          "failed": 0,
+          "blocked": 0,
+          "not_executed": 7,
+          "pass_rate": null,
+          "readiness": "NOT_STARTED"
+        },
+        {
+          "environment": "UAT",
+          "applicable": 7,
+          "executed": 0,
+          "passed": 0,
+          "failed": 0,
+          "blocked": 0,
+          "not_executed": 7,
+          "pass_rate": null,
+          "readiness": "NOT_STARTED"
+        },
+        {
+          "environment": "PPD",
+          "applicable": 7,
+          "executed": 0,
+          "passed": 0,
+          "failed": 0,
+          "blocked": 0,
+          "not_executed": 7,
+          "pass_rate": null,
+          "readiness": "NOT_STARTED"
+        },
+        {
+          "environment": "PROD",
+          "applicable": 3,
+          "executed": 0,
+          "passed": 0,
+          "failed": 0,
+          "blocked": 0,
+          "not_executed": 3,
+          "pass_rate": null,
+          "readiness": "NOT_STARTED"
+        }
+      ],
+      "release_items": [
+        {
+          "jira_key": "ETIVAI-12442",
+          "summary": "Agent schedule Job - add trace log for run record",
+          "issue_type": "Story",
+          "jira_url": "#",
+          "health": "GREY",
+          "environment_gate": {
+            "DEV": "N/A",
+            "SIT": "NOT_EXECUTED",
+            "UAT": "NOT_EXECUTED",
+            "PPD": "NOT_EXECUTED",
+            "PROD": "N/A"
+          },
+          "features": [
+            {
+              "id": "F-12442-01",
+              "name": "GCP trace log",
+              "scenario": {
+                "id": "SC-12442-01",
+                "title": "Verify trace log in GCP",
+                "manual_test_id": "M-12442-01",
+                "jira_key": "ETIVAI-12442"
+              },
+              "applicable_environments": [
+                "SIT",
+                "UAT",
+                "PPD"
+              ],
+              "environment_status": {
+                "DEV": "N/A",
+                "SIT": "NOT_EXECUTED",
+                "UAT": "NOT_EXECUTED",
+                "PPD": "NOT_EXECUTED",
+                "PROD": "N/A"
+              }
+            },
+            {
+              "id": "F-12442-02",
+              "name": "Azure trace log",
+              "scenario": {
+                "id": "SC-12442-02",
+                "title": "Verify trace log in Azure",
+                "manual_test_id": "M-12442-02",
+                "jira_key": "ETIVAI-12442"
+              },
+              "applicable_environments": [
+                "SIT",
+                "UAT",
+                "PPD"
+              ],
+              "environment_status": {
+                "DEV": "N/A",
+                "SIT": "NOT_EXECUTED",
+                "UAT": "NOT_EXECUTED",
+                "PPD": "NOT_EXECUTED",
+                "PROD": "N/A"
+              }
+            },
+            {
+              "id": "F-12442-03",
+              "name": "Local storage trace log",
+              "scenario": {
+                "id": "SC-12442-03",
+                "title": "Verify trace log in local storage",
+                "manual_test_id": "M-12442-03",
+                "jira_key": "ETIVAI-12442"
+              },
+              "applicable_environments": [
+                "SIT",
+                "UAT",
+                "PPD"
+              ],
+              "environment_status": {
+                "DEV": "N/A",
+                "SIT": "NOT_EXECUTED",
+                "UAT": "NOT_EXECUTED",
+                "PPD": "NOT_EXECUTED",
+                "PROD": "N/A"
+              }
+            }
+          ]
+        },
+        {
+          "jira_key": "ETIVAI-12626",
+          "summary": "Prevent tenant-foundation liveness restarts during blocking RAG retrieval",
+          "issue_type": "Bug",
+          "jira_url": "#",
+          "health": "GREY",
+          "environment_gate": {
+            "DEV": "N/A",
+            "SIT": "NOT_EXECUTED",
+            "UAT": "NOT_EXECUTED",
+            "PPD": "NOT_EXECUTED",
+            "PROD": "NOT_EXECUTED"
+          },
+          "features": [
+            {
+              "id": "F-12626-01",
+              "name": "RAG retrieval liveness",
+              "scenario": {
+                "id": "SC-12626-01",
+                "title": "Verify liveness during blocking retrieval",
+                "manual_test_id": "M-12626-01",
+                "jira_key": "ETIVAI-12626"
+              },
+              "applicable_environments": [
+                "SIT",
+                "UAT",
+                "PPD",
+                "PROD"
+              ],
+              "environment_status": {
+                "DEV": "N/A",
+                "SIT": "NOT_EXECUTED",
+                "UAT": "NOT_EXECUTED",
+                "PPD": "NOT_EXECUTED",
+                "PROD": "NOT_EXECUTED"
+              }
+            }
+          ]
+        },
+        {
+          "jira_key": "ETIVAI-12920",
+          "summary": "swb api add x-auh-type=di header",
+          "issue_type": "Story",
+          "jira_url": "#",
+          "health": "GREY",
+          "environment_gate": {
+            "DEV": "N/A",
+            "SIT": "NOT_EXECUTED",
+            "UAT": "NOT_EXECUTED",
+            "PPD": "NOT_EXECUTED",
+            "PROD": "NOT_EXECUTED"
+          },
+          "features": [
+            {
+              "id": "F-12920-01",
+              "name": "DI header handling",
+              "scenario": {
+                "id": "SC-12920-01",
+                "title": "Verify x-auh-type DI header",
+                "manual_test_id": "M-12920-01",
+                "jira_key": "ETIVAI-12920"
+              },
+              "applicable_environments": [
+                "SIT",
+                "UAT",
+                "PPD",
+                "PROD"
+              ],
+              "environment_status": {
+                "DEV": "N/A",
+                "SIT": "NOT_EXECUTED",
+                "UAT": "NOT_EXECUTED",
+                "PPD": "NOT_EXECUTED",
+                "PROD": "NOT_EXECUTED"
+              }
+            }
+          ]
+        },
+        {
+          "jira_key": "ETIVAI-12638",
+          "summary": "agenthub runtime violation fix and stability enhancement",
+          "issue_type": "Bug",
+          "jira_url": "#",
+          "health": "GREY",
+          "environment_gate": {
+            "DEV": "N/A",
+            "SIT": "NOT_EXECUTED",
+            "UAT": "NOT_EXECUTED",
+            "PPD": "NOT_EXECUTED",
+            "PROD": "N/A"
+          },
+          "features": [
+            {
+              "id": "F-12638-01",
+              "name": "Runtime stability",
+              "scenario": {
+                "id": "SC-12638-01",
+                "title": "Verify runtime stability fix",
+                "manual_test_id": "M-12638-01",
+                "jira_key": "ETIVAI-12638"
+              },
+              "applicable_environments": [
+                "SIT",
+                "UAT",
+                "PPD"
+              ],
+              "environment_status": {
+                "DEV": "N/A",
+                "SIT": "NOT_EXECUTED",
+                "UAT": "NOT_EXECUTED",
+                "PPD": "NOT_EXECUTED",
+                "PROD": "N/A"
+              }
+            }
+          ]
+        },
+        {
+          "jira_key": "ETIVAI-10649",
+          "summary": "MCP Enhancement - Entra ID Automatic renew",
+          "issue_type": "Story",
+          "jira_url": "#",
+          "health": "GREY",
+          "environment_gate": {
+            "DEV": "N/A",
+            "SIT": "NOT_EXECUTED",
+            "UAT": "NOT_EXECUTED",
+            "PPD": "NOT_EXECUTED",
+            "PROD": "NOT_EXECUTED"
+          },
+          "features": [
+            {
+              "id": "F-10649-01",
+              "name": "Entra ID renewal",
+              "scenario": {
+                "id": "SC-10649-01",
+                "title": "Verify automatic renewal",
+                "manual_test_id": "M-10649-01",
+                "jira_key": "ETIVAI-10649"
+              },
+              "applicable_environments": [
+                "SIT",
+                "UAT",
+                "PPD",
+                "PROD"
+              ],
+              "environment_status": {
+                "DEV": "N/A",
+                "SIT": "NOT_EXECUTED",
+                "UAT": "NOT_EXECUTED",
+                "PPD": "NOT_EXECUTED",
+                "PROD": "NOT_EXECUTED"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stream": {
+        "id": "agenthub-ui",
+        "name": "Agent Hub UI"
+      },
+      "release": {
+        "id": "ui-4.2",
+        "name": "Release 4.2",
+        "build": "4.2.1",
+        "available_builds": [
+          "4.2.1"
+        ],
+        "release_item_count": 0
+      },
+      "kpis": {
+        "overall_health": "NOT_AVAILABLE",
+        "release_test_coverage": 0.0,
+        "execution_progress": 0.0,
+        "pass_rate": null,
+        "executed": 0,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 0,
+        "not_executed": 0,
+        "total_applicable_gates": 0
+      },
+      "environment_health": [
+        {
+          "environment": "DEV",
+          "applicable": 0,
+          "executed": 0,
+          "passed": 0,
+          "failed": 0,
+          "blocked": 0,
+          "not_executed": 0,
+          "pass_rate": null,
+          "readiness": "N/A"
+        },
+        {
+          "environment": "SIT",
+          "applicable": 0,
+          "executed": 0,
+          "passed": 0,
+          "failed": 0,
+          "blocked": 0,
+          "not_executed": 0,
+          "pass_rate": null,
+          "readiness": "N/A"
+        },
+        {
+          "environment": "UAT",
+          "applicable": 0,
+          "executed": 0,
+          "passed": 0,
+          "failed": 0,
+          "blocked": 0,
+          "not_executed": 0,
+          "pass_rate": null,
+          "readiness": "N/A"
+        },
+        {
+          "environment": "PPD",
+          "applicable": 0,
+          "executed": 0,
+          "passed": 0,
+          "failed": 0,
+          "blocked": 0,
+          "not_executed": 0,
+          "pass_rate": null,
+          "readiness": "N/A"
+        },
+        {
+          "environment": "PROD",
+          "applicable": 0,
+          "executed": 0,
+          "passed": 0,
+          "failed": 0,
+          "blocked": 0,
+          "not_executed": 0,
+          "pass_rate": null,
+          "readiness": "N/A"
+        }
+      ],
+      "release_items": []
+    }
+  ]
+}
