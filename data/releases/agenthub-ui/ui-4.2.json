@@ -1,0 +1,21 @@
+{
+  "schema_version": "ng-release-scope-0.4",
+  "scope_version": 1,
+  "effective_at": "2026-08-17T14:30:00+08:00",
+  "stream": {
+    "id": "agenthub-ui",
+    "name": "Agent Hub UI"
+  },
+  "release": {
+    "id": "ui-4.2",
+    "name": "Release 4.2",
+    "builds": [
+      "4.2.1"
+    ],
+    "current_build": "4.2.1"
+  },
+  "scope": {
+    "release_items": []
+  },
+  "notes": "Current release scope. Items may be added or removed without invalidating historical executions."
+}

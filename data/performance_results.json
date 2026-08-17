@@ -1,0 +1,74 @@
+{
+  "schema_version": "ng-performance-0.5",
+  "generated_at": "2026-08-17T22:30:00+08:00",
+  "results": [
+    {
+      "stream_id": "agent-runtime",
+      "release_id": "runtime-2.8",
+      "build": "2.8.4",
+      "assessment": "AMBER",
+      "test_run": "PERF-RUNTIME-2.8.4-01",
+      "summary": "Baseline release performance run completed; P95 requires observation.",
+      "metrics": [
+        {
+          "name": "Peak Users",
+          "value": "500",
+          "target": "\u2265 500",
+          "status": "PASSED"
+        },
+        {
+          "name": "Throughput",
+          "value": "168 QPM",
+          "target": "\u2265 150 QPM",
+          "status": "PASSED"
+        },
+        {
+          "name": "P95 Response Time",
+          "value": "2.8 s",
+          "target": "\u2264 2.5 s",
+          "status": "FAILED"
+        },
+        {
+          "name": "Error Rate",
+          "value": "0.4%",
+          "target": "\u2264 1.0%",
+          "status": "PASSED"
+        }
+      ]
+    },
+    {
+      "stream_id": "agent-runtime",
+      "release_id": "runtime-2.8",
+      "build": "2.8.3",
+      "assessment": "GREEN",
+      "test_run": "PERF-RUNTIME-2.8.3-01",
+      "summary": "Previous build baseline passed agreed performance thresholds.",
+      "metrics": [
+        {
+          "name": "Peak Users",
+          "value": "500",
+          "target": "\u2265 500",
+          "status": "PASSED"
+        },
+        {
+          "name": "Throughput",
+          "value": "160 QPM",
+          "target": "\u2265 150 QPM",
+          "status": "PASSED"
+        },
+        {
+          "name": "P95 Response Time",
+          "value": "2.3 s",
+          "target": "\u2264 2.5 s",
+          "status": "PASSED"
+        },
+        {
+          "name": "Error Rate",
+          "value": "0.2%",
+          "target": "\u2264 1.0%",
+          "status": "PASSED"
+        }
+      ]
+    }
+  ]
+}

@@ -66,21 +66,37 @@
     </section>
 
     <section class="tab-panel" id="regressionTab">
-      <div class="placeholder-shell">
-        <p class="eyebrow dark">Regression / Automation</p>
-        <h2>Capability Explorer</h2>
-        <p>This tab will retain the Capability Explorer interaction model and focus only on automation/regression coverage. Automation is a supporting signal and does not gate release readiness.</p>
-        <div class="placeholder-grid"><div>Capability coverage</div><div>Feature automation status</div><div>Scenario regression status by environment</div></div>
+      <div class="section-title-row">
+        <div><p class="eyebrow dark">Regression / Automation</p><h2>Capability Explorer</h2></div>
+        <span class="muted">Supporting regression signal — not a release gate</span>
       </div>
+      <section class="automation-summary" id="automationSummary"></section>
+      <section class="environment-card">
+        <div class="subheading-row"><div><p class="eyebrow dark">Automation Coverage</p><h3>Environment Coverage</h3></div>
+        <span class="muted">Coverage = applicable automated scenario/environment gates with a result</span></div>
+        <div class="environment-grid" id="automationEnvironmentGrid"></div>
+      </section>
+      <section class="explorer-shell release-explorer">
+        <aside class="navigator-panel">
+          <div class="panel-heading"><div><p class="eyebrow dark">Navigator</p><h3>Capabilities</h3></div><span class="count-pill" id="capabilityCount">0</span></div>
+          <div class="release-items" id="capabilityItems"></div>
+        </aside>
+        <section class="detail-panel" id="capabilityDetail"></section>
+      </section>
     </section>
 
     <section class="tab-panel" id="performanceTab">
-      <div class="placeholder-shell">
-        <p class="eyebrow dark">Performance Testing</p>
-        <h2>Release Performance View</h2>
-        <p>This tab will use the same Release Stream → Release → Build context and display only performance results belonging to that selection.</p>
-        <div class="placeholder-grid"><div>Latency / P95</div><div>TPS / Throughput</div><div>Error Rate / Peak Users</div></div>
+      <div class="section-title-row">
+        <div><p class="eyebrow dark">Performance Testing</p><h2>Release Performance View</h2></div>
+        <span class="muted">Release Stream → Release → Build</span>
       </div>
+      <section class="context-bar">
+        <label><span>Release Stream</span><select id="perfStreamSelect"></select></label>
+        <label><span>Release</span><select id="perfReleaseSelect"></select></label>
+        <label><span>Build</span><select id="perfBuildSelect"></select></label>
+        <div class="context-note"><span>Test run</span><strong id="perfRun">—</strong></div>
+      </section>
+      <section class="performance-shell" id="performanceDetail"></section>
     </section>
   </main>
 

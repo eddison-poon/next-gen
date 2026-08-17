@@ -1,0 +1,143 @@
+{
+  "schema_version": "ng-release-scope-0.4",
+  "scope_version": 1,
+  "effective_at": "2026-08-17T14:30:00+08:00",
+  "stream": {
+    "id": "agent-runtime",
+    "name": "Agent Runtime"
+  },
+  "release": {
+    "id": "runtime-2.8",
+    "name": "Release 2.8",
+    "builds": [
+      "2.8.4",
+      "2.8.3"
+    ],
+    "current_build": "2.8.4"
+  },
+  "scope": {
+    "release_items": [
+      {
+        "jira_key": "ETIVAI-12442",
+        "summary": "Agent schedule Job - add trace log for run record",
+        "issue_type": "Story",
+        "jira_url": "#",
+        "features": [
+          {
+            "id": "F-12442-01",
+            "name": "GCP trace log",
+            "scenario_id": "SC-12442-01",
+            "manual_test_id": "M-12442-01",
+            "applicable_environments": [
+              "SIT",
+              "UAT",
+              "PPD"
+            ]
+          },
+          {
+            "id": "F-12442-02",
+            "name": "Azure trace log",
+            "scenario_id": "SC-12442-02",
+            "manual_test_id": "M-12442-02",
+            "applicable_environments": [
+              "SIT",
+              "UAT",
+              "PPD"
+            ]
+          },
+          {
+            "id": "F-12442-03",
+            "name": "Local storage trace log",
+            "scenario_id": "SC-12442-03",
+            "manual_test_id": "M-12442-03",
+            "applicable_environments": [
+              "SIT",
+              "UAT",
+              "PPD"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "ETIVAI-12626",
+        "summary": "Prevent tenant-foundation liveness restarts during blocking RAG retrieval",
+        "issue_type": "Bug",
+        "jira_url": "#",
+        "features": [
+          {
+            "id": "F-12626-01",
+            "name": "RAG retrieval liveness",
+            "scenario_id": "SC-12626-01",
+            "manual_test_id": "M-12626-01",
+            "applicable_environments": [
+              "SIT",
+              "UAT",
+              "PPD",
+              "PROD"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "ETIVAI-12920",
+        "summary": "swb api add x-auh-type=di header",
+        "issue_type": "Story",
+        "jira_url": "#",
+        "features": [
+          {
+            "id": "F-12920-01",
+            "name": "DI header handling",
+            "scenario_id": "SC-12920-01",
+            "manual_test_id": "M-12920-01",
+            "applicable_environments": [
+              "SIT",
+              "UAT",
+              "PPD",
+              "PROD"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "ETIVAI-12638",
+        "summary": "agenthub runtime violation fix and stability enhancement",
+        "issue_type": "Bug",
+        "jira_url": "#",
+        "features": [
+          {
+            "id": "F-12638-01",
+            "name": "Runtime stability",
+            "scenario_id": "SC-12638-01",
+            "manual_test_id": "M-12638-01",
+            "applicable_environments": [
+              "SIT",
+              "UAT",
+              "PPD"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "ETIVAI-10649",
+        "summary": "MCP Enhancement - Entra ID Automatic renew",
+        "issue_type": "Story",
+        "jira_url": "#",
+        "features": [
+          {
+            "id": "F-10649-01",
+            "name": "Entra ID renewal",
+            "scenario_id": "SC-10649-01",
+            "manual_test_id": "M-10649-01",
+            "applicable_environments": [
+              "SIT",
+              "UAT",
+              "PPD",
+              "PROD"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "notes": "Current release scope. Items may be added or removed without invalidating historical executions."
+}

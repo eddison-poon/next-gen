@@ -1,89 +1,60 @@
-# Next Generation Dashboard — Release Focus Reporting Layer v0.3
+# Next Generation Dashboard — v0.5 UAT Candidate 1
 
-v0.3 keeps the accepted v0.1 layout and the v0.2 raw-data model, and introduces the first derived reporting layer.
+This is the first bundled UAT-oriented package after v0.4.
 
-## Why v0.3
+## Included
 
-The browser no longer calculates release metrics directly from raw manifest / definition / execution files.
+### Release Focus
+- Release Stream → Release → Build
+- Dynamic release scope
+- Jira Release Item navigator
+- Manual release-governing testing
+- Release Test Coverage
+- Execution Progress
+- Pass Rate
+- Environment Health
+- Feature / Scenario per-environment status
+- N/A handling
 
-Instead:
+### Regression / Automation
+The placeholder is replaced by a working Capability Explorer.
 
-`Release Manifest + Manual Definitions + Manual Executions`
-→ `build_release_snapshot.py`
-→ `data/generated/release_focus_snapshot.json`
-→ Dashboard UI
+- left navigator = Capabilities
+- Capability → Feature → Automated Scenario
+- DEV / SIT / UAT / PPD / PROD status
+- overall automation coverage
+- per-environment automation coverage
+- ✓ / ✕ / ! / — / N/A
+- automation is a supporting regression signal and does not gate release readiness
 
-This creates a stable boundary between raw repository data and presentation.
+### Performance Testing
+The placeholder is replaced by a release-aware foundation.
 
-## Added
+- Release Stream → Release → Build
+- latest result for the selected release/build
+- overall assessment
+- Peak Users
+- Throughput / QPM
+- P95 Response Time
+- Error Rate
+- clean empty-state when no result exists
 
-- `tools/build_release_snapshot.py`
-  - derives latest execution state per Manual Test × Environment for the selected Build
-  - applies environment applicability / N/A rules
-  - calculates Release Test Coverage
-  - calculates Manual Execution Progress
-  - calculates Pass Rate
-  - calculates per-environment pass rate
-  - derives Release Item environment gates
-  - prepares Feature and Selected Feature per-environment status
-
-- `data/generated/release_focus_snapshot.json`
-  - generated UI contract
-  - includes all Release Stream / Release / Build combinations
-
-- Dashboard JS now consumes only the generated snapshot for Release Focus.
-
-## Current calculation rules
-
-### Release Test Coverage / Execution Progress
-
-`Executed applicable Scenario × Environment gates / Total applicable Scenario × Environment gates`
-
-Passed, Failed and Blocked count as executed. N/A is excluded.
-
-### Pass Rate
-
-`Passed / (Passed + Failed)`
-
-Blocked is excluded.
-
-### Environment Health
-
-For each environment:
-
-`Passed Manual scenario results / (Passed + Failed Manual scenario results)`
-
-This percentage is shown only at Environment Health level.
-
-### Feature / Selected Feature
-
-Per environment:
-
-- ✓ Passed
-- ✕ Failed
-- ! Blocked
-- — Not Executed
-- N/A Not Applicable
-
-No Feature-level percentage is shown.
-
-### Release Item environment gate
-
-A Release Item passes an environment only when **all applicable Features under that item have Passed** in that environment.
-
-## Commands
+## Validation
 
 From `next_gen_preview`:
 
 ```bash
-python tools/validate_release_data.py
 python tools/build_release_snapshot.py
 python tools/validate_release_data.py
+python tools/validate_uat_candidate.py
 python -m http.server 8000
 ```
 
 Then open `http://localhost:8000`.
 
-## v0.3 purpose
+## UAT focus
 
-Establish the release-focused reporting contract before connecting Jira ingestion, repository-managed Manual Test Definitions, and operational execution feeds.
+1. Can a tester understand selected Release progress and drill into a failing Manual scenario?
+2. Can a tester understand regression automation coverage and identify missing/failed automated scenarios?
+3. Does Performance selection by Release/Build feel natural?
+4. Do all three tabs feel like the same dashboard product?

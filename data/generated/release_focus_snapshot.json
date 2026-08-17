@@ -1,5 +1,5 @@
 {
-  "schema_version": "ng-release-focus-snapshot-0.3",
+  "schema_version": "ng-release-focus-snapshot-0.4",
   "generated_at": "2026-08-17T14:30:00+08:00",
   "selected": {
     "stream_id": "agent-runtime",
@@ -8,6 +8,10 @@
   },
   "snapshots": [
     {
+      "scope": {
+        "version": 1,
+        "effective_at": "2026-08-17T14:30:00+08:00"
+      },
       "stream": {
         "id": "agent-runtime",
         "name": "Agent Runtime"
@@ -332,6 +336,10 @@
       ]
     },
     {
+      "scope": {
+        "version": 1,
+        "effective_at": "2026-08-17T14:30:00+08:00"
+      },
       "stream": {
         "id": "agent-runtime",
         "name": "Agent Runtime"
@@ -656,6 +664,10 @@
       ]
     },
     {
+      "scope": {
+        "version": 1,
+        "effective_at": "2026-08-17T14:30:00+08:00"
+      },
       "stream": {
         "id": "agenthub-ui",
         "name": "Agent Hub UI"

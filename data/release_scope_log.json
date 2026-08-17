@@ -1,0 +1,13 @@
+{
+  "schema_version": "ng-release-scope-log-0.4",
+  "changes": [
+    {
+      "effective_at": "2026-08-17T14:30:00+08:00",
+      "stream_id": "agent-runtime",
+      "release_id": "runtime-2.8",
+      "scope_version": 1,
+      "change_type": "BASELINE",
+      "notes": "Initial v0.4 current-scope baseline."
+    }
+  ]
+}

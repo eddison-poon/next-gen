@@ -1,17 +1,20 @@
 (() => {
   "use strict";
   const ENVIRONMENTS=["DEV","SIT","UAT","PPD","PROD"];
-  const state={payload:null,snapshot:null,selectedItem:null,selectedFeature:null,search:""};
+  const state={payload:null,snapshot:null,selectedItem:null,selectedFeature:null,search:"",automation:null,selectedCapability:null,performance:null,perfSnapshot:null};
   const $=id=>document.getElementById(id);
 
-  document.addEventListener("DOMContentLoaded",()=>{bindTabs();bindEvents();loadData();});
+  document.addEventListener("DOMContentLoaded",()=>{bindTabs();bindEvents();loadData();loadAutomation();loadPerformance();});
   function bindTabs(){document.querySelectorAll(".rail-link").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll(".rail-link").forEach(x=>x.classList.toggle("active",x===btn));document.querySelectorAll(".tab-panel").forEach(x=>x.classList.remove("active"));$(btn.dataset.tab+"Tab").classList.add("active");}));}
   function bindEvents(){
     $("streamSelect").addEventListener("change",()=>selectFromControls("stream"));
     $("releaseSelect").addEventListener("change",()=>selectFromControls("release"));
     $("buildSelect").addEventListener("change",()=>selectFromControls("build"));
     $("releaseSearch").addEventListener("input",e=>{state.search=e.target.value.trim().toLowerCase();renderItems();});
-    $("refreshButton").addEventListener("click",loadData);
+    $("refreshButton").addEventListener("click",()=>{loadData();loadAutomation();loadPerformance();});
+    $("perfStreamSelect").addEventListener("change",()=>selectPerformance("stream"));
+    $("perfReleaseSelect").addEventListener("change",()=>selectPerformance("release"));
+    $("perfBuildSelect").addEventListener("change",()=>selectPerformance("build"));
   }
 
   async function loadData(){
@@ -98,6 +101,51 @@
   function renderSelectedFeature(){
     const f=state.selectedFeature;if(!f)return;
     $("selectedFeatureArea").innerHTML=`<section class="selected-feature"><p class="eyebrow dark">Selected Feature</p><h4>${esc(f.name)}</h4><table class="scenario-table"><thead><tr><th>Scenario / Manual Test</th>${ENVIRONMENTS.map(e=>`<th>${e}</th>`).join("")}<th>Jira</th></tr></thead><tbody><tr><td><span class="scenario-name">${esc(f.scenario.title)}</span><span class="scenario-id">${esc(f.scenario.id)} · ${esc(f.scenario.manual_test_id)}</span></td>${ENVIRONMENTS.map(e=>{const[m,c]=mark(f.environment_status[e]);return`<td><span class="env-mark ${c}">${m}</span></td>`}).join("")}<td><a class="jira-link" href="${escAttr(state.selectedItem.jira_url)}">${esc(state.selectedItem.jira_key)}</a></td></tr></tbody></table><div class="legend"><span><b>✓</b> Passed</span><span><b>✕</b> Failed</span><span><b>!</b> Blocked</span><span><b>—</b> Not Executed</span><span><b>N/A</b> Not Applicable</span></div></section>`;
+  }
+
+
+  async function loadAutomation(){
+    const r=await fetch(`data/automation_regression.json?ts=${Date.now()}`,{cache:"no-store"});if(!r.ok)return;
+    state.automation=await r.json();state.selectedCapability=state.automation.capabilities[0]||null;renderAutomation();
+  }
+  function automationScenarios(){return state.automation?.capabilities.flatMap(c=>c.features.flatMap(f=>f.scenarios.map(s=>({c,f,s}))))||[]}
+  function autoStatus(s,e){return s.applicable_environments.includes(e)?(s.results[e]||"NOT_EXECUTED"):"N/A"}
+  function autoCoverage(rows){const a=rows.flatMap(x=>ENVIRONMENTS.filter(e=>autoStatus(x.s,e)!=="N/A").map(e=>autoStatus(x.s,e)));const ex=a.filter(x=>x!=="NOT_EXECUTED");return{applicable:a.length,executed:ex.length,coverage:a.length?Math.round(ex.length/a.length*1000)/10:0,passed:ex.filter(x=>x==="PASSED").length,failed:ex.filter(x=>x==="FAILED").length,blocked:ex.filter(x=>x==="BLOCKED").length}}
+  function featureAutoMark(f,e){const s=f.scenarios.map(x=>autoStatus(x,e)).filter(x=>x!=="N/A");if(!s.length)return["N/A","na"];if(s.every(x=>x==="PASSED"))return["✓","pass"];if(s.some(x=>x==="FAILED"))return["✕","fail"];if(s.some(x=>x==="BLOCKED"))return["!","blocked"];return["—","none"]}
+  function renderAutomation(){
+    if(!state.automation)return;const rows=automationScenarios(),s=autoCoverage(rows);
+    $("automationSummary").innerHTML=[["Automation Coverage",`${s.coverage}%`,`${s.executed} / ${s.applicable} applicable gates`],["Automated Scenarios",rows.length,"Regression scenarios"],["Passed Results",s.passed,"Latest environment results"],["Failed / Blocked",`${s.failed} / ${s.blocked}`,"Supporting signal"]].map(x=>`<div class="automation-card"><span>${x[0]}</span><strong>${x[1]}</strong><small>${x[2]}</small></div>`).join("");
+    $("automationEnvironmentGrid").innerHTML=ENVIRONMENTS.map(e=>{const a=rows.filter(x=>autoStatus(x.s,e)!=="N/A"),ex=a.filter(x=>autoStatus(x.s,e)!=="NOT_EXECUTED"),cv=a.length?Math.round(ex.length/a.length*1000)/10:0;return`<div class="env-box"><div class="env-top"><span class="env-name">${e}</span><strong class="env-rate">${a.length?cv+"%":"—"}</strong></div><div class="env-stats"><div><span>Applicable</span><strong>${a.length}</strong></div><div><span>Executed</span><strong>${ex.length}</strong></div><div><span>Coverage</span><strong>${a.length?cv+"%":"N/A"}</strong></div></div><span class="readiness ${cv===100?"ready":ex.length?"partial":"not-started"}">${!a.length?"N/A":cv===100?"Covered":ex.length?"Partial":"Not Started"}</span></div>`}).join("");
+    $("capabilityCount").textContent=state.automation.capabilities.length;
+    $("capabilityItems").innerHTML=state.automation.capabilities.map(c=>{const cs=autoCoverage(c.features.flatMap(f=>f.scenarios.map(s=>({c,f,s}))));return`<button class="release-item ${c===state.selectedCapability?"active":""}" data-cap="${c.id}"><span><span class="release-key">${esc(c.name)}</span><span class="release-summary">${c.features.length} features</span><span class="release-meta">${cs.coverage}% automation coverage</span></span><i class="item-state ${cs.failed?"red":cs.blocked?"amber":cs.coverage===100?"green":"amber"}"></i></button>`}).join("");
+    document.querySelectorAll("[data-cap]").forEach(b=>b.addEventListener("click",()=>{state.selectedCapability=state.automation.capabilities.find(c=>c.id===b.dataset.cap);renderAutomation()}));
+    renderCapabilityDetail();
+  }
+  function renderCapabilityDetail(){
+    const c=state.selectedCapability;if(!c){$("capabilityDetail").innerHTML='<div class="muted">No capability selected.</div>';return}
+    $("capabilityDetail").innerHTML=`<div class="item-overview"><div><p class="eyebrow dark">Selected Capability</p><h3 class="detail-title">${esc(c.name)}</h3><p class="capability-description">${esc(c.description)}</p></div></div>${c.features.map(f=>`<section class="capability-feature"><div class="capability-feature-head"><strong>${esc(f.name)}</strong>${ENVIRONMENTS.map(e=>{const[m,cl]=featureAutoMark(f,e);return`<span class="env-mark ${cl}">${m}</span>`}).join("")}</div><table class="auto-scenario-table"><thead><tr><th>Automated Scenario</th>${ENVIRONMENTS.map(e=>`<th>${e}</th>`).join("")}</tr></thead><tbody>${f.scenarios.map(s=>`<tr><td><strong>${esc(s.name)}</strong><br><span class="muted">${esc(s.automation_test_id)}</span></td>${ENVIRONMENTS.map(e=>{const[m,cl]=mark(autoStatus(s,e));return`<td><span class="env-mark ${cl}">${m}</span></td>`}).join("")}</tr>`).join("")}</tbody></table></section>`).join("")}`;
+  }
+
+  async function loadPerformance(){
+    const r=await fetch(`data/performance_results.json?ts=${Date.now()}`,{cache:"no-store"});if(!r.ok)return;
+    state.performance=await r.json();renderPerformanceControls();
+  }
+  function selectPerformance(changed){
+    let sid=$("perfStreamSelect").value,rid=$("perfReleaseSelect").value,b=$("perfBuildSelect").value;
+    const all=state.payload.snapshots;
+    if(changed==="stream"){const x=all.find(x=>x.stream.id===sid);rid=x?.release.id;b=x?.release.build}
+    if(changed==="release"){const x=all.find(x=>x.stream.id===sid&&x.release.id===rid);b=x?.release.build}
+    state.perfSnapshot=all.find(x=>x.stream.id===sid&&x.release.id===rid&&x.release.build===b)||all[0];renderPerformanceControls();
+  }
+  function renderPerformanceControls(){
+    if(!state.performance||!state.payload)return;if(!state.perfSnapshot)state.perfSnapshot=state.snapshot;
+    const sid=state.perfSnapshot.stream.id,rid=state.perfSnapshot.release.id,b=state.perfSnapshot.release.build;
+    $("perfStreamSelect").innerHTML=streams().map(x=>`<option value="${x.id}" ${x.id===sid?"selected":""}>${esc(x.name)}</option>`).join("");
+    $("perfReleaseSelect").innerHTML=releasesFor(sid).map(x=>`<option value="${x.id}" ${x.id===rid?"selected":""}>${esc(x.name)}</option>`).join("");
+    $("perfBuildSelect").innerHTML=buildsFor(sid,rid).map(x=>`<option ${x===b?"selected":""}>${esc(x)}</option>`).join("");
+    const r=state.performance.results.find(x=>x.stream_id===sid&&x.release_id===rid&&x.build===b);$("perfRun").textContent=r?.test_run||"No result";
+    if(!r){$("performanceDetail").innerHTML='<div class="muted">No performance test result is available for the selected Release / Build.</div>';return}
+    $("performanceDetail").innerHTML=`<div class="performance-head"><div><p class="eyebrow dark">Latest Performance Result</p><h3>${esc(r.test_run)}</h3><p class="muted">${esc(r.summary)}</p></div><span class="performance-assessment ${r.assessment.toLowerCase()}">${esc(r.assessment)}</span></div><div class="performance-metrics">${r.metrics.map(m=>`<div class="performance-metric"><span>${esc(m.name)}</span><strong>${esc(m.value)}</strong><small>Target: ${esc(m.target)}</small><div class="metric-status ${m.status==="PASSED"?"pass":"fail"}">${m.status==="PASSED"?"✓ Passed":"✕ Failed"}</div></div>`).join("")}</div>`;
   }
 
   function healthClass(v){return v==="RED"?"red":v==="AMBER"?"amber":v==="GREEN"?"green":"grey"}

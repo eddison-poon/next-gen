@@ -1,0 +1,189 @@
+{
+  "schema_version": "ng-automation-0.5",
+  "generated_at": "2026-08-17T22:30:00+08:00",
+  "capabilities": [
+    {
+      "id": "mcp-jira",
+      "name": "MCP Jira",
+      "description": "Regression protection for Jira MCP capabilities.",
+      "features": [
+        {
+          "id": "AUTO-F-JIRA-01",
+          "name": "Create Jira Ticket",
+          "scenarios": [
+            {
+              "id": "AUTO-S-JIRA-01",
+              "name": "Create issue with mandatory fields",
+              "automation_test_id": "MCP-JIRA-A-001",
+              "applicable_environments": [
+                "DEV",
+                "SIT",
+                "UAT",
+                "PPD",
+                "PROD"
+              ],
+              "results": {
+                "DEV": "PASSED",
+                "SIT": "PASSED",
+                "UAT": "PASSED",
+                "PPD": "PASSED",
+                "PROD": "PASSED"
+              }
+            },
+            {
+              "id": "AUTO-S-JIRA-02",
+              "name": "Create issue with labels and component",
+              "automation_test_id": "MCP-JIRA-A-002",
+              "applicable_environments": [
+                "DEV",
+                "SIT",
+                "UAT",
+                "PPD"
+              ],
+              "results": {
+                "DEV": "PASSED",
+                "SIT": "PASSED",
+                "UAT": "FAILED",
+                "PPD": "NOT_EXECUTED",
+                "PROD": "N/A"
+              }
+            }
+          ]
+        },
+        {
+          "id": "AUTO-F-JIRA-02",
+          "name": "Search Jira Ticket",
+          "scenarios": [
+            {
+              "id": "AUTO-S-JIRA-03",
+              "name": "Search issue by Jira key",
+              "automation_test_id": "MCP-JIRA-A-003",
+              "applicable_environments": [
+                "DEV",
+                "SIT",
+                "UAT",
+                "PPD",
+                "PROD"
+              ],
+              "results": {
+                "DEV": "PASSED",
+                "SIT": "PASSED",
+                "UAT": "PASSED",
+                "PPD": "PASSED",
+                "PROD": "NOT_EXECUTED"
+              }
+            }
+          ]
+        },
+        {
+          "id": "AUTO-F-JIRA-03",
+          "name": "Update Jira Ticket",
+          "scenarios": [
+            {
+              "id": "AUTO-S-JIRA-04",
+              "name": "Update issue summary and labels",
+              "automation_test_id": "MCP-JIRA-A-004",
+              "applicable_environments": [
+                "DEV",
+                "SIT",
+                "UAT"
+              ],
+              "results": {
+                "DEV": "PASSED",
+                "SIT": "FAILED",
+                "UAT": "NOT_EXECUTED",
+                "PPD": "N/A",
+                "PROD": "N/A"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mcp-github",
+      "name": "MCP GitHub",
+      "description": "Regression protection for GitHub MCP capabilities.",
+      "features": [
+        {
+          "id": "AUTO-F-GH-01",
+          "name": "Repository Search",
+          "scenarios": [
+            {
+              "id": "AUTO-S-GH-01",
+              "name": "Search repository content",
+              "automation_test_id": "MCP-GITHUB-A-001",
+              "applicable_environments": [
+                "DEV",
+                "SIT",
+                "UAT",
+                "PPD"
+              ],
+              "results": {
+                "DEV": "PASSED",
+                "SIT": "PASSED",
+                "UAT": "PASSED",
+                "PPD": "NOT_EXECUTED",
+                "PROD": "N/A"
+              }
+            }
+          ]
+        },
+        {
+          "id": "AUTO-F-GH-02",
+          "name": "Issue Operations",
+          "scenarios": [
+            {
+              "id": "AUTO-S-GH-02",
+              "name": "Create and read issue",
+              "automation_test_id": "MCP-GITHUB-A-002",
+              "applicable_environments": [
+                "DEV",
+                "SIT",
+                "UAT"
+              ],
+              "results": {
+                "DEV": "PASSED",
+                "SIT": "PASSED",
+                "UAT": "NOT_EXECUTED",
+                "PPD": "N/A",
+                "PROD": "N/A"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mcp-confluence",
+      "name": "MCP Confluence",
+      "description": "Regression protection for Confluence MCP capabilities.",
+      "features": [
+        {
+          "id": "AUTO-F-CONF-01",
+          "name": "Content Search",
+          "scenarios": [
+            {
+              "id": "AUTO-S-CONF-01",
+              "name": "Search Confluence content",
+              "automation_test_id": "MCP-CONFLUENCE-A-001",
+              "applicable_environments": [
+                "DEV",
+                "SIT",
+                "UAT",
+                "PPD"
+              ],
+              "results": {
+                "DEV": "PASSED",
+                "SIT": "PASSED",
+                "UAT": "BLOCKED",
+                "PPD": "NOT_EXECUTED",
+                "PROD": "N/A"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

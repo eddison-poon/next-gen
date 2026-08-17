@@ -1,0 +1,28 @@
+{
+  "schema_version": "ng-release-registry-0.4",
+  "generated_at": "2026-08-17T14:30:00+08:00",
+  "streams": [
+    {
+      "id": "agent-runtime",
+      "name": "Agent Runtime",
+      "releases": [
+        {
+          "id": "runtime-2.8",
+          "name": "Release 2.8",
+          "manifest": "data/releases/agent-runtime/runtime-2.8.json"
+        }
+      ]
+    },
+    {
+      "id": "agenthub-ui",
+      "name": "Agent Hub UI",
+      "releases": [
+        {
+          "id": "ui-4.2",
+          "name": "Release 4.2",
+          "manifest": "data/releases/agenthub-ui/ui-4.2.json"
+        }
+      ]
+    }
+  ]
+}
