@@ -1,7 +1,7 @@
 {
   "schema_version": "ng-release-scope-0.4",
-  "scope_version": 1,
-  "effective_at": "2026-08-17T14:30:00+08:00",
+  "scope_version": 2,
+  "effective_at": "2026-08-18T00:45:00+08:00",
   "stream": {
     "id": "agenthub-ui",
     "name": "Agent Hub UI"
@@ -15,7 +15,78 @@
     "current_build": "4.2.1"
   },
   "scope": {
-    "release_items": []
+    "release_items": [
+      {
+        "jira_key": "ETIVAI-13110",
+        "summary": "Agent Hub conversation workspace refinements",
+        "issue_type": "Story",
+        "jira_url": "#",
+        "features": [
+          {
+            "id": "F-13110-01",
+            "name": "Conversation workspace",
+            "scenario_id": "SC-13110-01",
+            "manual_test_id": "M-13110-01",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT",
+              "PPD"
+            ]
+          },
+          {
+            "id": "F-13110-02",
+            "name": "Workspace persistence",
+            "scenario_id": "SC-13110-02",
+            "manual_test_id": "M-13110-02",
+            "applicable_environments": [
+              "SIT",
+              "UAT",
+              "PPD"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "ETIVAI-13124",
+        "summary": "Release selector and build visibility improvement",
+        "issue_type": "Story",
+        "jira_url": "#",
+        "features": [
+          {
+            "id": "F-13124-01",
+            "name": "Release selector",
+            "scenario_id": "SC-13124-01",
+            "manual_test_id": "M-13124-01",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT",
+              "PPD",
+              "PROD"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "ETIVAI-13141",
+        "summary": "Fix environment status refresh after navigation",
+        "issue_type": "Bug",
+        "jira_url": "#",
+        "features": [
+          {
+            "id": "F-13141-01",
+            "name": "Environment refresh",
+            "scenario_id": "SC-13141-01",
+            "manual_test_id": "M-13141-01",
+            "applicable_environments": [
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      }
+    ]
   },
   "notes": "Current release scope. Items may be added or removed without invalidating historical executions."
 }

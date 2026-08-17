@@ -1,60 +1,54 @@
-# Next Generation Dashboard — v0.5 UAT Candidate 1
+# Next Generation Dashboard — v0.6 UAT Candidate 2
 
-This is the first bundled UAT-oriented package after v0.4.
+v0.6 is a bundled UAT-hardening package. The three-tab architecture is unchanged.
 
 ## Included
 
-### Release Focus
-- Release Stream → Release → Build
-- Dynamic release scope
-- Jira Release Item navigator
-- Manual release-governing testing
-- Release Test Coverage
-- Execution Progress
-- Pass Rate
-- Environment Health
-- Feature / Scenario per-environment status
-- N/A handling
+### Release Focus hardening
+- Agent Runtime 2.8 remains the reference release.
+- Agent Hub UI 4.2 now contains a realistic second release scope.
+- Mixed Passed / Failed / Blocked / Not Executed / N/A conditions.
+- Multi-release switching can now be exercised with populated data.
 
-### Regression / Automation
-The placeholder is replaced by a working Capability Explorer.
+### Regression / Automation hardening
+- Added Ark Sandbox automation capability.
+- Added blocked, partial, not-executed, and N/A regression states.
+- Stronger duplicate-ID and result-matrix validation.
 
-- left navigator = Capabilities
-- Capability → Feature → Automated Scenario
-- DEV / SIT / UAT / PPD / PROD status
-- overall automation coverage
-- per-environment automation coverage
-- ✓ / ✕ / ! / — / N/A
-- automation is a supporting regression signal and does not gate release readiness
+### Performance hardening
+- Added Agent Hub UI 4.2.1 performance result.
+- Performance results remain isolated by Release Stream → Release → Build.
+- Existing no-result handling remains available for builds without a run.
 
-### Performance Testing
-The placeholder is replaced by a release-aware foundation.
+### Calculation regression tests
+`tests/test_release_reporting.py` locks the agreed Release Focus calculations and environment-gate rules.
 
-- Release Stream → Release → Build
-- latest result for the selected release/build
-- overall assessment
-- Peak Users
-- Throughput / QPM
-- P95 Response Time
-- Error Rate
-- clean empty-state when no result exists
-
-## Validation
-
-From `next_gen_preview`:
+### Company-network friendly UAT runner
+No pytest dependency is required:
 
 ```bash
-python tools/build_release_snapshot.py
-python tools/validate_release_data.py
-python tools/validate_uat_candidate.py
+python tools/run_uat_checks.py
+```
+
+This rebuilds the generated snapshot, validates all data contracts, and runs lightweight reporting regression checks.
+
+## Recommended internal UAT
+
+```bash
+python tools/run_uat_checks.py
 python -m http.server 8000
 ```
 
-Then open `http://localhost:8000`.
+Open `http://localhost:8000`.
 
-## UAT focus
+Suggested checks:
+1. Runtime 2.8 / Build 2.8.4 Release Focus.
+2. Drill ETIVAI-12442 and locate the UAT failure.
+3. Switch to Agent Hub UI 4.2 / Build 4.2.1.
+4. Confirm mixed Manual states and N/A handling.
+5. Regression / Automation: locate Failed, Blocked and Not Executed scenarios.
+6. Confirm automation does not alter Release Focus health.
+7. Performance: switch between Runtime and UI releases/builds.
+8. Confirm release/build isolation and clean empty-result behavior.
 
-1. Can a tester understand selected Release progress and drill into a failing Manual scenario?
-2. Can a tester understand regression automation coverage and identify missing/failed automated scenarios?
-3. Does Performance selection by Release/Build feel natural?
-4. Do all three tabs feel like the same dashboard product?
+If v0.6 passes, the next step should be production-data onboarding and UAT feedback fixes rather than another structural dashboard redesign.

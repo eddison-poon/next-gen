@@ -160,6 +160,106 @@
       "environment": "SIT",
       "status": "PASSED",
       "executed_at": "2026-08-14T09:00:00+08:00"
+    },
+    {
+      "execution_id": "NG-UAT-EXE-017",
+      "manual_test_id": "M-13110-01",
+      "stream_id": "agenthub-ui",
+      "release_id": "ui-4.2",
+      "build": "4.2.1",
+      "environment": "DEV",
+      "status": "PASSED",
+      "executed_at": "2026-08-18T09:15:00+08:00"
+    },
+    {
+      "execution_id": "NG-UAT-EXE-018",
+      "manual_test_id": "M-13110-01",
+      "stream_id": "agenthub-ui",
+      "release_id": "ui-4.2",
+      "build": "4.2.1",
+      "environment": "SIT",
+      "status": "PASSED",
+      "executed_at": "2026-08-18T10:15:00+08:00"
+    },
+    {
+      "execution_id": "NG-UAT-EXE-019",
+      "manual_test_id": "M-13110-01",
+      "stream_id": "agenthub-ui",
+      "release_id": "ui-4.2",
+      "build": "4.2.1",
+      "environment": "UAT",
+      "status": "FAILED",
+      "executed_at": "2026-08-18T11:15:00+08:00"
+    },
+    {
+      "execution_id": "NG-UAT-EXE-020",
+      "manual_test_id": "M-13110-02",
+      "stream_id": "agenthub-ui",
+      "release_id": "ui-4.2",
+      "build": "4.2.1",
+      "environment": "SIT",
+      "status": "PASSED",
+      "executed_at": "2026-08-18T12:15:00+08:00"
+    },
+    {
+      "execution_id": "NG-UAT-EXE-021",
+      "manual_test_id": "M-13110-02",
+      "stream_id": "agenthub-ui",
+      "release_id": "ui-4.2",
+      "build": "4.2.1",
+      "environment": "UAT",
+      "status": "BLOCKED",
+      "executed_at": "2026-08-18T13:15:00+08:00"
+    },
+    {
+      "execution_id": "NG-UAT-EXE-022",
+      "manual_test_id": "M-13124-01",
+      "stream_id": "agenthub-ui",
+      "release_id": "ui-4.2",
+      "build": "4.2.1",
+      "environment": "DEV",
+      "status": "PASSED",
+      "executed_at": "2026-08-18T14:15:00+08:00"
+    },
+    {
+      "execution_id": "NG-UAT-EXE-023",
+      "manual_test_id": "M-13124-01",
+      "stream_id": "agenthub-ui",
+      "release_id": "ui-4.2",
+      "build": "4.2.1",
+      "environment": "SIT",
+      "status": "PASSED",
+      "executed_at": "2026-08-18T15:15:00+08:00"
+    },
+    {
+      "execution_id": "NG-UAT-EXE-024",
+      "manual_test_id": "M-13124-01",
+      "stream_id": "agenthub-ui",
+      "release_id": "ui-4.2",
+      "build": "4.2.1",
+      "environment": "UAT",
+      "status": "PASSED",
+      "executed_at": "2026-08-18T16:15:00+08:00"
+    },
+    {
+      "execution_id": "NG-UAT-EXE-025",
+      "manual_test_id": "M-13141-01",
+      "stream_id": "agenthub-ui",
+      "release_id": "ui-4.2",
+      "build": "4.2.1",
+      "environment": "SIT",
+      "status": "PASSED",
+      "executed_at": "2026-08-18T17:15:00+08:00"
+    },
+    {
+      "execution_id": "NG-UAT-EXE-026",
+      "manual_test_id": "M-13141-01",
+      "stream_id": "agenthub-ui",
+      "release_id": "ui-4.2",
+      "build": "4.2.1",
+      "environment": "UAT",
+      "status": "PASSED",
+      "executed_at": "2026-08-18T18:15:00+08:00"
     }
   ]
 }

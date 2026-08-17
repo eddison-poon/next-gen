@@ -42,6 +42,30 @@
       "scenario_id": "SC-10649-01",
       "title": "Verify automatic renewal",
       "jira_key": "ETIVAI-10649"
+    },
+    {
+      "manual_test_id": "M-13110-01",
+      "scenario_id": "SC-13110-01",
+      "title": "Verify conversation workspace behavior",
+      "jira_key": "ETIVAI-13110"
+    },
+    {
+      "manual_test_id": "M-13110-02",
+      "scenario_id": "SC-13110-02",
+      "title": "Verify workspace persists across navigation",
+      "jira_key": "ETIVAI-13110"
+    },
+    {
+      "manual_test_id": "M-13124-01",
+      "scenario_id": "SC-13124-01",
+      "title": "Verify release/build selector visibility",
+      "jira_key": "ETIVAI-13124"
+    },
+    {
+      "manual_test_id": "M-13141-01",
+      "scenario_id": "SC-13141-01",
+      "title": "Verify environment status refresh",
+      "jira_key": "ETIVAI-13141"
     }
   ]
 }

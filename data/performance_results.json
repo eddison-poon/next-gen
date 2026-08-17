@@ -69,6 +69,40 @@
           "status": "PASSED"
         }
       ]
+    },
+    {
+      "stream_id": "agenthub-ui",
+      "release_id": "ui-4.2",
+      "build": "4.2.1",
+      "assessment": "GREEN",
+      "test_run": "PERF-UI-4.2.1-01",
+      "summary": "UI release performance smoke run passed the agreed thresholds.",
+      "metrics": [
+        {
+          "name": "Peak Users",
+          "value": "250",
+          "target": "\u2265 200",
+          "status": "PASSED"
+        },
+        {
+          "name": "Throughput",
+          "value": "92 QPM",
+          "target": "\u2265 80 QPM",
+          "status": "PASSED"
+        },
+        {
+          "name": "P95 Response Time",
+          "value": "1.6 s",
+          "target": "\u2264 2.0 s",
+          "status": "PASSED"
+        },
+        {
+          "name": "Error Rate",
+          "value": "0.1%",
+          "target": "\u2264 1.0%",
+          "status": "PASSED"
+        }
+      ]
     }
   ]
 }

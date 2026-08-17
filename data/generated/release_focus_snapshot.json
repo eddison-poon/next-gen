@@ -665,8 +665,8 @@
     },
     {
       "scope": {
-        "version": 1,
-        "effective_at": "2026-08-17T14:30:00+08:00"
+        "version": 2,
+        "effective_at": "2026-08-18T00:45:00+08:00"
       },
       "stream": {
         "id": "agenthub-ui",
@@ -679,78 +679,217 @@
         "available_builds": [
           "4.2.1"
         ],
-        "release_item_count": 0
+        "release_item_count": 3
       },
       "kpis": {
-        "overall_health": "NOT_AVAILABLE",
-        "release_test_coverage": 0.0,
-        "execution_progress": 0.0,
-        "pass_rate": null,
-        "executed": 0,
-        "passed": 0,
-        "failed": 0,
-        "blocked": 0,
-        "not_executed": 0,
-        "total_applicable_gates": 0
+        "overall_health": "RED",
+        "release_test_coverage": 71.4,
+        "execution_progress": 71.4,
+        "pass_rate": 88.9,
+        "executed": 10,
+        "passed": 8,
+        "failed": 1,
+        "blocked": 1,
+        "not_executed": 4,
+        "total_applicable_gates": 14
       },
       "environment_health": [
         {
           "environment": "DEV",
-          "applicable": 0,
-          "executed": 0,
-          "passed": 0,
+          "applicable": 2,
+          "executed": 2,
+          "passed": 2,
           "failed": 0,
           "blocked": 0,
           "not_executed": 0,
-          "pass_rate": null,
-          "readiness": "N/A"
+          "pass_rate": 100.0,
+          "readiness": "READY"
         },
         {
           "environment": "SIT",
-          "applicable": 0,
-          "executed": 0,
-          "passed": 0,
+          "applicable": 4,
+          "executed": 4,
+          "passed": 4,
           "failed": 0,
           "blocked": 0,
           "not_executed": 0,
-          "pass_rate": null,
-          "readiness": "N/A"
+          "pass_rate": 100.0,
+          "readiness": "READY"
         },
         {
           "environment": "UAT",
-          "applicable": 0,
-          "executed": 0,
-          "passed": 0,
-          "failed": 0,
-          "blocked": 0,
+          "applicable": 4,
+          "executed": 4,
+          "passed": 2,
+          "failed": 1,
+          "blocked": 1,
           "not_executed": 0,
-          "pass_rate": null,
-          "readiness": "N/A"
+          "pass_rate": 66.7,
+          "readiness": "IN_PROGRESS"
         },
         {
           "environment": "PPD",
-          "applicable": 0,
+          "applicable": 3,
           "executed": 0,
           "passed": 0,
           "failed": 0,
           "blocked": 0,
-          "not_executed": 0,
+          "not_executed": 3,
           "pass_rate": null,
-          "readiness": "N/A"
+          "readiness": "NOT_STARTED"
         },
         {
           "environment": "PROD",
-          "applicable": 0,
+          "applicable": 1,
           "executed": 0,
           "passed": 0,
           "failed": 0,
           "blocked": 0,
-          "not_executed": 0,
+          "not_executed": 1,
           "pass_rate": null,
-          "readiness": "N/A"
+          "readiness": "NOT_STARTED"
         }
       ],
-      "release_items": []
+      "release_items": [
+        {
+          "jira_key": "ETIVAI-13110",
+          "summary": "Agent Hub conversation workspace refinements",
+          "issue_type": "Story",
+          "jira_url": "#",
+          "health": "RED",
+          "environment_gate": {
+            "DEV": "PASSED",
+            "SIT": "PASSED",
+            "UAT": "FAILED",
+            "PPD": "NOT_EXECUTED",
+            "PROD": "N/A"
+          },
+          "features": [
+            {
+              "id": "F-13110-01",
+              "name": "Conversation workspace",
+              "scenario": {
+                "id": "SC-13110-01",
+                "title": "Verify conversation workspace behavior",
+                "manual_test_id": "M-13110-01",
+                "jira_key": "ETIVAI-13110"
+              },
+              "applicable_environments": [
+                "DEV",
+                "SIT",
+                "UAT",
+                "PPD"
+              ],
+              "environment_status": {
+                "DEV": "PASSED",
+                "SIT": "PASSED",
+                "UAT": "FAILED",
+                "PPD": "NOT_EXECUTED",
+                "PROD": "N/A"
+              }
+            },
+            {
+              "id": "F-13110-02",
+              "name": "Workspace persistence",
+              "scenario": {
+                "id": "SC-13110-02",
+                "title": "Verify workspace persists across navigation",
+                "manual_test_id": "M-13110-02",
+                "jira_key": "ETIVAI-13110"
+              },
+              "applicable_environments": [
+                "SIT",
+                "UAT",
+                "PPD"
+              ],
+              "environment_status": {
+                "DEV": "N/A",
+                "SIT": "PASSED",
+                "UAT": "BLOCKED",
+                "PPD": "NOT_EXECUTED",
+                "PROD": "N/A"
+              }
+            }
+          ]
+        },
+        {
+          "jira_key": "ETIVAI-13124",
+          "summary": "Release selector and build visibility improvement",
+          "issue_type": "Story",
+          "jira_url": "#",
+          "health": "AMBER",
+          "environment_gate": {
+            "DEV": "PASSED",
+            "SIT": "PASSED",
+            "UAT": "PASSED",
+            "PPD": "NOT_EXECUTED",
+            "PROD": "NOT_EXECUTED"
+          },
+          "features": [
+            {
+              "id": "F-13124-01",
+              "name": "Release selector",
+              "scenario": {
+                "id": "SC-13124-01",
+                "title": "Verify release/build selector visibility",
+                "manual_test_id": "M-13124-01",
+                "jira_key": "ETIVAI-13124"
+              },
+              "applicable_environments": [
+                "DEV",
+                "SIT",
+                "UAT",
+                "PPD",
+                "PROD"
+              ],
+              "environment_status": {
+                "DEV": "PASSED",
+                "SIT": "PASSED",
+                "UAT": "PASSED",
+                "PPD": "NOT_EXECUTED",
+                "PROD": "NOT_EXECUTED"
+              }
+            }
+          ]
+        },
+        {
+          "jira_key": "ETIVAI-13141",
+          "summary": "Fix environment status refresh after navigation",
+          "issue_type": "Bug",
+          "jira_url": "#",
+          "health": "GREEN",
+          "environment_gate": {
+            "DEV": "N/A",
+            "SIT": "PASSED",
+            "UAT": "PASSED",
+            "PPD": "N/A",
+            "PROD": "N/A"
+          },
+          "features": [
+            {
+              "id": "F-13141-01",
+              "name": "Environment refresh",
+              "scenario": {
+                "id": "SC-13141-01",
+                "title": "Verify environment status refresh",
+                "manual_test_id": "M-13141-01",
+                "jira_key": "ETIVAI-13141"
+              },
+              "applicable_environments": [
+                "SIT",
+                "UAT"
+              ],
+              "environment_status": {
+                "DEV": "N/A",
+                "SIT": "PASSED",
+                "UAT": "PASSED",
+                "PPD": "N/A",
+                "PROD": "N/A"
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

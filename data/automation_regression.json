@@ -184,6 +184,53 @@
           ]
         }
       ]
+    },
+    {
+      "id": "ark-sandbox",
+      "name": "Ark Sandbox",
+      "description": "Regression protection for sandbox lifecycle and command execution.",
+      "features": [
+        {
+          "id": "AUTO-F-ARK-01",
+          "name": "Sandbox Lifecycle",
+          "scenarios": [
+            {
+              "id": "AUTO-S-ARK-01",
+              "name": "Create and destroy sandbox",
+              "automation_test_id": "ARK-SANDBOX-A-001",
+              "applicable_environments": [
+                "DEV",
+                "SIT",
+                "UAT"
+              ],
+              "results": {
+                "DEV": "PASSED",
+                "SIT": "PASSED",
+                "UAT": "NOT_EXECUTED",
+                "PPD": "N/A",
+                "PROD": "N/A"
+              }
+            },
+            {
+              "id": "AUTO-S-ARK-02",
+              "name": "Execute command in sandbox",
+              "automation_test_id": "ARK-SANDBOX-A-002",
+              "applicable_environments": [
+                "DEV",
+                "SIT",
+                "UAT"
+              ],
+              "results": {
+                "DEV": "PASSED",
+                "SIT": "BLOCKED",
+                "UAT": "NOT_EXECUTED",
+                "PPD": "N/A",
+                "PROD": "N/A"
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }
