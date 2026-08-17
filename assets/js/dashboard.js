@@ -1,7 +1,7 @@
 (() => {
   "use strict";
   const ENVIRONMENTS=["DEV","SIT","UAT","PPD","PROD"];
-  const state={payload:null,snapshot:null,selectedItem:null,selectedFeature:null,search:"",automation:null,selectedCapability:null,performance:null,perfSnapshot:null};
+  const state={payload:null,snapshot:null,selectedItem:null,selectedFeature:null,search:"",automation:null,selectedCapability:null,selectedAutomationFeature:null,performance:null,perfSnapshot:null};
   const $=id=>document.getElementById(id);
 
   document.addEventListener("DOMContentLoaded",()=>{bindTabs();bindEvents();loadData();loadAutomation();loadPerformance();});
@@ -106,7 +106,7 @@
 
   async function loadAutomation(){
     const r=await fetch(`data/automation_regression.json?ts=${Date.now()}`,{cache:"no-store"});if(!r.ok)return;
-    state.automation=await r.json();state.selectedCapability=state.automation.capabilities[0]||null;renderAutomation();
+    state.automation=await r.json();state.selectedCapability=state.automation.capabilities[0]||null;state.selectedAutomationFeature=state.selectedCapability?.features[0]||null;renderAutomation();
   }
   function automationScenarios(){return state.automation?.capabilities.flatMap(c=>c.features.flatMap(f=>f.scenarios.map(s=>({c,f,s}))))||[]}
   function autoStatus(s,e){return s.applicable_environments.includes(e)?(s.results[e]||"NOT_EXECUTED"):"N/A"}
@@ -118,12 +118,20 @@
     $("automationEnvironmentGrid").innerHTML=ENVIRONMENTS.map(e=>{const a=rows.filter(x=>autoStatus(x.s,e)!=="N/A"),ex=a.filter(x=>autoStatus(x.s,e)!=="NOT_EXECUTED"),cv=a.length?Math.round(ex.length/a.length*1000)/10:0;return`<div class="env-box"><div class="env-top"><span class="env-name">${e}</span><strong class="env-rate">${a.length?cv+"%":"—"}</strong></div><div class="env-stats"><div><span>Applicable</span><strong>${a.length}</strong></div><div><span>Executed</span><strong>${ex.length}</strong></div><div><span>Coverage</span><strong>${a.length?cv+"%":"N/A"}</strong></div></div><span class="readiness ${cv===100?"ready":ex.length?"partial":"not-started"}">${!a.length?"N/A":cv===100?"Covered":ex.length?"Partial":"Not Started"}</span></div>`}).join("");
     $("capabilityCount").textContent=state.automation.capabilities.length;
     $("capabilityItems").innerHTML=state.automation.capabilities.map(c=>{const cs=autoCoverage(c.features.flatMap(f=>f.scenarios.map(s=>({c,f,s}))));return`<button class="release-item ${c===state.selectedCapability?"active":""}" data-cap="${c.id}"><span><span class="release-key">${esc(c.name)}</span><span class="release-summary">${c.features.length} features</span><span class="release-meta">${cs.coverage}% automation coverage</span></span><i class="item-state ${cs.failed?"red":cs.blocked?"amber":cs.coverage===100?"green":"amber"}"></i></button>`}).join("");
-    document.querySelectorAll("[data-cap]").forEach(b=>b.addEventListener("click",()=>{state.selectedCapability=state.automation.capabilities.find(c=>c.id===b.dataset.cap);renderAutomation()}));
+    document.querySelectorAll("[data-cap]").forEach(b=>b.addEventListener("click",()=>{state.selectedCapability=state.automation.capabilities.find(c=>c.id===b.dataset.cap);state.selectedAutomationFeature=state.selectedCapability?.features[0]||null;renderAutomation()}));
     renderCapabilityDetail();
   }
   function renderCapabilityDetail(){
     const c=state.selectedCapability;if(!c){$("capabilityDetail").innerHTML='<div class="muted">No capability selected.</div>';return}
-    $("capabilityDetail").innerHTML=`<div class="item-overview"><div><p class="eyebrow dark">Selected Capability</p><h3 class="detail-title">${esc(c.name)}</h3><p class="capability-description">${esc(c.description)}</p></div></div>${c.features.map(f=>`<section class="capability-feature"><div class="capability-feature-head"><strong>${esc(f.name)}</strong>${ENVIRONMENTS.map(e=>{const[m,cl]=featureAutoMark(f,e);return`<span class="env-mark ${cl}">${m}</span>`}).join("")}</div><table class="auto-scenario-table"><thead><tr><th>Automated Scenario</th>${ENVIRONMENTS.map(e=>`<th>${e}</th>`).join("")}</tr></thead><tbody>${f.scenarios.map(s=>`<tr><td><strong>${esc(s.name)}</strong><br><span class="muted">${esc(s.automation_test_id)}</span></td>${ENVIRONMENTS.map(e=>{const[m,cl]=mark(autoStatus(s,e));return`<td><span class="env-mark ${cl}">${m}</span></td>`}).join("")}</tr>`).join("")}</tbody></table></section>`).join("")}`;
+    if(!state.selectedAutomationFeature||!c.features.includes(state.selectedAutomationFeature))state.selectedAutomationFeature=c.features[0]||null;
+    const featureRows=c.features.map(f=>`<div class="feature-row ${f===state.selectedAutomationFeature?"active":""}" data-auto-feature="${f.id}"><div class="feature-name"><strong>${esc(f.name)}</strong><small>${f.scenarios.length} automated scenario${f.scenarios.length===1?"":"s"}</small></div>${ENVIRONMENTS.map(e=>{const[m,cl]=featureAutoMark(f,e);return`<span class="env-mark ${cl}">${m}</span>`}).join("")}</div>`).join("");
+    $("capabilityDetail").innerHTML=`<div class="item-overview"><div><p class="eyebrow dark">Selected Capability</p><h3 class="detail-title">${esc(c.name)}</h3><p class="capability-description">${esc(c.description)}</p><div class="issue-meta"><span>${c.features.length} features</span><span>${c.features.reduce((n,f)=>n+f.scenarios.length,0)} automated scenarios</span></div></div></div><div class="feature-list"><div class="feature-header"><span>Feature</span>${ENVIRONMENTS.map(e=>`<span>${e}</span>`).join("")}</div>${featureRows}</div><div id="selectedAutomationFeatureArea"></div>`;
+    document.querySelectorAll("[data-auto-feature]").forEach(r=>r.addEventListener("click",()=>{state.selectedAutomationFeature=c.features.find(f=>f.id===r.dataset.autoFeature);renderCapabilityDetail()}));
+    renderSelectedAutomationFeature();
+  }
+  function renderSelectedAutomationFeature(){
+    const f=state.selectedAutomationFeature;if(!f)return;
+    $("selectedAutomationFeatureArea").innerHTML=`<section class="selected-feature"><p class="eyebrow dark">Selected Feature</p><h4>${esc(f.name)}</h4><table class="scenario-table"><thead><tr><th>Automated Scenario</th>${ENVIRONMENTS.map(e=>`<th>${e}</th>`).join("")}</tr></thead><tbody>${f.scenarios.map(s=>`<tr><td><span class="scenario-name">${esc(s.name)}</span><span class="scenario-id">${esc(s.id)} · ${esc(s.automation_test_id)}</span></td>${ENVIRONMENTS.map(e=>{const[m,cl]=mark(autoStatus(s,e));return`<td><span class="env-mark ${cl}">${m}</span></td>`}).join("")}</tr>`).join("")}</tbody></table><div class="legend"><span><b>✓</b> Passed</span><span><b>✕</b> Failed</span><span><b>!</b> Blocked</span><span><b>—</b> Not Executed</span><span><b>N/A</b> Not Applicable</span></div></section>`;
   }
 
   async function loadPerformance(){
