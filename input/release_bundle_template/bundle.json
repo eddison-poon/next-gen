@@ -1,0 +1,9 @@
+{
+  "schema_version": "ng-release-data-bundle-0.7",
+  "mode": "upsert",
+  "release_scope": "release_scope.json",
+  "manual_test_definitions": "manual_test_definitions.json",
+  "manual_executions": "manual_executions.json",
+  "automation_regression": "automation_regression.json",
+  "performance_results": "performance_results.json"
+}

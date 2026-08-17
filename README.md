@@ -1,54 +1,89 @@
-# Next Generation Dashboard — v0.6 UAT Candidate 2
+# Next Generation Dashboard — v0.7 UAT Readiness / Real Data Onboarding
 
-v0.6 is a bundled UAT-hardening package. The three-tab architecture is unchanged.
+v0.7 shifts the project from dashboard construction to **operational onboarding of real project data**. The Release, Regression / Automation, and Performance tab architecture remains unchanged.
 
-## Included
+## v0.7 objective
 
-### Release Focus hardening
-- Agent Runtime 2.8 remains the reference release.
-- Agent Hub UI 4.2 now contains a realistic second release scope.
-- Mixed Passed / Failed / Blocked / Not Executed / N/A conditions.
-- Multi-release switching can now be exercised with populated data.
+A team should be able to add or update a Release without editing HTML, CSS, or JavaScript.
 
-### Regression / Automation hardening
-- Added Ark Sandbox automation capability.
-- Added blocked, partial, not-executed, and N/A regression states.
-- Stronger duplicate-ID and result-matrix validation.
+The operating path is now:
 
-### Performance hardening
-- Added Agent Hub UI 4.2.1 performance result.
-- Performance results remain isolated by Release Stream → Release → Build.
-- Existing no-result handling remains available for builds without a run.
+**Release Data Bundle → Import / Validate → Canonical Data → Reporting Snapshot → Dashboard**
 
-### Calculation regression tests
-`tests/test_release_reporting.py` locks the agreed Release Focus calculations and environment-gate rules.
+## New: Release Data Bundle
 
-### Company-network friendly UAT runner
+Use:
+
+```bash
+python tools/create_release_bundle.py --stream-id agent-runtime --stream-name "Agent Runtime" --release-id runtime-2.9 --release-name "Release 2.9" --build 2.9.1 --output input/runtime-2.9
+```
+
+The generated bundle contains:
+
+- `release_scope.json`
+- `manual_test_definitions.json`
+- `manual_executions.json`
+- `automation_regression.json`
+- `performance_results.json`
+
+Edit only these input files for the new release.
+
+## Validate before changing dashboard data
+
+```bash
+python tools/import_data_bundle.py input/runtime-2.9 --dry-run
+```
+
+A dry run validates the Release hierarchy, Manual Test Definition references, execution Release/Build/Environment mapping, and input structure without modifying canonical dashboard data.
+
+## Apply
+
+```bash
+python tools/import_data_bundle.py input/runtime-2.9 --apply
+python tools/run_uat_checks.py
+```
+
+The importer:
+
+- adds or updates the Release Stream / Release registry;
+- writes the current Release Scope manifest;
+- upserts Manual Test Definitions by `manual_test_id`;
+- upserts Manual executions by `execution_id`;
+- optionally replaces the Automation snapshot when a non-empty automation file is supplied;
+- optionally upserts Performance results by `test_run`;
+- records the scope import in the Release Scope Log.
+
+## Regression / Automation UI consistency
+
+The v0.6 UI correction is included: Automation now follows the same interaction model as Release Focus:
+
+**Capability → Feature → Selected Feature → Automated Scenarios**
+
+## UAT checks
+
 No pytest dependency is required:
 
 ```bash
 python tools/run_uat_checks.py
 ```
 
-This rebuilds the generated snapshot, validates all data contracts, and runs lightweight reporting regression checks.
+v0.7 adds onboarding regression checks to ensure dry-run imports are non-destructive and bundle generation works correctly.
 
-## Recommended internal UAT
+## Documentation
 
-```bash
-python tools/run_uat_checks.py
-python -m http.server 8000
-```
+See:
 
-Open `http://localhost:8000`.
+`docs/UAT_DATA_ONBOARDING.md`
 
-Suggested checks:
-1. Runtime 2.8 / Build 2.8.4 Release Focus.
-2. Drill ETIVAI-12442 and locate the UAT failure.
-3. Switch to Agent Hub UI 4.2 / Build 4.2.1.
-4. Confirm mixed Manual states and N/A handling.
-5. Regression / Automation: locate Failed, Blocked and Not Executed scenarios.
-6. Confirm automation does not alter Release Focus health.
-7. Performance: switch between Runtime and UI releases/builds.
-8. Confirm release/build isolation and clean empty-result behavior.
+## Recommended internal UAT flow
 
-If v0.6 passes, the next step should be production-data onboarding and UAT feedback fixes rather than another structural dashboard redesign.
+1. Pull the repository.
+2. Run `python tools/run_uat_checks.py`.
+3. Create a new test Release Data Bundle.
+4. Populate 1–2 real Jira Release Items and their Manual Test data.
+5. Run `--dry-run`.
+6. Apply the bundle.
+7. Run UAT checks again.
+8. Start the local dashboard and confirm the new Release appears without any UI code changes.
+
+If this flow works cleanly with your team's real data, the next phase should be UAT feedback fixes and production connector/automation work rather than further data-model redesign.

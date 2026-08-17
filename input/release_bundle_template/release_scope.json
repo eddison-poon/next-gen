@@ -1,0 +1,21 @@
+{
+  "schema_version": "ng-release-scope-0.4",
+  "scope_version": 1,
+  "effective_at": "2026-08-18T00:00:00+08:00",
+  "stream": {
+    "id": "replace-me",
+    "name": "Replace Me"
+  },
+  "release": {
+    "id": "replace-me",
+    "name": "Release X",
+    "builds": [
+      "X.Y.Z"
+    ],
+    "current_build": "X.Y.Z"
+  },
+  "scope": {
+    "release_items": []
+  },
+  "notes": "Edit this file to define the current release scope."
+}
