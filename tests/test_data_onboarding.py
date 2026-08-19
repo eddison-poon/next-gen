@@ -1,5 +1,5 @@
 from __future__ import annotations
-import hashlib, json, subprocess, sys, tempfile
+import hashlib, importlib.util, json, subprocess, sys, tempfile
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -33,3 +33,14 @@ def test_bundle_creator_generates_expected_context():
         assert scope["stream"]["id"]=="test-stream"
         assert scope["release"]["id"]=="test-1.0"
         assert scope["release"]["current_build"]=="1.0.1"
+
+def test_rebuild_discovery_excludes_template_and_finds_real_bundles():
+    spec=importlib.util.spec_from_file_location("rebuild",ROOT/"tools/rebuild_from_bundles.py")
+    rebuild=importlib.util.module_from_spec(spec); spec.loader.exec_module(rebuild)
+    with tempfile.TemporaryDirectory(dir=ROOT) as tmp:
+        base=Path(tmp)
+        template=base/"release_bundle_template"; template.mkdir(); (template/"bundle.json").write_text("{}",encoding="utf-8")
+        release=base/"runtime-9.9"; release.mkdir(); (release/"bundle.json").write_text("{}",encoding="utf-8")
+        ignored=base/"notes"; ignored.mkdir()
+        found=rebuild.discover_bundles(base)
+        assert found==[release]
