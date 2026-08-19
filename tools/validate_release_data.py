@@ -28,8 +28,6 @@ def main():
     assert len(definition_by_id) == len(defs["definitions"]), "duplicate manual_test_id"
 
     release_ids=set()
-    feature_ids=set()
-    scenario_ids=set()
     manifests=[]
 
     for stream in registry["streams"]:
@@ -49,15 +47,20 @@ def main():
             assert rid not in release_ids, f"duplicate release {rid}"
             release_ids.add(rid)
 
+            # Feature and scenario identifiers are scoped to a release manifest.
+            # Reusing the same logical feature/scenario in another release is valid;
+            # duplicates within this release remain invalid.
             jira_keys=set()
+            feature_ids=set()
+            scenario_ids=set()
             for item in m["scope"]["release_items"]:
                 assert item["jira_key"] not in jira_keys, f"duplicate release item {item['jira_key']} in {rid}"
                 jira_keys.add(item["jira_key"])
 
                 for f in item["features"]:
-                    assert f["id"] not in feature_ids, f"duplicate feature {f['id']}"
+                    assert f["id"] not in feature_ids, f"duplicate feature {f['id']} in {rid}"
                     feature_ids.add(f["id"])
-                    assert f["scenario_id"] not in scenario_ids, f"duplicate scenario {f['scenario_id']}"
+                    assert f["scenario_id"] not in scenario_ids, f"duplicate scenario {f['scenario_id']} in {rid}"
                     scenario_ids.add(f["scenario_id"])
                     assert f["manual_test_id"] in definition_by_id, f"missing definition {f['manual_test_id']}"
                     d=definition_by_id[f["manual_test_id"]]
