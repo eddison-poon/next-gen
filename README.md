@@ -1,111 +1,88 @@
-# Next Generation Dashboard — v0.7 UAT Readiness / Real Data Onboarding
+# Next Generation Dashboard — v0.8 Internal UAT Operator Candidate
 
-v0.7 shifts the project from dashboard construction to **operational onboarding of real project data**. The Release, Regression / Automation, and Performance tab architecture remains unchanged.
+v0.8 keeps the stable three-tab dashboard architecture and the v0.7 durable Release Data Bundle model. Its purpose is to make day-to-day internal UAT operation safer and simpler for testers.
 
-## v0.7 objective
+## Operating model
 
-A team should be able to add or update a Release without editing HTML, CSS, or JavaScript.
+**Durable Release Data Bundle → Safe operator update → Dry-run → Publish → Canonical Data → Reporting Snapshot → Dashboard**
 
-The operating path is now:
+Release, Regression / Automation and Performance remain separate functional tabs. Manual testing remains the release-governing signal.
 
-**Release Data Bundle → Import / Validate → Canonical Data → Reporting Snapshot → Dashboard**
+## Create a Release Data Bundle
 
-## New: Release Data Bundle
-
-Use:
-
-```bash
-python tools/create_release_bundle.py --stream-id agent-runtime --stream-name "Agent Runtime" --release-id runtime-2.9 --release-name "Release 2.9" --build 2.9.1 --output input/runtime-2.9
+```cmd
+python .\tools\create_release_bundle.py --stream-id agent-runtime --stream-name "Agent Runtime" --release-id runtime-2.9 --release-name "Release 2.9" --build 2.9.1 --output input/runtime-2.9
 ```
 
-The generated bundle contains:
+The bundle contains the current release scope, Manual Test Definitions, execution history, and optional Automation / Performance inputs.
 
-- `release_scope.json`
-- `manual_test_definitions.json`
-- `manual_executions.json`
-- `automation_regression.json`
-- `performance_results.json`
+## v0.8: inspect current bundle state
 
-Edit only these input files for the new release.
-
-## Validate before changing dashboard data
-
-```bash
-python tools/import_data_bundle.py input/runtime-2.9 --dry-run
+```cmd
+python .\tools\show_bundle_status.py input\runtime-2.9
 ```
 
-A dry run validates the Release hierarchy, Manual Test Definition references, execution Release/Build/Environment mapping, and input structure without modifying canonical dashboard data.
+This shows the latest status in each environment before publishing.
 
-## Apply
+## v0.8: record Manual executions safely
 
-```bash
-python tools/import_data_bundle.py input/runtime-2.9 --apply
-python tools/run_uat_checks.py
+Instead of hand-editing normal execution rows:
+
+```cmd
+python .\tools\record_manual_execution.py input\runtime-2.9 --manual-test-id M-13005-01 --environment UAT --status PASSED
 ```
 
-The importer:
+The recorder:
 
-- adds or updates the Release Stream / Release registry;
-- writes the current Release Scope manifest;
-- upserts Manual Test Definitions by `manual_test_id`;
-- upserts Manual executions by `execution_id`;
-- optionally replaces the Automation snapshot when a non-empty automation file is supplied;
-- optionally upserts Performance results by `test_run`;
-- records the scope import in the Release Scope Log.
+- derives Release Stream, Release and Build from the bundle;
+- generates an execution ID and timestamp when omitted;
+- rejects non-applicable environments;
+- rejects duplicate execution IDs;
+- preserves previous execution history by appending a new row.
 
-## Durable manual bundle restore
+## v0.8: validate / publish one bundle
 
-The manually maintained folders under `input/` are the durable source for manually onboarded releases. Canonical `data/` files may be refreshed by Git, so they must be reproducible from these bundles.
+Dry-run:
 
-After a fresh pull or canonical-data reset, validate every real bundle under `input/` with:
-
-```bash
-python tools/rebuild_from_bundles.py --dry-run
+```cmd
+python .\tools\publish_release_bundle.py input\runtime-2.9 --dry-run
 ```
 
-Then restore all discovered bundles and rebuild the generated snapshot with:
+Apply:
 
-```bash
-python tools/rebuild_from_bundles.py --apply
-python tools/run_uat_checks.py
+```cmd
+python .\tools\publish_release_bundle.py input\runtime-2.9 --apply
 ```
 
-`release_bundle_template` is intentionally excluded from automatic discovery. Only subfolders containing a `bundle.json` are treated as real Release Data Bundles.
+`--apply` always performs the dry-run first. Only after validation succeeds does it import the bundle and run the full UAT regression suite.
 
-For long-term durability, real release bundle folders should be retained as controlled project inputs (and committed to the appropriate project repository when company policy allows). The generated/canonical dashboard files remain rebuildable outputs.
+## Restore durable bundles after a repository refresh
 
-## Regression / Automation UI consistency
+```cmd
+python .\tools\rebuild_from_bundles.py --dry-run
+python .\tools\rebuild_from_bundles.py --apply
+python .\tools\run_uat_checks.py
+```
 
-The v0.6 UI correction is included: Automation now follows the same interaction model as Release Focus:
+`input/release_bundle_template` is excluded from automatic discovery. Real bundle folders are the durable manual source; canonical dashboard data can be rebuilt from them.
 
-**Capability → Feature → Selected Feature → Automated Scenarios**
-
-## UAT checks
+## UAT validation
 
 No pytest dependency is required:
 
-```bash
-python tools/run_uat_checks.py
+```cmd
+python .\tools\run_uat_checks.py
 ```
 
-v0.7 adds onboarding regression checks to ensure dry-run imports are non-destructive, bundle generation works correctly, and durable-bundle discovery excludes the template while finding real release bundles.
+v0.8 adds operator-workflow regression checks covering valid execution entry, non-applicable environment rejection and duplicate execution-ID protection.
 
 ## Documentation
 
-See:
+- `docs/UAT_DATA_ONBOARDING.md` — v0.7 data onboarding model
+- `docs/INTERNAL_UAT_OPERATOR_GUIDE.md` — v0.8 day-to-day operator workflow
 
-`docs/UAT_DATA_ONBOARDING.md`
+## Internal UAT recommendation
 
-## Recommended internal UAT flow
+Use manually prepared release scope and definitions first. During normal execution, record new results through `record_manual_execution.py`, inspect them with `show_bundle_status.py`, and publish them with `publish_release_bundle.py`.
 
-1. Pull the repository.
-2. If real bundles already exist under `input/`, run `python tools/rebuild_from_bundles.py --apply`.
-3. Run `python tools/run_uat_checks.py`.
-4. Create or update a Release Data Bundle.
-5. Populate real Jira Release Items and their Manual Test data.
-6. Run the bundle `--dry-run` import.
-7. Apply the bundle.
-8. Run UAT checks again.
-9. Start the local dashboard and confirm the Release appears without any UI code changes.
-
-If this flow works cleanly with your team's real data, the next phase should be UAT feedback fixes and production connector/automation work rather than further data-model redesign.
+Third-party Jira extraction, execution connectors and other automated ingestion should be added only after this complete manual operating process is accepted by the internal team.
