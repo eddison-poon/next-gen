@@ -53,6 +53,27 @@ The importer:
 - optionally upserts Performance results by `test_run`;
 - records the scope import in the Release Scope Log.
 
+## Durable manual bundle restore
+
+The manually maintained folders under `input/` are the durable source for manually onboarded releases. Canonical `data/` files may be refreshed by Git, so they must be reproducible from these bundles.
+
+After a fresh pull or canonical-data reset, validate every real bundle under `input/` with:
+
+```bash
+python tools/rebuild_from_bundles.py --dry-run
+```
+
+Then restore all discovered bundles and rebuild the generated snapshot with:
+
+```bash
+python tools/rebuild_from_bundles.py --apply
+python tools/run_uat_checks.py
+```
+
+`release_bundle_template` is intentionally excluded from automatic discovery. Only subfolders containing a `bundle.json` are treated as real Release Data Bundles.
+
+For long-term durability, real release bundle folders should be retained as controlled project inputs (and committed to the appropriate project repository when company policy allows). The generated/canonical dashboard files remain rebuildable outputs.
+
 ## Regression / Automation UI consistency
 
 The v0.6 UI correction is included: Automation now follows the same interaction model as Release Focus:
@@ -67,7 +88,7 @@ No pytest dependency is required:
 python tools/run_uat_checks.py
 ```
 
-v0.7 adds onboarding regression checks to ensure dry-run imports are non-destructive and bundle generation works correctly.
+v0.7 adds onboarding regression checks to ensure dry-run imports are non-destructive, bundle generation works correctly, and durable-bundle discovery excludes the template while finding real release bundles.
 
 ## Documentation
 
@@ -78,12 +99,13 @@ See:
 ## Recommended internal UAT flow
 
 1. Pull the repository.
-2. Run `python tools/run_uat_checks.py`.
-3. Create a new test Release Data Bundle.
-4. Populate 1–2 real Jira Release Items and their Manual Test data.
-5. Run `--dry-run`.
-6. Apply the bundle.
-7. Run UAT checks again.
-8. Start the local dashboard and confirm the new Release appears without any UI code changes.
+2. If real bundles already exist under `input/`, run `python tools/rebuild_from_bundles.py --apply`.
+3. Run `python tools/run_uat_checks.py`.
+4. Create or update a Release Data Bundle.
+5. Populate real Jira Release Items and their Manual Test data.
+6. Run the bundle `--dry-run` import.
+7. Apply the bundle.
+8. Run UAT checks again.
+9. Start the local dashboard and confirm the Release appears without any UI code changes.
 
 If this flow works cleanly with your team's real data, the next phase should be UAT feedback fixes and production connector/automation work rather than further data-model redesign.
