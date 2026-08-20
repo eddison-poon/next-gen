@@ -4,6 +4,7 @@ from pathlib import Path
 from datetime import datetime
 
 ROOT=Path(__file__).resolve().parents[1]
+DATA=ROOT/"data"
 ENVS=["DEV","SIT","UAT","PPD","PROD"]
 
 def load(path:Path):
@@ -11,6 +12,37 @@ def load(path:Path):
 
 def latest(rows):
     return max(rows,key=lambda x: datetime.fromisoformat(x["executed_at"])) if rows else None
+
+def canonical_publish_state(scope):
+    registry_path=DATA/"release_registry.json"
+    snapshot_path=DATA/"generated/release_focus_snapshot.json"
+    sid=scope["stream"]["id"]
+    rid=scope["release"]["id"]
+    build=scope["release"]["current_build"]
+
+    registered=False
+    if registry_path.is_file():
+        registry=load(registry_path)
+        for stream in registry.get("streams",[]):
+            if stream.get("id")!=sid:
+                continue
+            if any(r.get("id")==rid for r in stream.get("releases",[])):
+                registered=True
+                break
+
+    snapshot_present=False
+    if snapshot_path.is_file():
+        payload=load(snapshot_path)
+        for snap in payload.get("snapshots",[]):
+            if snap.get("stream",{}).get("id")==sid and snap.get("release",{}).get("id")==rid and snap.get("release",{}).get("build")==build:
+                snapshot_present=True
+                break
+
+    if registered and snapshot_present:
+        return "PUBLISHED", None
+    if not registered:
+        return "NOT_PUBLISHED", f"Release {scope['release']['name']} is not registered in canonical dashboard data. Run: python .\\tools\\rebuild_from_bundles.py --apply"
+    return "STALE_SNAPSHOT", f"Release {scope['release']['name']} is registered, but build {build} is missing from the generated dashboard snapshot. Run: python .\\tools\\run_uat_checks.py"
 
 def main():
     p=argparse.ArgumentParser(description="Show a concise internal-UAT readiness summary for one Release Data Bundle.")
@@ -23,6 +55,8 @@ def main():
     bundle=load(bundle_dir/"bundle.json")
     scope=load(bundle_dir/bundle["release_scope"])
     executions=load(bundle_dir/bundle["manual_executions"]).get("executions",[])
+
+    publish_state,publish_warning=canonical_publish_state(scope)
 
     gates=[]
     for item in scope["scope"]["release_items"]:
@@ -40,6 +74,9 @@ def main():
     health="RED" if blocked or failed else ("GREEN" if total and passed==total else "AMBER")
 
     print(f"{scope['stream']['name']} | {scope['release']['name']} | build {scope['release']['current_build']}")
+    print(f"dashboard publish state: {publish_state}")
+    if publish_warning:
+        print(f"WARNING: {publish_warning}")
     print(f"scope version: {scope['scope_version']}")
     print(f"release items: {len(scope['scope']['release_items'])}")
     print(f"manual gates: {total}")
