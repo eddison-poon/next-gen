@@ -23,6 +23,8 @@ python .\tools\operator_preflight.py --bundle input\runtime-2.9
 python .\tools\team_uat_status.py input\runtime-2.9
 ```
 
+The status command also reports whether the bundle is currently PUBLISHED to canonical dashboard data.
+
 ## During UAT
 
 ### Manual / Release Focus
@@ -64,7 +66,21 @@ python .\tools\publish_automation_status.py input\automation_regression.json --a
 
 ## Feedback and defect handling
 
-Use `docs/UAT_FEEDBACK_TEMPLATE.md` for dashboard/process feedback. Product defects discovered while testing the release remain normal release Jira defects and should be linked to the relevant Release Item where appropriate.
+Product defects discovered while testing the release remain normal release Jira defects and should be linked to the relevant Release Item where appropriate.
+
+Dashboard/process findings belong to the dashboard Team UAT log. Record them without changing dashboard data:
+
+```cmd
+python .\tools\record_uat_feedback.py --summary "Release dropdown missing published release" --severity HIGH --type DATA --tab RELEASE --stream "Agent Runtime" --release "Release 2.9" --build 2.9.1 --expected "Release 2.9 is selectable" --actual "Only Release 2.8 is shown"
+```
+
+Review the current finding summary:
+
+```cmd
+python .\tools\show_uat_feedback.py
+```
+
+The durable feedback file is `input\uat_feedback.json`. `docs/UAT_FEEDBACK_TEMPLATE.md` remains available when a longer narrative/evidence record is useful.
 
 Classify dashboard UAT feedback as:
 
@@ -81,10 +97,11 @@ Do not change canonical JSON directly to work around a dashboard defect. Preserv
 
 ```cmd
 python .\tools\team_uat_status.py input\runtime-2.9
+python .\tools\show_uat_feedback.py
 ```
 
 2. Confirm the browser matches the command-line status.
-3. Capture new dashboard/process feedback.
+3. Review new dashboard/process findings and product Jira defects separately.
 4. Run the full check suite before committing controlled input changes:
 
 ```cmd
