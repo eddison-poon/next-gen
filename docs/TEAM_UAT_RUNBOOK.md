@@ -80,6 +80,14 @@ Review the current finding summary:
 python .\tools\show_uat_feedback.py
 ```
 
+After the issue is fixed and the retest passes, close it while retaining the original finding and resolution history:
+
+```cmd
+python .\tools\close_uat_feedback.py UAT-001 --retested-by "Tester Name" --retest-result PASSED --resolution "Durable bundle restored and publish-state warning added" --fix-version v0.9
+```
+
+A failed retest must remain OPEN. `close_uat_feedback.py` will only close a finding when `--retest-result PASSED` is supplied.
+
 The durable feedback file is `input\uat_feedback.json`. `docs/UAT_FEEDBACK_TEMPLATE.md` remains available when a longer narrative/evidence record is useful.
 
 Classify dashboard UAT feedback as:
