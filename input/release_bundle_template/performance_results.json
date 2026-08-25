@@ -1,5 +1,6 @@
 {
-  "schema_version": "ng-performance-0.5",
-  "generated_at": "2026-08-18T00:00:00+08:00",
-  "results": []
+  "schema_version": "ng-performance-0.6",
+  "generated_at": "2026-08-26T00:00:00+08:00",
+  "definitions": [],
+  "executions": []
 }
