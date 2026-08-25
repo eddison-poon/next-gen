@@ -7,6 +7,7 @@ ROOT=Path(__file__).resolve().parents[1]
 DATA=ROOT/"data"
 ENVIRONMENTS={"DEV","SIT","UAT","PPD","PROD"}
 MANUAL_STATUS={"PASSED","FAILED","BLOCKED"}
+PERFORMANCE_SCHEMA="ng-performance-0.6"
 
 def load(path:Path):
     return json.loads(path.read_text(encoding="utf-8"))
@@ -64,10 +65,12 @@ def validate_execution_rows(rows, defs_by_id, scope):
         datetime.fromisoformat(x["executed_at"])
 
 def merge_performance(current_perf,incoming_perf):
-    schema=incoming_perf.get("schema_version")
-    if schema=="ng-performance-0.6":
-        if current_perf.get("schema_version")!="ng-performance-0.6":
-            current_perf={"schema_version":"ng-performance-0.6","generated_at":incoming_perf.get("generated_at"),"definitions":[],"executions":[]}
+    has_history=bool(incoming_perf.get("definitions") or incoming_perf.get("executions"))
+    if has_history:
+        if current_perf.get("schema_version")!=PERFORMANCE_SCHEMA:
+            current_perf={"schema_version":PERFORMANCE_SCHEMA,"generated_at":incoming_perf.get("generated_at"),"definitions":[],"executions":[]}
+        current_perf["schema_version"]=PERFORMANCE_SCHEMA
+        current_perf.pop("results",None)
         current_perf["definitions"]=merge_by_id(current_perf.get("definitions",[]),incoming_perf.get("definitions",[]),"performance_test_id")
         current_perf["executions"]=merge_by_id(current_perf.get("executions",[]),incoming_perf.get("executions",[]),"performance_execution_id")
         current_perf["generated_at"]=incoming_perf.get("generated_at",current_perf.get("generated_at"))
@@ -108,6 +111,11 @@ def apply_bundle(bundle_dir:Path, dry_run:bool):
     current_exec=load(DATA/"manual_executions.json")
     merged_exec=merge_by_id(current_exec["executions"],incoming_exec,"execution_id")
 
+    perf_path=require_bundle_file(bundle_dir,bundle,"performance_results")
+    incoming_perf=load(perf_path) if perf_path else {}
+    incoming_perf_defs=incoming_perf.get("definitions",[])
+    incoming_perf_exec=incoming_perf.get("executions",[])
+
     print("Release Data Bundle validation passed")
     print(f"  stream: {scope['stream']['name']}")
     print(f"  release: {scope['release']['name']}")
@@ -115,6 +123,8 @@ def apply_bundle(bundle_dir:Path, dry_run:bool):
     print(f"  release items: {len(scope['scope']['release_items'])}")
     print(f"  incoming Manual definitions: {len(incoming_defs)}")
     print(f"  incoming Manual executions: {len(incoming_exec)}")
+    print(f"  incoming Performance definitions: {len(incoming_perf_defs)}")
+    print(f"  incoming Performance executions: {len(incoming_perf_exec)}")
 
     if dry_run:
         print("DRY RUN: canonical data was not changed")
@@ -130,10 +140,8 @@ def apply_bundle(bundle_dir:Path, dry_run:bool):
         auto=load(auto_path)
         if auto.get("capabilities"):
             write(DATA/"automation_regression.json",auto)
-    perf_path=require_bundle_file(bundle_dir,bundle,"performance_results")
     if perf_path:
-        incoming_perf=load(perf_path)
-        has_new=incoming_perf.get("definitions") or incoming_perf.get("executions")
+        has_new=incoming_perf_defs or incoming_perf_exec
         has_old=incoming_perf.get("results")
         if has_new or has_old:
             current_perf=load(DATA/"performance_results.json")
