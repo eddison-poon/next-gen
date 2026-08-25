@@ -1,108 +1,112 @@
 {
-  "schema_version": "ng-performance-0.5",
-  "generated_at": "2026-08-17T22:30:00+08:00",
-  "results": [
+  "schema_version": "ng-performance-0.6",
+  "generated_at": "2026-08-26T02:15:00+08:00",
+  "definitions": [
     {
+      "performance_test_id": "PT-AR-001",
+      "performance_scenario_id": "PS-AR-001",
+      "jira_key": "ETIVAI-PERF-001",
+      "title": "Single tenant baseline load",
+      "objective": "Validate sustained release throughput and response time under the agreed single-tenant baseline workload."
+    },
+    {
+      "performance_test_id": "PT-UI-001",
+      "performance_scenario_id": "PS-UI-001",
+      "jira_key": "ETIVAI-PERF-002",
+      "title": "UI release performance smoke",
+      "objective": "Validate the UI release remains responsive under the agreed smoke workload."
+    }
+  ],
+  "executions": [
+    {
+      "performance_execution_id": "PERF-AR-002",
+      "performance_test_id": "PT-AR-001",
       "stream_id": "agent-runtime",
       "release_id": "runtime-2.8",
       "build": "2.8.4",
-      "assessment": "AMBER",
-      "test_run": "PERF-RUNTIME-2.8.4-01",
-      "summary": "Baseline release performance run completed; P95 requires observation.",
-      "metrics": [
-        {
-          "name": "Peak Users",
-          "value": "500",
-          "target": "\u2265 500",
-          "status": "PASSED"
-        },
-        {
-          "name": "Throughput",
-          "value": "168 QPM",
-          "target": "\u2265 150 QPM",
-          "status": "PASSED"
-        },
-        {
-          "name": "P95 Response Time",
-          "value": "2.8 s",
-          "target": "\u2264 2.5 s",
-          "status": "FAILED"
-        },
-        {
-          "name": "Error Rate",
-          "value": "0.4%",
-          "target": "\u2264 1.0%",
-          "status": "PASSED"
-        }
-      ]
+      "executed_at": "2026-08-26T09:15:00+08:00",
+      "executed_by": "tester1",
+      "assessment": "PASSED",
+      "workload": [
+        {"name": "Concurrent users", "value": "300"},
+        {"name": "Target throughput", "value": "9,000 tasks/hour"},
+        {"name": "Duration", "value": "60 min"}
+      ],
+      "results": [
+        {"name": "Actual throughput", "value": "8,940 tasks/hour", "target": ">= 8,900", "status": "PASSED"},
+        {"name": "P95 completion", "value": "86 sec", "target": "< 120 sec", "status": "PASSED"},
+        {"name": "Error rate", "value": "0.4%", "target": "<= 1.0%", "status": "PASSED"},
+        {"name": "Completion <120s", "value": "99.1%", "target": ">= 99%", "status": "PASSED"}
+      ],
+      "environment": {"name": "UAT", "tenant": "Tenant-01", "runtime_type": "DeepAgent"},
+      "hardware_utilization": [
+        {"component": "Runtime API", "metrics": [{"name": "CPU peak", "value": "72%"}, {"name": "Memory peak", "value": "64%"}]},
+        {"component": "Sandbox Worker", "metrics": [{"name": "CPU peak", "value": "81%"}, {"name": "Memory peak", "value": "5.2 GB"}]}
+      ],
+      "notes": "Stable throughput; no saturation observed."
     },
     {
+      "performance_execution_id": "PERF-AR-001",
+      "performance_test_id": "PT-AR-001",
+      "stream_id": "agent-runtime",
+      "release_id": "runtime-2.8",
+      "build": "2.8.4",
+      "executed_at": "2026-08-25T14:30:00+08:00",
+      "executed_by": "tester1",
+      "assessment": "FAILED",
+      "workload": [
+        {"name": "Concurrent users", "value": "300"},
+        {"name": "Target throughput", "value": "9,000 tasks/hour"},
+        {"name": "Duration", "value": "60 min"}
+      ],
+      "results": [
+        {"name": "Actual throughput", "value": "8,450 tasks/hour", "target": ">= 8,900", "status": "FAILED"},
+        {"name": "P95 completion", "value": "142 sec", "target": "< 120 sec", "status": "FAILED"},
+        {"name": "Error rate", "value": "1.8%", "target": "<= 1.0%", "status": "FAILED"},
+        {"name": "Completion <120s", "value": "93.2%", "target": ">= 99%", "status": "FAILED"}
+      ],
+      "environment": {"name": "UAT", "tenant": "Tenant-01", "runtime_type": "DeepAgent"},
+      "hardware_utilization": [
+        {"component": "Runtime API", "metrics": [{"name": "CPU peak", "value": "93%"}, {"name": "Memory peak", "value": "71%"}]},
+        {"component": "Sandbox Worker", "metrics": [{"name": "CPU peak", "value": "96%"}, {"name": "Memory peak", "value": "6.1 GB"}]}
+      ],
+      "notes": "High CPU observed on Sandbox Worker; throttling occurred at approximately 45 minutes."
+    },
+    {
+      "performance_execution_id": "PERF-AR-2.8.3-001",
+      "performance_test_id": "PT-AR-001",
       "stream_id": "agent-runtime",
       "release_id": "runtime-2.8",
       "build": "2.8.3",
-      "assessment": "GREEN",
-      "test_run": "PERF-RUNTIME-2.8.3-01",
-      "summary": "Previous build baseline passed agreed performance thresholds.",
-      "metrics": [
-        {
-          "name": "Peak Users",
-          "value": "500",
-          "target": "\u2265 500",
-          "status": "PASSED"
-        },
-        {
-          "name": "Throughput",
-          "value": "160 QPM",
-          "target": "\u2265 150 QPM",
-          "status": "PASSED"
-        },
-        {
-          "name": "P95 Response Time",
-          "value": "2.3 s",
-          "target": "\u2264 2.5 s",
-          "status": "PASSED"
-        },
-        {
-          "name": "Error Rate",
-          "value": "0.2%",
-          "target": "\u2264 1.0%",
-          "status": "PASSED"
-        }
-      ]
+      "executed_at": "2026-08-17T12:00:00+08:00",
+      "executed_by": "tester1",
+      "assessment": "PASSED",
+      "workload": [{"name": "Peak users", "value": "500"}],
+      "results": [
+        {"name": "Throughput", "value": "160 QPM", "target": ">= 150 QPM", "status": "PASSED"},
+        {"name": "P95 response time", "value": "2.3 s", "target": "<= 2.5 s", "status": "PASSED"}
+      ],
+      "environment": {"name": "UAT"},
+      "hardware_utilization": [],
+      "notes": "Previous build baseline passed agreed performance thresholds."
     },
     {
+      "performance_execution_id": "PERF-UI-001",
+      "performance_test_id": "PT-UI-001",
       "stream_id": "agenthub-ui",
       "release_id": "ui-4.2",
       "build": "4.2.1",
-      "assessment": "GREEN",
-      "test_run": "PERF-UI-4.2.1-01",
-      "summary": "UI release performance smoke run passed the agreed thresholds.",
-      "metrics": [
-        {
-          "name": "Peak Users",
-          "value": "250",
-          "target": "\u2265 200",
-          "status": "PASSED"
-        },
-        {
-          "name": "Throughput",
-          "value": "92 QPM",
-          "target": "\u2265 80 QPM",
-          "status": "PASSED"
-        },
-        {
-          "name": "P95 Response Time",
-          "value": "1.6 s",
-          "target": "\u2264 2.0 s",
-          "status": "PASSED"
-        },
-        {
-          "name": "Error Rate",
-          "value": "0.1%",
-          "target": "\u2264 1.0%",
-          "status": "PASSED"
-        }
-      ]
+      "executed_at": "2026-08-17T16:00:00+08:00",
+      "executed_by": "tester2",
+      "assessment": "PASSED",
+      "workload": [{"name": "Peak users", "value": "250"}],
+      "results": [
+        {"name": "Throughput", "value": "92 QPM", "target": ">= 80 QPM", "status": "PASSED"},
+        {"name": "P95 response time", "value": "1.6 s", "target": "<= 2.0 s", "status": "PASSED"}
+      ],
+      "environment": {"name": "UAT"},
+      "hardware_utilization": [],
+      "notes": "UI release performance smoke run passed the agreed thresholds."
     }
   ]
 }
