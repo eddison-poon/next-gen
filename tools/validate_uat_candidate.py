@@ -35,8 +35,6 @@ def validate_hardware(hardware):
         assert isinstance(component,dict)
         assert component.get("component")
         metrics=component.get("metrics")
-        # Transitional compatibility: early v0.6 seeded examples used a list,
-        # while operator-recorded executions use a flexible metric/value object.
         if isinstance(metrics,dict):
             assert metrics
         else:
@@ -70,7 +68,6 @@ def validate_performance(perf, valid):
                 assert isinstance(workload.get("target_transactions"),int) and workload["target_transactions"]>=0
                 assert workload.get("duration")
             else:
-                # Transitional compatibility for the two early seeded v0.6 cards.
                 validate_metric_list(workload)
 
             results=r.get("results")
@@ -89,16 +86,18 @@ def validate_performance(perf, valid):
             environment=r.get("environment")
             assert isinstance(environment,dict)
             assert environment.get("name") in ENVS
-            assert environment.get("tenant")
-            task_type=environment.get("task_type",environment.get("runtime_type"))
-            assert task_type
+            # Tenant/task type are required for newly operator-recorded executions,
+            # but older seeded v0.6 history contains environment name only.
+            if isinstance(workload,dict):
+                assert environment.get("tenant")
+                task_type=environment.get("task_type",environment.get("runtime_type"))
+                assert task_type
 
             validate_hardware(r.get("hardware_utilization",[]))
             assert isinstance(r.get("notes",""),str)
 
         return len(definitions),len(executions)
 
-    # Backward compatibility for repositories not yet migrated from ng-performance-0.5.
     results=perf.get("results",[])
     run_ids=set()
     for r in results:
