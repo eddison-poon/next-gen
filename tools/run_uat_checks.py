@@ -20,6 +20,7 @@ run([sys.executable,"tools/validate_uat_candidate.py"])
 
 tests=[]
 tests += load_tests(ROOT/"tests/test_release_reporting.py","release_reporting_tests")
+tests += load_tests(ROOT/"tests/test_release_cleanup.py","release_cleanup_tests")
 tests += load_tests(ROOT/"tests/test_data_onboarding.py","data_onboarding_tests")
 tests += load_tests(ROOT/"tests/test_uat_operator_workflow.py","uat_operator_workflow_tests")
 tests += load_tests(ROOT/"tests/test_automation_operator_workflow.py","automation_operator_workflow_tests")
