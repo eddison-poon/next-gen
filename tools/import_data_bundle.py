@@ -63,6 +63,20 @@ def validate_execution_rows(rows, defs_by_id, scope):
         assert x["status"] in MANUAL_STATUS
         datetime.fromisoformat(x["executed_at"])
 
+def merge_performance(current_perf,incoming_perf):
+    schema=incoming_perf.get("schema_version")
+    if schema=="ng-performance-0.6":
+        if current_perf.get("schema_version")!="ng-performance-0.6":
+            current_perf={"schema_version":"ng-performance-0.6","generated_at":incoming_perf.get("generated_at"),"definitions":[],"executions":[]}
+        current_perf["definitions"]=merge_by_id(current_perf.get("definitions",[]),incoming_perf.get("definitions",[]),"performance_test_id")
+        current_perf["executions"]=merge_by_id(current_perf.get("executions",[]),incoming_perf.get("executions",[]),"performance_execution_id")
+        current_perf["generated_at"]=incoming_perf.get("generated_at",current_perf.get("generated_at"))
+        return current_perf
+    if incoming_perf.get("results"):
+        current_perf["results"]=merge_by_id(current_perf.get("results",[]),incoming_perf["results"],"test_run")
+        current_perf["generated_at"]=incoming_perf.get("generated_at",current_perf.get("generated_at"))
+    return current_perf
+
 def apply_bundle(bundle_dir:Path, dry_run:bool):
     bundle=load(bundle_dir/"bundle.json")
     assert bundle["schema_version"]=="ng-release-data-bundle-0.7"
@@ -119,11 +133,11 @@ def apply_bundle(bundle_dir:Path, dry_run:bool):
     perf_path=require_bundle_file(bundle_dir,bundle,"performance_results")
     if perf_path:
         incoming_perf=load(perf_path)
-        if incoming_perf.get("results"):
+        has_new=incoming_perf.get("definitions") or incoming_perf.get("executions")
+        has_old=incoming_perf.get("results")
+        if has_new or has_old:
             current_perf=load(DATA/"performance_results.json")
-            current_perf["results"]=merge_by_id(current_perf["results"],incoming_perf["results"],"test_run")
-            current_perf["generated_at"]=incoming_perf.get("generated_at",current_perf.get("generated_at"))
-            write(DATA/"performance_results.json",current_perf)
+            write(DATA/"performance_results.json",merge_performance(current_perf,incoming_perf))
 
     scope_log=load(DATA/"release_scope_log.json")
     scope_log["changes"].append({
