@@ -27,6 +27,31 @@ def manual_ids_from_scope(scope):
     }
 
 
+def prune_performance(performance, stream_id, release_id, keep_builds):
+    if performance.get("schema_version") == "ng-performance-0.6":
+        executions = [
+            x for x in performance.get("executions", [])
+            if x["stream_id"] == stream_id
+            and x["release_id"] == release_id
+            and x["build"] in keep_builds
+        ]
+        keep_test_ids = {x["performance_test_id"] for x in executions}
+        definitions = [
+            x for x in performance.get("definitions", [])
+            if x["performance_test_id"] in keep_test_ids
+        ]
+        return {**performance, "definitions": definitions, "executions": executions}
+    return {
+        **performance,
+        "results": [
+            x for x in performance.get("results", [])
+            if x["stream_id"] == stream_id
+            and x["release_id"] == release_id
+            and x["build"] in keep_builds
+        ],
+    }
+
+
 def build_pruned_state(registry, definitions, executions, performance, keep_scope):
     stream_id = keep_scope["stream"]["id"]
     release_id = keep_scope["release"]["id"]
@@ -74,16 +99,9 @@ def build_pruned_state(registry, definitions, executions, performance, keep_scop
             and x["build"] in keep_builds
         ],
     }
-    pruned_performance = {
-        **performance,
-        "results": [
-            x
-            for x in performance.get("results", [])
-            if x["stream_id"] == stream_id
-            and x["release_id"] == release_id
-            and x["build"] in keep_builds
-        ],
-    }
+    pruned_performance = prune_performance(
+        performance, stream_id, release_id, keep_builds
+    )
     return pruned_registry, pruned_definitions, pruned_executions, pruned_performance
 
 
@@ -141,6 +159,11 @@ def main():
     print(f"  keep release items: {len(keep_scope['scope']['release_items'])}")
     print(f"  keep Manual definitions: {len(pruned_definitions['definitions'])}")
     print(f"  keep Manual executions: {len(pruned_executions['executions'])}")
+    if pruned_performance.get("schema_version") == "ng-performance-0.6":
+        print(f"  keep Performance definitions: {len(pruned_performance.get('definitions', []))}")
+        print(f"  keep Performance executions: {len(pruned_performance.get('executions', []))}")
+    else:
+        print(f"  keep Performance results: {len(pruned_performance.get('results', []))}")
     print(f"  remove release manifests: {len(obsolete)}")
 
     if args.dry_run:
