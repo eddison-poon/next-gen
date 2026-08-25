@@ -1,12 +1,13 @@
 from __future__ import annotations
 import json, subprocess, sys
+from datetime import datetime
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 DATA=ROOT/"data"
 ENVS={"DEV","SIT","UAT","PPD","PROD"}
 AUTO_STATUS={"PASSED","FAILED","BLOCKED","NOT_EXECUTED","N/A"}
-PERF_ASSESSMENTS={"PASSED","FAILED","AMBER"}
+PERF_ASSESSMENTS={"PASSED","FAILED","BLOCKED"}
 PERF_METRIC_STATUS={"PASSED","FAILED","AMBER"}
 
 def load(name): return json.loads((DATA/name).read_text(encoding="utf-8"))
@@ -25,28 +26,56 @@ def validate_performance(perf, valid):
     if perf.get("schema_version")=="ng-performance-0.6":
         definitions=perf.get("definitions",[])
         executions=perf.get("executions",[])
+        assert isinstance(definitions,list)
+        assert isinstance(executions,list)
+
         def_ids=set(); scenario_ids=set()
         for d in definitions:
             assert d["performance_test_id"] not in def_ids; def_ids.add(d["performance_test_id"])
             assert d["performance_scenario_id"] not in scenario_ids; scenario_ids.add(d["performance_scenario_id"])
             assert d["jira_key"] and d["title"] and d["objective"]
+
         execution_ids=set()
         for r in executions:
             assert r["performance_execution_id"] not in execution_ids; execution_ids.add(r["performance_execution_id"])
             assert r["performance_test_id"] in def_ids
             assert (r["stream_id"],r["release_id"],r["build"]) in valid
             assert r["assessment"] in PERF_ASSESSMENTS
-            assert r.get("executed_at")
-            assert isinstance(r.get("workload",[]),list)
-            assert isinstance(r.get("results",[]),list)
-            assert isinstance(r.get("environment",{}),dict)
-            assert isinstance(r.get("hardware_utilization",[]),list)
-            for metric in r.get("results",[]):
-                if metric.get("status") is not None:
-                    assert metric["status"] in PERF_METRIC_STATUS
-            for component in r.get("hardware_utilization",[]):
+            datetime.fromisoformat(r["executed_at"])
+            assert r.get("executed_by")
+
+            workload=r.get("workload")
+            assert isinstance(workload,dict)
+            assert isinstance(workload.get("concurrent_users"),int) and workload["concurrent_users"]>=0
+            assert isinstance(workload.get("target_transactions"),int) and workload["target_transactions"]>=0
+            assert workload.get("duration")
+
+            results=r.get("results")
+            assert isinstance(results,dict)
+            attempted=results.get("attempted_transactions")
+            passed=results.get("passed_transactions")
+            failed=results.get("failed_transactions")
+            assert all(isinstance(x,int) and x>=0 for x in (attempted,passed,failed))
+            assert passed+failed==attempted
+            assert isinstance(results.get("transaction_pass_rate_percent"),(int,float))
+            assert isinstance(results.get("transaction_failure_rate_percent"),(int,float))
+            assert results.get("p95_completion")
+
+            environment=r.get("environment")
+            assert isinstance(environment,dict)
+            assert environment.get("name") in ENVS
+            assert environment.get("tenant")
+            assert environment.get("task_type")
+
+            hardware=r.get("hardware_utilization",[])
+            assert isinstance(hardware,list)
+            for component in hardware:
                 assert component.get("component")
-                assert isinstance(component.get("metrics",[]),list)
+                metrics=component.get("metrics")
+                assert isinstance(metrics,dict) and metrics
+
+            assert isinstance(r.get("notes",""),str)
+
         return len(definitions),len(executions)
 
     # Backward compatibility for repositories not yet migrated from ng-performance-0.5.
