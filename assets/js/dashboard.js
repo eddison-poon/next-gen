@@ -100,7 +100,9 @@
   }
   function renderSelectedFeature(){
     const f=state.selectedFeature;if(!f)return;
-    $("selectedFeatureArea").innerHTML=`<section class="selected-feature"><p class="eyebrow dark">Selected Feature</p><h4>${esc(f.name)}</h4><table class="scenario-table"><thead><tr><th>Scenario / Manual Test</th>${ENVIRONMENTS.map(e=>`<th>${e}</th>`).join("")}<th>Jira</th></tr></thead><tbody><tr><td><span class="scenario-name">${esc(f.scenario.title)}</span><span class="scenario-id">${esc(f.scenario.id)} · ${esc(f.scenario.manual_test_id)}</span></td>${ENVIRONMENTS.map(e=>{const[m,c]=mark(f.environment_status[e]);return`<td><span class="env-mark ${c}">${m}</span></td>`}).join("")}<td><a class="jira-link" href="${escAttr(state.selectedItem.jira_url)}">${esc(state.selectedItem.jira_key)}</a></td></tr></tbody></table><div class="legend"><span><b>✓</b> Passed</span><span><b>✕</b> Failed</span><span><b>!</b> Blocked</span><span><b>—</b> Not Executed</span><span><b>N/A</b> Not Applicable</span></div></section>`;
+    const testJiraKey=f.scenario.test_jira_key||state.selectedItem.jira_key;
+    const testJiraUrl=f.scenario.test_jira_url||state.selectedItem.jira_url;
+    $("selectedFeatureArea").innerHTML=`<section class="selected-feature"><p class="eyebrow dark">Selected Feature</p><h4>${esc(f.name)}</h4><table class="scenario-table"><thead><tr><th>Scenario / Manual Test</th>${ENVIRONMENTS.map(e=>`<th>${e}</th>`).join("")}<th>Jira</th></tr></thead><tbody><tr><td><span class="scenario-name">${esc(f.scenario.title)}</span><span class="scenario-id">${esc(f.scenario.id)} · ${esc(f.scenario.manual_test_id)}</span></td>${ENVIRONMENTS.map(e=>{const[m,c]=mark(f.environment_status[e]);return`<td><span class="env-mark ${c}">${m}</span></td>`}).join("")}<td><a class="jira-link" href="${escAttr(testJiraUrl)}" target="_blank" rel="noopener">${esc(testJiraKey)} ↗</a></td></tr></tbody></table><div class="legend"><span><b>✓</b> Passed</span><span><b>✕</b> Failed</span><span><b>!</b> Blocked</span><span><b>—</b> Not Executed</span><span><b>N/A</b> Not Applicable</span></div></section>`;
   }
 
 
