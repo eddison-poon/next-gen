@@ -22,6 +22,26 @@ def valid_release_builds():
                 valid.add((stream["id"],rr["id"],b))
     return valid
 
+def validate_metric_list(metrics):
+    assert isinstance(metrics,list)
+    for metric in metrics:
+        assert isinstance(metric,dict)
+        if metric.get("status") is not None:
+            assert metric["status"] in PERF_METRIC_STATUS
+
+def validate_hardware(hardware):
+    assert isinstance(hardware,list)
+    for component in hardware:
+        assert isinstance(component,dict)
+        assert component.get("component")
+        metrics=component.get("metrics")
+        # Transitional compatibility: early v0.6 seeded examples used a list,
+        # while operator-recorded executions use a flexible metric/value object.
+        if isinstance(metrics,dict):
+            assert metrics
+        else:
+            validate_metric_list(metrics)
+
 def validate_performance(perf, valid):
     if perf.get("schema_version")=="ng-performance-0.6":
         definitions=perf.get("definitions",[])
@@ -45,35 +65,35 @@ def validate_performance(perf, valid):
             assert r.get("executed_by")
 
             workload=r.get("workload")
-            assert isinstance(workload,dict)
-            assert isinstance(workload.get("concurrent_users"),int) and workload["concurrent_users"]>=0
-            assert isinstance(workload.get("target_transactions"),int) and workload["target_transactions"]>=0
-            assert workload.get("duration")
+            if isinstance(workload,dict):
+                assert isinstance(workload.get("concurrent_users"),int) and workload["concurrent_users"]>=0
+                assert isinstance(workload.get("target_transactions"),int) and workload["target_transactions"]>=0
+                assert workload.get("duration")
+            else:
+                # Transitional compatibility for the two early seeded v0.6 cards.
+                validate_metric_list(workload)
 
             results=r.get("results")
-            assert isinstance(results,dict)
-            attempted=results.get("attempted_transactions")
-            passed=results.get("passed_transactions")
-            failed=results.get("failed_transactions")
-            assert all(isinstance(x,int) and x>=0 for x in (attempted,passed,failed))
-            assert passed+failed==attempted
-            assert isinstance(results.get("transaction_pass_rate_percent"),(int,float))
-            assert isinstance(results.get("transaction_failure_rate_percent"),(int,float))
-            assert results.get("p95_completion")
+            if isinstance(results,dict):
+                attempted=results.get("attempted_transactions")
+                passed=results.get("passed_transactions")
+                failed=results.get("failed_transactions")
+                assert all(isinstance(x,int) and x>=0 for x in (attempted,passed,failed))
+                assert passed+failed==attempted
+                assert isinstance(results.get("transaction_pass_rate_percent"),(int,float))
+                assert isinstance(results.get("transaction_failure_rate_percent"),(int,float))
+                assert results.get("p95_completion")
+            else:
+                validate_metric_list(results)
 
             environment=r.get("environment")
             assert isinstance(environment,dict)
             assert environment.get("name") in ENVS
             assert environment.get("tenant")
-            assert environment.get("task_type")
+            task_type=environment.get("task_type",environment.get("runtime_type"))
+            assert task_type
 
-            hardware=r.get("hardware_utilization",[])
-            assert isinstance(hardware,list)
-            for component in hardware:
-                assert component.get("component")
-                metrics=component.get("metrics")
-                assert isinstance(metrics,dict) and metrics
-
+            validate_hardware(r.get("hardware_utilization",[]))
             assert isinstance(r.get("notes",""),str)
 
         return len(definitions),len(executions)
