@@ -6,6 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ASSESSMENTS = {"PASSED", "FAILED", "BLOCKED"}
+PERFORMANCE_SCHEMA = "ng-performance-0.6"
 
 
 def load(path: Path):
@@ -98,10 +99,19 @@ def normalize_sample(sample: dict):
     return definition, execution
 
 
+def upgrade_payload(payload: dict):
+    if payload.get("schema_version") != PERFORMANCE_SCHEMA:
+        payload["schema_version"] = PERFORMANCE_SCHEMA
+    payload.pop("results", None)
+    payload.setdefault("definitions", [])
+    payload.setdefault("executions", [])
+    return payload
+
+
 def record(bundle_dir: Path, sample_path: Path):
     _, scope_path, perf_path = bundle_paths(bundle_dir)
     scope = load(scope_path)
-    payload = load(perf_path)
+    payload = upgrade_payload(load(perf_path))
     sample = load(sample_path)
     definition, execution = normalize_sample(sample)
 
@@ -114,8 +124,8 @@ def record(bundle_dir: Path, sample_path: Path):
     assert str(execution["build"]) == str(release["current_build"]), \
         f"build mismatch: sample={execution['build']} bundle={release['current_build']}"
 
-    definitions = payload.setdefault("definitions", [])
-    executions = payload.setdefault("executions", [])
+    definitions = payload["definitions"]
+    executions = payload["executions"]
     test_id = str(definition["performance_test_id"])
 
     existing_definition = next((d for d in definitions if str(d.get("performance_test_id")) == test_id), None)
@@ -156,6 +166,7 @@ def main():
     print(f"  failed: {results['failed_transactions']}")
     print(f"  pass_rate: {results['transaction_pass_rate_percent']:.2f}%")
     print(f"  failure_rate: {results['transaction_failure_rate_percent']:.2f}%")
+    print(f"  performance_schema: {PERFORMANCE_SCHEMA}")
     print("Next: python tools/publish_release_bundle.py <bundle_dir> --dry-run")
 
 
