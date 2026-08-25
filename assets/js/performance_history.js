@@ -30,9 +30,9 @@
     const build=$("perfBuildSelect")?.value;
     if(!sid||!rid||!build)return;
 
-    const definitions=new Map((performanceData.definitions||[]).map(x=>[x.performance_test_id,x]));
+    const definitions=new Map((performanceData.definitions||[]).map(x=>[String(x.performance_test_id),x]));
     const runs=(performanceData.executions||[])
-      .filter(x=>x.stream_id===sid&&x.release_id===rid&&x.build===build)
+      .filter(x=>String(x.stream_id)===String(sid)&&String(x.release_id)===String(rid)&&String(x.build)===String(build))
       .sort((a,b)=>String(b.executed_at).localeCompare(String(a.executed_at)));
 
     $("perfRun").textContent=runs.length?`${runs.length} execution${runs.length===1?"":"s"}`:"No executions";
@@ -55,7 +55,7 @@
         </div>
       </section>
       <div class="performance-execution-list">
-        ${runs.map((run,index)=>executionCard(run,definitions.get(run.performance_test_id),index<2)).join("")}
+        ${runs.map((run,index)=>executionCard(run,definitions.get(String(run.performance_test_id)),index<2)).join("")}
       </div>`;
   }
 
@@ -87,8 +87,8 @@
           <span class="performance-jira">Jira: ${esc(jira)}</span>
           <span class="performance-by">Executed by ${esc(run.executed_by||"—")}</span>
         </section>
-        ${metricSection("Workload",run.workload||[],false)}
-        ${metricSection("Results",run.results||[],true)}
+        ${metricSection("Workload",run.workload||{},false)}
+        ${metricSection("Results",run.results||{},true)}
         ${environmentSection(run.environment||{})}
         ${hardwareSection(run.hardware_utilization||[])}
         <section class="performance-card-section performance-notes-section">
@@ -99,8 +99,28 @@
     </details>`;
   }
 
-  function metricSection(label,rows,showStatus){
-    return `<section class="performance-card-section"><span class="performance-section-label">${esc(label)}</span>${rows.length?rows.map(x=>`<div class="performance-data-row"><span>${esc(x.name)}</span><strong class="${showStatus&&x.status==="FAILED"?"value-fail":showStatus&&x.status==="PASSED"?"value-pass":""}">${esc(x.value)}</strong>${x.target?`<small>Target ${esc(x.target)}</small>`:""}</div>`).join(""):'<p class="muted">Not recorded</p>'}</section>`;
+  function metricSection(label,data,showStatus){
+    if(Array.isArray(data)){
+      return `<section class="performance-card-section"><span class="performance-section-label">${esc(label)}</span>${data.length?data.map(x=>metricRow(x.name,x.value,x.target,x.status,showStatus)).join(""):'<p class="muted">Not recorded</p>'}</section>`;
+    }
+    if(data&&typeof data==="object"){
+      const rows=Object.entries(data);
+      return `<section class="performance-card-section"><span class="performance-section-label">${esc(label)}</span>${rows.length?rows.map(([k,v])=>metricRow(pretty(k),formatMetricValue(k,v),null,null,false)).join(""):'<p class="muted">Not recorded</p>'}</section>`;
+    }
+    return `<section class="performance-card-section"><span class="performance-section-label">${esc(label)}</span><p class="muted">Not recorded</p></section>`;
+  }
+
+  function metricRow(name,value,target,status,showStatus){
+    const cls=showStatus&&status==="FAILED"?"value-fail":showStatus&&status==="PASSED"?"value-pass":"";
+    return `<div class="performance-data-row"><span>${esc(name)}</span><strong class="${cls}">${esc(value)}</strong>${target?`<small>Target ${esc(target)}</small>`:""}</div>`;
+  }
+
+  function formatMetricValue(key,value){
+    if(value===null||value===undefined)return"—";
+    if(key.endsWith("_percent"))return `${value}%`;
+    if(key==="concurrent_users")return String(value);
+    if(key==="target_transactions"||key==="attempted_transactions"||key==="passed_transactions"||key==="failed_transactions")return Number(value).toLocaleString("en-US");
+    return String(value);
   }
 
   function environmentSection(env){
@@ -109,7 +129,22 @@
   }
 
   function hardwareSection(components){
-    return `<section class="performance-card-section performance-hardware-section"><span class="performance-section-label">Hardware Utilization</span>${components.length?components.map(c=>`<div class="hardware-component"><strong>${esc(c.component)}</strong>${(c.metrics||[]).map(m=>`<div class="performance-data-row"><span>${esc(m.name)}</span><strong>${esc(m.value)}</strong></div>`).join("")}</div>`).join(""):'<p class="muted">Not recorded</p>'}</section>`;
+    if(!components.length)return `<section class="performance-card-section performance-hardware-section"><span class="performance-section-label">Hardware Utilization</span><p class="muted">Not recorded</p></section>`;
+    const visible=components.slice(0,2).map(hardwareComponent).join("");
+    const extra=components.slice(2);
+    const more=extra.length?`<details class="hardware-more"><summary>+ ${extra.length} more component${extra.length===1?"":"s"}</summary>${extra.map(hardwareComponent).join("")}</details>`:"";
+    return `<section class="performance-card-section performance-hardware-section"><span class="performance-section-label">Hardware Utilization</span>${visible}${more}</section>`;
+  }
+
+  function hardwareComponent(component){
+    const metrics=component?.metrics;
+    let rows="";
+    if(Array.isArray(metrics)){
+      rows=metrics.map(m=>`<div class="performance-data-row"><span>${esc(m.name)}</span><strong>${esc(m.value)}</strong></div>`).join("");
+    }else if(metrics&&typeof metrics==="object"){
+      rows=Object.entries(metrics).map(([k,v])=>`<div class="performance-data-row"><span>${esc(pretty(k))}</span><strong>${esc(formatMetricValue(k,v))}</strong></div>`).join("");
+    }
+    return `<div class="hardware-component"><strong>${esc(component?.component||"Component")}</strong>${rows||'<p class="muted">Not recorded</p>'}</div>`;
   }
 
   function pretty(v){return String(v).replaceAll("_"," ").replace(/\b\w/g,c=>c.toUpperCase())}
