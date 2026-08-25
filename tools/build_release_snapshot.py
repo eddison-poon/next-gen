@@ -83,6 +83,8 @@ def build_release_snapshot(manifest, build, definitions, executions):
                     "title":d["title"],
                     "manual_test_id":feature["manual_test_id"],
                     "jira_key":d["jira_key"],
+                    "test_jira_key":d.get("test_jira_key"),
+                    "test_jira_url":d.get("test_jira_url"),
                 },
                 "applicable_environments":feature["applicable_environments"],
                 "environment_status":env_statuses,
