@@ -35,23 +35,32 @@ def validate_hardware(hardware):
         assert isinstance(component,dict)
         assert component.get("component")
         metrics=component.get("metrics")
-        if isinstance(metrics,dict):
-            assert metrics
-        else:
-            validate_metric_list(metrics)
+        if isinstance(metrics,dict): assert metrics
+        else: validate_metric_list(metrics)
 
 def validate_performance(perf, valid):
     if perf.get("schema_version")=="ng-performance-0.6":
-        definitions=perf.get("definitions",[])
-        executions=perf.get("executions",[])
-        assert isinstance(definitions,list)
-        assert isinstance(executions,list)
+        definitions=perf.get("definitions",[]); executions=perf.get("executions",[])
+        assert isinstance(definitions,list); assert isinstance(executions,list)
 
-        def_ids=set(); scenario_ids=set()
+        # performance_test_id is the unique Performance Center execution/test ID.
+        # performance_scenario_id is intentionally reusable for reruns of the same
+        # logical workload/scenario (for example PC IDs 3828 and 3830).
+        def_ids=set()
+        scenario_contracts={}
         for d in definitions:
-            assert d["performance_test_id"] not in def_ids; def_ids.add(d["performance_test_id"])
-            assert d["performance_scenario_id"] not in scenario_ids; scenario_ids.add(d["performance_scenario_id"])
+            test_id=d["performance_test_id"]
+            scenario_id=d["performance_scenario_id"]
+            assert test_id not in def_ids; def_ids.add(test_id)
+            assert scenario_id
             assert d["jira_key"] and d["title"] and d["objective"]
+
+            contract=(d["jira_key"],d["title"],d["objective"])
+            if scenario_id in scenario_contracts:
+                assert scenario_contracts[scenario_id]==contract, \
+                    f"Performance scenario {scenario_id} reused with inconsistent definition metadata"
+            else:
+                scenario_contracts[scenario_id]=contract
 
         execution_ids=set()
         for r in executions:
@@ -59,59 +68,44 @@ def validate_performance(perf, valid):
             assert r["performance_test_id"] in def_ids
             assert (r["stream_id"],r["release_id"],r["build"]) in valid
             assert r["assessment"] in PERF_ASSESSMENTS
-            datetime.fromisoformat(r["executed_at"])
-            assert r.get("executed_by")
+            datetime.fromisoformat(r["executed_at"]); assert r.get("executed_by")
 
             workload=r.get("workload")
             if isinstance(workload,dict):
                 assert isinstance(workload.get("concurrent_users"),int) and workload["concurrent_users"]>=0
                 assert isinstance(workload.get("target_transactions"),int) and workload["target_transactions"]>=0
                 assert workload.get("duration")
-            else:
-                validate_metric_list(workload)
+            else: validate_metric_list(workload)
 
             results=r.get("results")
             if isinstance(results,dict):
-                attempted=results.get("attempted_transactions")
-                passed=results.get("passed_transactions")
-                failed=results.get("failed_transactions")
+                attempted=results.get("attempted_transactions"); passed=results.get("passed_transactions"); failed=results.get("failed_transactions")
                 assert all(isinstance(x,int) and x>=0 for x in (attempted,passed,failed))
                 assert passed+failed==attempted
                 assert isinstance(results.get("transaction_pass_rate_percent"),(int,float))
                 assert isinstance(results.get("transaction_failure_rate_percent"),(int,float))
                 assert results.get("p95_completion")
-            else:
-                validate_metric_list(results)
+            else: validate_metric_list(results)
 
-            environment=r.get("environment")
-            assert isinstance(environment,dict)
-            assert environment.get("name") in ENVS
-            # Tenant/task type are required for newly operator-recorded executions,
-            # but older seeded v0.6 history contains environment name only.
+            environment=r.get("environment"); assert isinstance(environment,dict); assert environment.get("name") in ENVS
             if isinstance(workload,dict):
                 assert environment.get("tenant")
-                task_type=environment.get("task_type",environment.get("runtime_type"))
-                assert task_type
+                task_type=environment.get("task_type",environment.get("runtime_type")); assert task_type
 
-            validate_hardware(r.get("hardware_utilization",[]))
-            assert isinstance(r.get("notes",""),str)
+            validate_hardware(r.get("hardware_utilization",[])); assert isinstance(r.get("notes",""),str)
 
         return len(definitions),len(executions)
 
-    results=perf.get("results",[])
-    run_ids=set()
+    results=perf.get("results",[]); run_ids=set()
     for r in results:
         assert r["test_run"] not in run_ids; run_ids.add(r["test_run"])
         assert (r["stream_id"],r["release_id"],r["build"]) in valid
-        assert r["assessment"] in {"GREEN","AMBER","RED"}
-        assert r["metrics"]
-        for m in r["metrics"]:
-            assert m["status"] in {"PASSED","FAILED"}
+        assert r["assessment"] in {"GREEN","AMBER","RED"}; assert r["metrics"]
+        for m in r["metrics"]: assert m["status"] in {"PASSED","FAILED"}
     return 0,len(results)
 
 def main():
     subprocess.run([sys.executable,"tools/validate_release_data.py"],cwd=ROOT,check=True)
-
     auto=load("automation_regression.json")
     cap_ids=set(); feature_ids=set(); scenario_ids=set(); test_ids=set()
     for c in auto["capabilities"]:
@@ -121,22 +115,13 @@ def main():
             for s in f["scenarios"]:
                 assert s["id"] not in scenario_ids; scenario_ids.add(s["id"])
                 assert s["automation_test_id"] not in test_ids; test_ids.add(s["automation_test_id"])
-                assert set(s["results"].keys())==ENVS
-                assert set(s["results"].values())<=AUTO_STATUS
-                assert set(s["applicable_environments"])<=ENVS
-                for e in ENVS-set(s["applicable_environments"]):
-                    assert s["results"][e]=="N/A"
-                for e in set(s["applicable_environments"]):
-                    assert s["results"][e]!="N/A"
-
+                assert set(s["results"].keys())==ENVS; assert set(s["results"].values())<=AUTO_STATUS; assert set(s["applicable_environments"])<=ENVS
+                for e in ENVS-set(s["applicable_environments"]): assert s["results"][e]=="N/A"
+                for e in set(s["applicable_environments"]): assert s["results"][e]!="N/A"
     perf=load("performance_results.json")
     perf_definitions,perf_executions=validate_performance(perf,valid_release_builds())
-
     print("v0.6 UAT Candidate validation passed")
-    print(f"Automation capabilities: {len(cap_ids)}")
-    print(f"Automation scenarios: {len(scenario_ids)}")
-    print(f"Performance definitions: {perf_definitions}")
-    print(f"Performance executions: {perf_executions}")
+    print(f"Automation capabilities: {len(cap_ids)}"); print(f"Automation scenarios: {len(scenario_ids)}")
+    print(f"Performance definitions: {perf_definitions}"); print(f"Performance executions: {perf_executions}")
 
-if __name__=="__main__":
-    main()
+if __name__=="__main__": main()
