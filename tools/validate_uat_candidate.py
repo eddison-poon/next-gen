@@ -44,23 +44,22 @@ def validate_performance(perf, valid):
         assert isinstance(definitions,list); assert isinstance(executions,list)
 
         # performance_test_id is the unique Performance Center execution/test ID.
-        # performance_scenario_id is intentionally reusable for reruns of the same
-        # logical workload/scenario (for example PC IDs 3828 and 3830).
+        # performance_scenario_id is reusable for reruns of the same logical scenario.
+        # The stable traceability rule is scenario -> Jira ticket. Title/objective are
+        # descriptive metadata and may evolve without invalidating an unrelated publish.
         def_ids=set()
-        scenario_contracts={}
+        scenario_jira={}
         for d in definitions:
             test_id=d["performance_test_id"]
             scenario_id=d["performance_scenario_id"]
             assert test_id not in def_ids; def_ids.add(test_id)
             assert scenario_id
             assert d["jira_key"] and d["title"] and d["objective"]
-
-            contract=(d["jira_key"],d["title"],d["objective"])
-            if scenario_id in scenario_contracts:
-                assert scenario_contracts[scenario_id]==contract, \
-                    f"Performance scenario {scenario_id} reused with inconsistent definition metadata"
+            if scenario_id in scenario_jira:
+                assert scenario_jira[scenario_id]==d["jira_key"], \
+                    f"Performance scenario {scenario_id} reused with a different Jira key"
             else:
-                scenario_contracts[scenario_id]=contract
+                scenario_jira[scenario_id]=d["jira_key"]
 
         execution_ids=set()
         for r in executions:
