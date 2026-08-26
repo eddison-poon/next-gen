@@ -93,16 +93,29 @@
     return `<div class="performance-data-row"><span>${esc(name)}</span><strong class="${cls}">${esc(value)}</strong>${target?`<small>Target ${esc(target)}</small>`:""}</div>`;
   }
 
+  function thresholdStatus(percent){
+    if(!Number.isFinite(percent))return null;
+    if(percent<90)return"FAILED";
+    if(percent>90)return"PASSED";
+    return null;
+  }
+
   function inferMetricStatus(key,value,run){
     const results=run?.results;
     if(!results||Array.isArray(results)||typeof results!=="object")return null;
-    const failed=Number(results.failed_transactions||0);
     const target=Number(run?.workload?.target_transactions||0);
-    const attempted=Number(results.attempted_transactions||0);
-    if(key==="failed_transactions"||key==="transaction_failure_rate_percent")return Number(value)>0?"FAILED":"PASSED";
-    if(key==="transaction_pass_rate_percent")return Number(value)>=100?"PASSED":"FAILED";
-    if(key==="passed_transactions")return failed===0&&Number(value)>0?"PASSED":failed>0?"FAILED":null;
-    if(key==="attempted_transactions")return target>0&&attempted>=target?"PASSED":null;
+    const n=Number(value);
+
+    if(key==="attempted_transactions"||key==="passed_transactions"){
+      return target>0?thresholdStatus((n/target)*100):null;
+    }
+    if(key==="transaction_pass_rate_percent"){
+      return thresholdStatus(n);
+    }
+    if(key==="failed_transactions"||key==="transaction_failure_rate_percent"){
+      if(!Number.isFinite(n))return null;
+      return n===0?"PASSED":"FAILED";
+    }
     return null;
   }
 
@@ -130,22 +143,27 @@
   function hardwareComponent(component,run){
     const metrics=component?.metrics; let rows="";
     if(Array.isArray(metrics)){
-      rows=metrics.map(m=>`<div class="performance-data-row"><span>${esc(m.name)}</span><strong class="${m.status==="FAILED"?"value-fail":m.status==="PASSED"?"value-pass":""}">${esc(m.value)}</strong></div>`).join("");
+      rows=metrics.map(m=>{
+        const status=inferHardwareStatus(m.name,m.value);
+        return `<div class="performance-data-row"><span>${esc(m.name)}</span><strong class="${status==="FAILED"?"value-fail":""}">${esc(m.value)}</strong></div>`;
+      }).join("");
     }else if(metrics&&typeof metrics==="object"){
       rows=Object.entries(metrics).map(([k,v])=>{
-        const status=inferHardwareStatus(k,v,run);
-        return `<div class="performance-data-row"><span>${esc(pretty(k))}</span><strong class="${status==="FAILED"?"value-fail":status==="PASSED"?"value-pass":""}">${esc(formatMetricValue(k,v))}</strong></div>`;
+        const status=inferHardwareStatus(k,v);
+        return `<div class="performance-data-row"><span>${esc(pretty(k))}</span><strong class="${status==="FAILED"?"value-fail":""}">${esc(formatMetricValue(k,v))}</strong></div>`;
       }).join("");
     }
     return `<div class="hardware-component"><strong>${esc(component?.component||"Component")}</strong>${rows||'<p class="muted">Not recorded</p>'}</div>`;
   }
 
-  function inferHardwareStatus(key,value,run){
-    if(!String(key).toLowerCase().includes("cpu"))return null;
-    const n=Number(value);
+  function inferHardwareStatus(key,value){
+    const keyText=String(key||"").toLowerCase();
+    const valueText=String(value??"").trim();
+    const isPercent=keyText.includes("percent")||/%$/.test(valueText);
+    if(!isPercent)return null;
+    const n=Number(valueText.replace("%",""));
     if(!Number.isFinite(n))return null;
-    if(n>=90)return"FAILED";
-    return null;
+    return n>90?"FAILED":null;
   }
 
   function pretty(v){return String(v).replaceAll("_"," ").replace(/\b\w/g,c=>c.toUpperCase())}
