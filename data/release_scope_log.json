@@ -1,21 +1,4 @@
 {
-  "schema_version": "ng-release-scope-log-0.4",
-  "changes": [
-    {
-      "effective_at": "2026-08-17T14:30:00+08:00",
-      "stream_id": "agent-runtime",
-      "release_id": "runtime-2.8",
-      "scope_version": 1,
-      "change_type": "BASELINE",
-      "notes": "Initial v0.4 current-scope baseline."
-    },
-    {
-      "effective_at": "2026-08-18T00:45:00+08:00",
-      "stream_id": "agenthub-ui",
-      "release_id": "ui-4.2",
-      "scope_version": 2,
-      "change_type": "UAT_SCOPE",
-      "notes": "Representative Agent Hub UI release scope for internal UAT."
-    }
-  ]
+  "schema_version": "ng-release-scope-log-0.8",
+  "changes": []
 }
