@@ -1,4 +1,16 @@
 {
-  "schema_version": "ng-manual-execution-0.2",
-  "executions": []
+  "schema_version": "ng-manual-execution-index-0.8",
+  "executions": [
+    {
+      "execution_id": "RESULT-0001",
+      "execution_variant_id": "EXAMPLE-VARIANT-001",
+      "manual_test_id": "EXAMPLE-MTD-001",
+      "stream_id": "replace-me",
+      "release_id": "replace-me",
+      "build": "X.Y.Z",
+      "environment": "SIT",
+      "status": "PASSED",
+      "executed_at": "2026-09-16T00:00:00+08:00"
+    }
+  ]
 }
