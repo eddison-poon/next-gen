@@ -1,21 +1,32 @@
 {
-  "schema_version": "ng-release-scope-0.4",
+  "schema_version": "ng-release-scope-0.8",
   "scope_version": 1,
-  "effective_at": "2026-08-18T00:00:00+08:00",
-  "stream": {
-    "id": "replace-me",
-    "name": "Replace Me"
-  },
-  "release": {
-    "id": "replace-me",
-    "name": "Release X",
-    "builds": [
-      "X.Y.Z"
-    ],
-    "current_build": "X.Y.Z"
-  },
+  "effective_at": "2026-09-16T00:00:00+08:00",
+  "stream": {"id": "replace-me", "name": "Replace Me"},
+  "release": {"id": "replace-me", "name": "Release X", "builds": ["X.Y.Z"], "current_build": "X.Y.Z"},
   "scope": {
-    "release_items": []
+    "release_items": [
+      {
+        "jira_key": "PROJECT-MTD-JIRA",
+        "summary": "Manual Test Definition title",
+        "issue_type": "Test",
+        "jira_url": "https://jira.example/browse/PROJECT-MTD-JIRA",
+        "priority": "P0",
+        "features": [
+          {
+            "id": "EXAMPLE-VARIANT-001",
+            "name": "Execution variant title",
+            "manual_test_id": "EXAMPLE-MTD-001",
+            "jira_key": "PROJECT-VARIANT-JIRA",
+            "jira_url": "https://jira.example/browse/PROJECT-VARIANT-JIRA",
+            "role": "Optional role",
+            "expected_access": "ALLOW",
+            "expected_result": "Optional expected result",
+            "applicable_environments": ["DEV", "SIT", "UAT"]
+          }
+        ]
+      }
+    ]
   },
-  "notes": "Edit this file to define the current release scope."
+  "notes": "v0.8: Release Item = MTD Jira; Feature = independently assignable Execution Variant Jira."
 }
