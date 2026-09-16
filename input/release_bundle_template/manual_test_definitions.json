@@ -1,4 +1,13 @@
 {
-  "schema_version": "ng-manual-definition-index-0.2",
-  "definitions": []
+  "schema_version": "ng-manual-definition-index-0.8",
+  "definitions": [
+    {
+      "manual_test_id": "EXAMPLE-MTD-001",
+      "title": "Manual Test Definition title",
+      "priority": "P0",
+      "scenario_ids": ["BUSINESS-SCENARIO-001"],
+      "jira_key": "PROJECT-MTD-JIRA",
+      "jira_url": "https://jira.example/browse/PROJECT-MTD-JIRA"
+    }
+  ]
 }
