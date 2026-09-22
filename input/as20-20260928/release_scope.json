@@ -1,0 +1,2057 @@
+{
+  "schema_version": "ng-release-scope-0.8",
+  "scope_version": 1,
+  "effective_at": "2026-09-23T00:00:00+08:00",
+  "stream": {
+    "id": "agent-studio-2",
+    "name": "Agent Studio 2.0"
+  },
+  "release": {
+    "id": "as20-20260928",
+    "name": "AS20 28 Sep 2026",
+    "builds": [
+      "initial"
+    ],
+    "current_build": "initial"
+  },
+  "scope": {
+    "release_items": [
+      {
+        "jira_key": "TBD-MTD-PAT-001",
+        "jira_url": "#TBD-MTD-PAT-001",
+        "summary": "Verify required Patterns exist and are assignable",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-PAT-001",
+        "features": [
+          {
+            "id": "EX-PAT-001",
+            "name": "Low Risk Pattern exists/identifiable",
+            "manual_test_id": "MTD-PAT-001",
+            "jira_key": "TBD-EX-PAT-001",
+            "jira_url": "#TBD-EX-PAT-001",
+            "role": "Authorized pattern viewer/admin",
+            "expected_access": "ALLOW",
+            "expected_result": "Low Risk Pattern exists/identifiable",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-PAT-002",
+            "name": "SDLC Pattern exists/identifiable",
+            "manual_test_id": "MTD-PAT-001",
+            "jira_key": "TBD-EX-PAT-002",
+            "jira_url": "#TBD-EX-PAT-002",
+            "role": "Authorized pattern viewer/admin",
+            "expected_access": "ALLOW",
+            "expected_result": "SDLC Pattern exists/identifiable",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-PAT-002",
+        "jira_url": "#TBD-MTD-PAT-002",
+        "summary": "Verify shared Pattern rules govern downstream behaviour",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-PAT-002",
+        "features": [
+          {
+            "id": "EX-PAT-003",
+            "name": "Pattern rule persists/inherits",
+            "manual_test_id": "MTD-PAT-002",
+            "jira_key": "TBD-EX-PAT-003",
+            "jira_url": "#TBD-EX-PAT-003",
+            "role": "Authorized governance setup",
+            "expected_access": "ALLOW",
+            "expected_result": "Pattern rule persists/inherits",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-PAT-004",
+            "name": "Pattern rule remains effective",
+            "manual_test_id": "MTD-PAT-002",
+            "jira_key": "TBD-EX-PAT-004",
+            "jira_url": "#TBD-EX-PAT-004",
+            "role": "Space Designer runtime",
+            "expected_access": "DENY override",
+            "expected_result": "Pattern rule remains effective",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-GOV-001",
+        "jira_url": "#TBD-MTD-GOV-001",
+        "summary": "Verify Low Risk Pattern is enabled for the tenant",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-GOV-001",
+        "features": [
+          {
+            "id": "EX-GOV-001",
+            "name": "Can enable/disable Pattern",
+            "manual_test_id": "MTD-GOV-001",
+            "jira_key": "TBD-EX-GOV-001",
+            "jira_url": "#TBD-EX-GOV-001",
+            "role": "U-TO-A",
+            "expected_access": "ALLOW",
+            "expected_result": "Can enable/disable Pattern",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-GOV-002",
+            "name": "Cannot change Pattern enablement",
+            "manual_test_id": "MTD-GOV-001",
+            "jira_key": "TBD-EX-GOV-002",
+            "jira_url": "#TBD-EX-GOV-002",
+            "role": "U-SO-A",
+            "expected_access": "DENY",
+            "expected_result": "Cannot change Pattern enablement",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-GOV-003",
+            "name": "Cannot change Pattern enablement",
+            "manual_test_id": "MTD-GOV-001",
+            "jira_key": "TBD-EX-GOV-003",
+            "jira_url": "#TBD-EX-GOV-003",
+            "role": "U-SD-A",
+            "expected_access": "DENY",
+            "expected_result": "Cannot change Pattern enablement",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-GOV-004",
+            "name": "Cannot change Pattern enablement",
+            "manual_test_id": "MTD-GOV-001",
+            "jira_key": "TBD-EX-GOV-004",
+            "jira_url": "#TBD-EX-GOV-004",
+            "role": "U-SU-A1",
+            "expected_access": "DENY",
+            "expected_result": "Cannot change Pattern enablement",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-GOV-002",
+        "jira_url": "#TBD-MTD-GOV-002",
+        "summary": "Verify tenant controls permitted agent capabilities/types",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-GOV-002",
+        "features": [
+          {
+            "id": "EX-GOV-005",
+            "name": "Defines permitted capability/types",
+            "manual_test_id": "MTD-GOV-002",
+            "jira_key": "TBD-EX-GOV-005",
+            "jira_url": "#TBD-EX-GOV-005",
+            "role": "U-TO-A",
+            "expected_access": "ALLOW",
+            "expected_result": "Defines permitted capability/types",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-GOV-006",
+            "name": "Cannot define tenant capabilities",
+            "manual_test_id": "MTD-GOV-002",
+            "jira_key": "TBD-EX-GOV-006",
+            "jira_url": "#TBD-EX-GOV-006",
+            "role": "U-SO-A",
+            "expected_access": "DENY",
+            "expected_result": "Cannot define tenant capabilities",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-GOV-007",
+            "name": "Cannot expand allowance",
+            "manual_test_id": "MTD-GOV-002",
+            "jira_key": "TBD-EX-GOV-007",
+            "jira_url": "#TBD-EX-GOV-007",
+            "role": "U-SD-A",
+            "expected_access": "DENY",
+            "expected_result": "Cannot expand allowance",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-GOV-003",
+        "jira_url": "#TBD-MTD-GOV-003",
+        "summary": "Verify Tenant Owner creates a space and assigns Space Owner",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-GOV-003",
+        "features": [
+          {
+            "id": "EX-GOV-008",
+            "name": "Creates Space B if in scope",
+            "manual_test_id": "MTD-GOV-003",
+            "jira_key": "TBD-EX-GOV-008",
+            "jira_url": "#TBD-EX-GOV-008",
+            "role": "U-TO-A",
+            "expected_access": "ALLOW / N/A",
+            "expected_result": "Creates Space B if in scope",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-GOV-009",
+            "name": "Cannot create Space",
+            "manual_test_id": "MTD-GOV-003",
+            "jira_key": "TBD-EX-GOV-009",
+            "jira_url": "#TBD-EX-GOV-009",
+            "role": "U-SO-A",
+            "expected_access": "DENY",
+            "expected_result": "Cannot create Space",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-GOV-010",
+            "name": "Assign/change Space Owner",
+            "manual_test_id": "MTD-GOV-003",
+            "jira_key": "TBD-EX-GOV-010",
+            "jira_url": "#TBD-EX-GOV-010",
+            "role": "U-TO-A",
+            "expected_access": "ALLOW / N/A",
+            "expected_result": "Assign/change Space Owner",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-GOV-004",
+        "jira_url": "#TBD-MTD-GOV-004",
+        "summary": "Verify Space Owner assigns members and roles",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-GOV-004",
+        "features": [
+          {
+            "id": "EX-GOV-011",
+            "name": "Add members/assign roles",
+            "manual_test_id": "MTD-GOV-004",
+            "jira_key": "TBD-EX-GOV-011",
+            "jira_url": "#TBD-EX-GOV-011",
+            "role": "U-SO-A",
+            "expected_access": "ALLOW",
+            "expected_result": "Add members/assign roles",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-GOV-012",
+            "name": "Does not receive 6.3",
+            "manual_test_id": "MTD-GOV-004",
+            "jira_key": "TBD-EX-GOV-012",
+            "jira_url": "#TBD-EX-GOV-012",
+            "role": "U-TO-A",
+            "expected_access": "DENY",
+            "expected_result": "Does not receive 6.3",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-GOV-013",
+            "name": "Cannot assign roles",
+            "manual_test_id": "MTD-GOV-004",
+            "jira_key": "TBD-EX-GOV-013",
+            "jira_url": "#TBD-EX-GOV-013",
+            "role": "U-SD-A",
+            "expected_access": "DENY",
+            "expected_result": "Cannot assign roles",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-GOV-014",
+            "name": "Cannot assign roles",
+            "manual_test_id": "MTD-GOV-004",
+            "jira_key": "TBD-EX-GOV-014",
+            "jira_url": "#TBD-EX-GOV-014",
+            "role": "U-SU-A1",
+            "expected_access": "DENY",
+            "expected_result": "Cannot assign roles",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-GOV-005",
+        "jira_url": "#TBD-MTD-GOV-005",
+        "summary": "Verify rollout tenants, default spaces and mandatory-space protection",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-GOV-005",
+        "features": [
+          {
+            "id": "EX-GOV-015",
+            "name": "All 10 required tenants exist",
+            "manual_test_id": "MTD-GOV-005",
+            "jira_key": "TBD-EX-GOV-015",
+            "jira_url": "#TBD-EX-GOV-015",
+            "role": "Tenant Owner/admin view",
+            "expected_access": "ALLOW",
+            "expected_result": "All 10 required tenants exist",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-GOV-016",
+            "name": "Required default Space exists for each tenant",
+            "manual_test_id": "MTD-GOV-005",
+            "jira_key": "TBD-EX-GOV-016",
+            "jira_url": "#TBD-EX-GOV-016",
+            "role": "Tenant Owner/admin view",
+            "expected_access": "ALLOW",
+            "expected_result": "Required default Space exists for each tenant",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-GOV-017",
+            "name": "Required default Space protected",
+            "manual_test_id": "MTD-GOV-005",
+            "jira_key": "TBD-EX-GOV-017",
+            "jira_url": "#TBD-EX-GOV-017",
+            "role": "Tenant Owner",
+            "expected_access": "DENY removal",
+            "expected_result": "Required default Space protected",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-GOV-007",
+        "jira_url": "#TBD-MTD-GOV-007",
+        "summary": "Verify Space System Prompt governance hierarchy",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-GOV-007",
+        "features": [
+          {
+            "id": "EX-GOV-022",
+            "name": "Space prompt saves and persists",
+            "manual_test_id": "MTD-GOV-007",
+            "jira_key": "TBD-EX-GOV-022",
+            "jira_url": "#TBD-EX-GOV-022",
+            "role": "U-SO-A",
+            "expected_access": "ALLOW",
+            "expected_result": "Space prompt saves and persists",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-GOV-023",
+            "name": "Precedence Pattern > Tenant > Space > Agent enforced",
+            "manual_test_id": "MTD-GOV-007",
+            "jira_key": "TBD-EX-GOV-023",
+            "jira_url": "#TBD-EX-GOV-023",
+            "role": "U-SD-A",
+            "expected_access": "DENY override",
+            "expected_result": "Precedence Pattern > Tenant > Space > Agent enforced",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-GOV-006",
+        "jira_url": "#TBD-MTD-GOV-006",
+        "summary": "Verify Tenant Member read-only tenant access and Space eligibility",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-GOV-006",
+        "features": [
+          {
+            "id": "EX-GOV-018",
+            "name": "Tenant Member can view tenant configuration",
+            "manual_test_id": "MTD-GOV-006",
+            "jira_key": "TBD-EX-GOV-018",
+            "jira_url": "#TBD-EX-GOV-018",
+            "role": "U-TM-A",
+            "expected_access": "VIEW ONLY",
+            "expected_result": "Tenant Member can view tenant configuration",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-GOV-019",
+            "name": "Tenant Member cannot administer tenant",
+            "manual_test_id": "MTD-GOV-006",
+            "jira_key": "TBD-EX-GOV-019",
+            "jira_url": "#TBD-EX-GOV-019",
+            "role": "U-TM-A",
+            "expected_access": "DENY",
+            "expected_result": "Tenant Member cannot administer tenant",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-GOV-020",
+            "name": "Existing Tenant Member can be assigned a Space role",
+            "manual_test_id": "MTD-GOV-006",
+            "jira_key": "TBD-EX-GOV-020",
+            "jira_url": "#TBD-EX-GOV-020",
+            "role": "U-SO-A",
+            "expected_access": "ALLOW",
+            "expected_result": "Existing Tenant Member can be assigned a Space role",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-GOV-021",
+            "name": "Space membership cannot bypass tenant membership",
+            "manual_test_id": "MTD-GOV-006",
+            "jira_key": "TBD-EX-GOV-021",
+            "jira_url": "#TBD-EX-GOV-021",
+            "role": "U-SO-A",
+            "expected_access": "DENY",
+            "expected_result": "Space membership cannot bypass tenant membership",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-BLD-001",
+        "jira_url": "#TBD-MTD-BLD-001",
+        "summary": "Create an agent from an enabled pattern",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-BLD-001",
+        "features": [
+          {
+            "id": "EX-BLD-001",
+            "name": "Creates Agent from enabled Low Risk",
+            "manual_test_id": "MTD-BLD-001",
+            "jira_key": "TBD-EX-BLD-001",
+            "jira_url": "#TBD-EX-BLD-001",
+            "role": "U-SD-A",
+            "expected_access": "ALLOW",
+            "expected_result": "Creates Agent from enabled Low Risk",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-BLD-002",
+            "name": "Cannot create Agent",
+            "manual_test_id": "MTD-BLD-001",
+            "jira_key": "TBD-EX-BLD-002",
+            "jira_url": "#TBD-EX-BLD-002",
+            "role": "U-TO-A",
+            "expected_access": "DENY",
+            "expected_result": "Cannot create Agent",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-BLD-003",
+            "name": "Cannot create Agent",
+            "manual_test_id": "MTD-BLD-001",
+            "jira_key": "TBD-EX-BLD-003",
+            "jira_url": "#TBD-EX-BLD-003",
+            "role": "U-SO-A",
+            "expected_access": "DENY",
+            "expected_result": "Cannot create Agent",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-BLD-004",
+            "name": "Cannot create Agent",
+            "manual_test_id": "MTD-BLD-001",
+            "jira_key": "TBD-EX-BLD-004",
+            "jira_url": "#TBD-EX-BLD-004",
+            "role": "U-SU-A1",
+            "expected_access": "DENY",
+            "expected_result": "Cannot create Agent",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-BLD-005",
+        "jira_url": "#TBD-MTD-BLD-005",
+        "summary": "Create agent through assisted natural-language idea",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-BLD-005",
+        "features": [
+          {
+            "id": "EX-BLD-013",
+            "name": "Assisted creation starts from supplied idea",
+            "manual_test_id": "MTD-BLD-005",
+            "jira_key": "TBD-EX-BLD-013",
+            "jira_url": "#TBD-EX-BLD-013",
+            "role": "U-SD-A",
+            "expected_access": "ALLOW",
+            "expected_result": "Assisted creation starts from supplied idea",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-BLD-014",
+            "name": "Focused required setup information collected",
+            "manual_test_id": "MTD-BLD-005",
+            "jira_key": "TBD-EX-BLD-014",
+            "jira_url": "#TBD-EX-BLD-014",
+            "role": "U-SD-A",
+            "expected_access": "ALLOW",
+            "expected_result": "Focused required setup information collected",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-BLD-006",
+        "jira_url": "#TBD-MTD-BLD-006",
+        "summary": "Create agent from scratch with required-field validation",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-BLD-006",
+        "features": [
+          {
+            "id": "EX-BLD-015",
+            "name": "One valid draft Agent created",
+            "manual_test_id": "MTD-BLD-006",
+            "jira_key": "TBD-EX-BLD-015",
+            "jira_url": "#TBD-EX-BLD-015",
+            "role": "U-SD-A",
+            "expected_access": "ALLOW",
+            "expected_result": "One valid draft Agent created",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-BLD-016",
+            "name": "Required-field validation prevents invalid draft",
+            "manual_test_id": "MTD-BLD-006",
+            "jira_key": "TBD-EX-BLD-016",
+            "jira_url": "#TBD-EX-BLD-016",
+            "role": "U-SD-A",
+            "expected_access": "DENY invalid create",
+            "expected_result": "Required-field validation prevents invalid draft",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-BLD-007",
+        "jira_url": "#TBD-MTD-BLD-007",
+        "summary": "Cancel agent creation without side effects",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-BLD-007",
+        "features": [
+          {
+            "id": "EX-BLD-017",
+            "name": "No unintended Agent/draft created",
+            "manual_test_id": "MTD-BLD-007",
+            "jira_key": "TBD-EX-BLD-017",
+            "jira_url": "#TBD-EX-BLD-017",
+            "role": "U-SD-A",
+            "expected_access": "ALLOW cancel",
+            "expected_result": "No unintended Agent/draft created",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-BLD-002",
+        "jira_url": "#TBD-MTD-BLD-002",
+        "summary": "Configure agent instructions within Pattern governance",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-BLD-002",
+        "features": [
+          {
+            "id": "EX-BLD-005",
+            "name": "Configure Agent",
+            "manual_test_id": "MTD-BLD-002",
+            "jira_key": "TBD-EX-BLD-005",
+            "jira_url": "#TBD-EX-BLD-005",
+            "role": "U-SD-A",
+            "expected_access": "ALLOW",
+            "expected_result": "Configure Agent",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-BLD-006",
+            "name": "Cannot configure",
+            "manual_test_id": "MTD-BLD-002",
+            "jira_key": "TBD-EX-BLD-006",
+            "jira_url": "#TBD-EX-BLD-006",
+            "role": "U-TO-A",
+            "expected_access": "DENY",
+            "expected_result": "Cannot configure",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-BLD-007",
+            "name": "Cannot configure",
+            "manual_test_id": "MTD-BLD-002",
+            "jira_key": "TBD-EX-BLD-007",
+            "jira_url": "#TBD-EX-BLD-007",
+            "role": "U-SO-A",
+            "expected_access": "DENY",
+            "expected_result": "Cannot configure",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-BLD-008",
+            "name": "Cannot configure",
+            "manual_test_id": "MTD-BLD-002",
+            "jira_key": "TBD-EX-BLD-008",
+            "jira_url": "#TBD-EX-BLD-008",
+            "role": "U-SU-A1",
+            "expected_access": "DENY",
+            "expected_result": "Cannot configure",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-BLD-003",
+        "jira_url": "#TBD-MTD-BLD-003",
+        "summary": "Attach approved MCP tool / skill",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-BLD-003",
+        "features": [
+          {
+            "id": "EX-BLD-009",
+            "name": "Attach approved MCP/skill",
+            "manual_test_id": "MTD-BLD-003",
+            "jira_key": "TBD-EX-BLD-009",
+            "jira_url": "#TBD-EX-BLD-009",
+            "role": "U-SD-A",
+            "expected_access": "ALLOW",
+            "expected_result": "Attach approved MCP/skill",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-BLD-010",
+            "name": "Cannot attach MCP/skill",
+            "manual_test_id": "MTD-BLD-003",
+            "jira_key": "TBD-EX-BLD-010",
+            "jira_url": "#TBD-EX-BLD-010",
+            "role": "U-SO-A",
+            "expected_access": "DENY",
+            "expected_result": "Cannot attach MCP/skill",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-BLD-018",
+            "name": "Tool selection and personal access setup persist",
+            "manual_test_id": "MTD-BLD-003",
+            "jira_key": "TBD-EX-BLD-018",
+            "jira_url": "#TBD-EX-BLD-018",
+            "role": "U-SD-A",
+            "expected_access": "ALLOW",
+            "expected_result": "Tool selection and personal access setup persist",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-BLD-019",
+            "name": "Deferred credential setup does not grant usable access",
+            "manual_test_id": "MTD-BLD-003",
+            "jira_key": "TBD-EX-BLD-019",
+            "jira_url": "#TBD-EX-BLD-019",
+            "role": "U-SD-A",
+            "expected_access": "DENY use until setup",
+            "expected_result": "Deferred credential setup does not grant usable access",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-BLD-004",
+        "jira_url": "#TBD-MTD-BLD-004",
+        "summary": "Prevent unapproved MCP / skill / API use",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-BLD-004",
+        "features": [
+          {
+            "id": "EX-BLD-011",
+            "name": "Cannot attach/use",
+            "manual_test_id": "MTD-BLD-004",
+            "jira_key": "TBD-EX-BLD-011",
+            "jira_url": "#TBD-EX-BLD-011",
+            "role": "U-SD-A",
+            "expected_access": "DENY resource",
+            "expected_result": "Cannot attach/use",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-BLD-012",
+            "name": "Bypass rejected",
+            "manual_test_id": "MTD-BLD-004",
+            "jira_key": "TBD-EX-BLD-012",
+            "jira_url": "#TBD-EX-BLD-012",
+            "role": "U-SD-A direct attempt",
+            "expected_access": "DENY resource",
+            "expected_result": "Bypass rejected",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-ACC-001",
+        "jira_url": "#TBD-MTD-ACC-001",
+        "summary": "Verify permitted roles can view same-space agents",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-ACC-001",
+        "features": [
+          {
+            "id": "EX-ACC-001",
+            "name": "Can view, not edit/run",
+            "manual_test_id": "MTD-ACC-001",
+            "jira_key": "TBD-EX-ACC-001",
+            "jira_url": "#TBD-EX-ACC-001",
+            "role": "U-TO-A",
+            "expected_access": "VIEW ONLY",
+            "expected_result": "Can view, not edit/run",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-ACC-002",
+            "name": "Can view",
+            "manual_test_id": "MTD-ACC-001",
+            "jira_key": "TBD-EX-ACC-002",
+            "jira_url": "#TBD-EX-ACC-002",
+            "role": "U-SO-A",
+            "expected_access": "VIEW ONLY",
+            "expected_result": "Can view",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-ACC-003",
+            "name": "Can view",
+            "manual_test_id": "MTD-ACC-001",
+            "jira_key": "TBD-EX-ACC-003",
+            "jira_url": "#TBD-EX-ACC-003",
+            "role": "U-SD-A",
+            "expected_access": "ALLOW",
+            "expected_result": "Can view",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-ACC-004",
+            "name": "Can view",
+            "manual_test_id": "MTD-ACC-001",
+            "jira_key": "TBD-EX-ACC-004",
+            "jira_url": "#TBD-EX-ACC-004",
+            "role": "U-SU-A1",
+            "expected_access": "ALLOW",
+            "expected_result": "Can view",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-ACC-005",
+            "name": "No 6.6 from platform role",
+            "manual_test_id": "MTD-ACC-001",
+            "jira_key": "TBD-EX-ACC-005",
+            "jira_url": "#TBD-EX-ACC-005",
+            "role": "U-PA",
+            "expected_access": "DENY",
+            "expected_result": "No 6.6 from platform role",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-ACC-006",
+            "name": "Catalogue access ≠ Agent visibility",
+            "manual_test_id": "MTD-ACC-001",
+            "jira_key": "TBD-EX-ACC-006",
+            "jira_url": "#TBD-EX-ACC-006",
+            "role": "U-VR",
+            "expected_access": "DENY",
+            "expected_result": "Catalogue access ≠ Agent visibility",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-ACC-002",
+        "jira_url": "#TBD-MTD-ACC-002",
+        "summary": "Verify only Space Designer can edit same-space agent",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-ACC-002",
+        "features": [
+          {
+            "id": "EX-ACC-007",
+            "name": "Can edit",
+            "manual_test_id": "MTD-ACC-002",
+            "jira_key": "TBD-EX-ACC-007",
+            "jira_url": "#TBD-EX-ACC-007",
+            "role": "U-SD-A",
+            "expected_access": "ALLOW",
+            "expected_result": "Can edit",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-ACC-008",
+            "name": "Cannot edit",
+            "manual_test_id": "MTD-ACC-002",
+            "jira_key": "TBD-EX-ACC-008",
+            "jira_url": "#TBD-EX-ACC-008",
+            "role": "U-TO-A",
+            "expected_access": "DENY",
+            "expected_result": "Cannot edit",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-ACC-009",
+            "name": "Cannot edit",
+            "manual_test_id": "MTD-ACC-002",
+            "jira_key": "TBD-EX-ACC-009",
+            "jira_url": "#TBD-EX-ACC-009",
+            "role": "U-SO-A",
+            "expected_access": "DENY",
+            "expected_result": "Cannot edit",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-ACC-010",
+            "name": "Cannot edit",
+            "manual_test_id": "MTD-ACC-002",
+            "jira_key": "TBD-EX-ACC-010",
+            "jira_url": "#TBD-EX-ACC-010",
+            "role": "U-SU-A1",
+            "expected_access": "DENY",
+            "expected_result": "Cannot edit",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-ACC-011",
+            "name": "Backend rejects edit",
+            "manual_test_id": "MTD-ACC-002",
+            "jira_key": "TBD-EX-ACC-011",
+            "jira_url": "#TBD-EX-ACC-011",
+            "role": "Unauthorized direct request",
+            "expected_access": "DENY",
+            "expected_result": "Backend rejects edit",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-RUN-001",
+        "jira_url": "#TBD-MTD-RUN-001",
+        "summary": "Space Designer executes a same-space agent",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-RUN-001",
+        "features": [
+          {
+            "id": "EX-RUN-001",
+            "name": "Executes successfully",
+            "manual_test_id": "MTD-RUN-001",
+            "jira_key": "TBD-EX-RUN-001",
+            "jira_url": "#TBD-EX-RUN-001",
+            "role": "U-SD-A",
+            "expected_access": "ALLOW",
+            "expected_result": "Executes successfully",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-RUN-002",
+        "jira_url": "#TBD-MTD-RUN-002",
+        "summary": "Space User executes a same-space agent",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-RUN-002",
+        "features": [
+          {
+            "id": "EX-RUN-002",
+            "name": "Executes successfully",
+            "manual_test_id": "MTD-RUN-002",
+            "jira_key": "TBD-EX-RUN-002",
+            "jira_url": "#TBD-EX-RUN-002",
+            "role": "U-SU-A1",
+            "expected_access": "ALLOW",
+            "expected_result": "Executes successfully",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-RUN-003",
+        "jira_url": "#TBD-MTD-RUN-003",
+        "summary": "Prevent Tenant Owner / Space Owner from executing agent",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-RUN-003",
+        "features": [
+          {
+            "id": "EX-RUN-003",
+            "name": "View but cannot execute",
+            "manual_test_id": "MTD-RUN-003",
+            "jira_key": "TBD-EX-RUN-003",
+            "jira_url": "#TBD-EX-RUN-003",
+            "role": "U-TO-A",
+            "expected_access": "DENY",
+            "expected_result": "View but cannot execute",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-RUN-004",
+            "name": "View but cannot execute",
+            "manual_test_id": "MTD-RUN-003",
+            "jira_key": "TBD-EX-RUN-004",
+            "jira_url": "#TBD-EX-RUN-004",
+            "role": "U-SO-A",
+            "expected_access": "DENY",
+            "expected_result": "View but cannot execute",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-RUN-005",
+            "name": "Platform admin ≠ runtime",
+            "manual_test_id": "MTD-RUN-003",
+            "jira_key": "TBD-EX-RUN-005",
+            "jira_url": "#TBD-EX-RUN-005",
+            "role": "U-PA",
+            "expected_access": "DENY",
+            "expected_result": "Platform admin ≠ runtime",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-RUN-006",
+            "name": "Service rejects invocation",
+            "manual_test_id": "MTD-RUN-003",
+            "jira_key": "TBD-EX-RUN-006",
+            "jira_url": "#TBD-EX-RUN-006",
+            "role": "Unauthorized direct request",
+            "expected_access": "DENY",
+            "expected_result": "Service rejects invocation",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-RUN-004",
+        "jira_url": "#TBD-MTD-RUN-004",
+        "summary": "Verify own execution output/history isolation",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-RUN-004",
+        "features": [
+          {
+            "id": "EX-RUN-007",
+            "name": "Own history visible",
+            "manual_test_id": "MTD-RUN-004",
+            "jira_key": "TBD-EX-RUN-007",
+            "jira_url": "#TBD-EX-RUN-007",
+            "role": "U-SU-A1",
+            "expected_access": "ALLOW",
+            "expected_result": "Own history visible",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-RUN-008",
+            "name": "Own history visible",
+            "manual_test_id": "MTD-RUN-004",
+            "jira_key": "TBD-EX-RUN-008",
+            "jira_url": "#TBD-EX-RUN-008",
+            "role": "U-SD-A",
+            "expected_access": "ALLOW",
+            "expected_result": "Own history visible",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-RUN-009",
+            "name": "Other history protected",
+            "manual_test_id": "MTD-RUN-004",
+            "jira_key": "TBD-EX-RUN-009",
+            "jira_url": "#TBD-EX-RUN-009",
+            "role": "U-SU-A2",
+            "expected_access": "DENY",
+            "expected_result": "Other history protected",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-RUN-010",
+            "name": "Object authorization",
+            "manual_test_id": "MTD-RUN-004",
+            "jira_key": "TBD-EX-RUN-010",
+            "jira_url": "#TBD-EX-RUN-010",
+            "role": "Direct history URL/ID",
+            "expected_access": "DENY",
+            "expected_result": "Object authorization",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-RUN-005",
+        "jira_url": "#TBD-MTD-RUN-005",
+        "summary": "Verify multi-turn runtime under inherited governance",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-RUN-005",
+        "features": [
+          {
+            "id": "EX-RUN-011",
+            "name": "Establish context",
+            "manual_test_id": "MTD-RUN-005",
+            "jira_key": "TBD-EX-RUN-011",
+            "jira_url": "#TBD-EX-RUN-011",
+            "role": "U-SU-A1",
+            "expected_access": "ALLOW",
+            "expected_result": "Establish context",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-RUN-012",
+            "name": "Context retained",
+            "manual_test_id": "MTD-RUN-005",
+            "jira_key": "TBD-EX-RUN-012",
+            "jira_url": "#TBD-EX-RUN-012",
+            "role": "U-SU-A1",
+            "expected_access": "ALLOW",
+            "expected_result": "Context retained",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-RUN-013",
+            "name": "Higher governance effective",
+            "manual_test_id": "MTD-RUN-005",
+            "jira_key": "TBD-EX-RUN-013",
+            "jira_url": "#TBD-EX-RUN-013",
+            "role": "U-SU-A1",
+            "expected_access": "DENY override",
+            "expected_result": "Higher governance effective",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-RUN-014",
+            "name": "Creator obeys same governance",
+            "manual_test_id": "MTD-RUN-005",
+            "jira_key": "TBD-EX-RUN-014",
+            "jira_url": "#TBD-EX-RUN-014",
+            "role": "U-SD-A",
+            "expected_access": "ALLOW within rules",
+            "expected_result": "Creator obeys same governance",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-SRC-001",
+        "jira_url": "#TBD-MTD-SRC-001",
+        "summary": "Upload and use a valid personal source",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-SRC-001",
+        "features": [
+          {
+            "id": "EX-SRC-001",
+            "name": "Upload/select/use; original read-only",
+            "manual_test_id": "MTD-SRC-001",
+            "jira_key": "TBD-EX-SRC-001",
+            "jira_url": "#TBD-EX-SRC-001",
+            "role": "U-SU-A1",
+            "expected_access": "ALLOW",
+            "expected_result": "Upload/select/use; original read-only",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-SRC-002",
+            "name": "Creator runtime source works",
+            "manual_test_id": "MTD-SRC-001",
+            "jira_key": "TBD-EX-SRC-002",
+            "jira_url": "#TBD-EX-SRC-002",
+            "role": "U-SD-A",
+            "expected_access": "ALLOW",
+            "expected_result": "Creator runtime source works",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-SRC-002",
+        "jira_url": "#TBD-MTD-SRC-002",
+        "summary": "Verify personal source is isolated from another user",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-SRC-002",
+        "features": [
+          {
+            "id": "EX-SRC-003",
+            "name": "Owner sees/uses",
+            "manual_test_id": "MTD-SRC-002",
+            "jira_key": "TBD-EX-SRC-003",
+            "jira_url": "#TBD-EX-SRC-003",
+            "role": "U-SU-A1",
+            "expected_access": "ALLOW",
+            "expected_result": "Owner sees/uses",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-SRC-004",
+            "name": "Cannot see/use",
+            "manual_test_id": "MTD-SRC-002",
+            "jira_key": "TBD-EX-SRC-004",
+            "jira_url": "#TBD-EX-SRC-004",
+            "role": "U-SU-A2",
+            "expected_access": "DENY",
+            "expected_result": "Cannot see/use",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-SRC-005",
+            "name": "Object access rejected",
+            "manual_test_id": "MTD-SRC-002",
+            "jira_key": "TBD-EX-SRC-005",
+            "jira_url": "#TBD-EX-SRC-005",
+            "role": "Direct source ID as A2",
+            "expected_access": "DENY",
+            "expected_result": "Object access rejected",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-SRC-003",
+        "jira_url": "#TBD-MTD-SRC-003",
+        "summary": "Verify source selection changes runtime context",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-SRC-003",
+        "features": [
+          {
+            "id": "EX-SRC-006",
+            "name": "Context reflects selected set",
+            "manual_test_id": "MTD-SRC-003",
+            "jira_key": "TBD-EX-SRC-006",
+            "jira_url": "#TBD-EX-SRC-006",
+            "role": "U-SU-A1",
+            "expected_access": "ALLOW",
+            "expected_result": "Context reflects selected set",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-SRC-007",
+            "name": "B no longer selected context",
+            "manual_test_id": "MTD-SRC-003",
+            "jira_key": "TBD-EX-SRC-007",
+            "jira_url": "#TBD-EX-SRC-007",
+            "role": "U-SU-A1",
+            "expected_access": "ALLOW",
+            "expected_result": "B no longer selected context",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-SRC-008",
+            "name": "Context updates",
+            "manual_test_id": "MTD-SRC-003",
+            "jira_key": "TBD-EX-SRC-008",
+            "jira_url": "#TBD-EX-SRC-008",
+            "role": "U-SU-A1",
+            "expected_access": "ALLOW",
+            "expected_result": "Context updates",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-GEN-001",
+        "jira_url": "#TBD-MTD-GEN-001",
+        "summary": "Generate output file",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-GEN-001",
+        "features": [
+          {
+            "id": "EX-GEN-001",
+            "name": "Artifact created",
+            "manual_test_id": "MTD-GEN-001",
+            "jira_key": "TBD-EX-GEN-001",
+            "jira_url": "#TBD-EX-GEN-001",
+            "role": "U-SU-A1",
+            "expected_access": "ALLOW",
+            "expected_result": "Artifact created",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-GEN-002",
+            "name": "Artifact created",
+            "manual_test_id": "MTD-GEN-001",
+            "jira_key": "TBD-EX-GEN-002",
+            "jira_url": "#TBD-EX-GEN-002",
+            "role": "U-SD-A",
+            "expected_access": "ALLOW",
+            "expected_result": "Artifact created",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-GEN-002",
+        "jira_url": "#TBD-MTD-GEN-002",
+        "summary": "Retrieve and validate generated output",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-GEN-002",
+        "features": [
+          {
+            "id": "EX-GEN-003",
+            "name": "Retrieves/opens",
+            "manual_test_id": "MTD-GEN-002",
+            "jira_key": "TBD-EX-GEN-003",
+            "jira_url": "#TBD-EX-GEN-003",
+            "role": "U-SU-A1",
+            "expected_access": "ALLOW",
+            "expected_result": "Retrieves/opens",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-GEN-004",
+            "name": "No unauthorized access",
+            "manual_test_id": "MTD-GEN-002",
+            "jira_key": "TBD-EX-GEN-004",
+            "jira_url": "#TBD-EX-GEN-004",
+            "role": "U-SU-A2",
+            "expected_access": "DENY / TBD",
+            "expected_result": "No unauthorized access",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-GEN-005",
+            "name": "Object protection",
+            "manual_test_id": "MTD-GEN-002",
+            "jira_key": "TBD-EX-GEN-005",
+            "jira_url": "#TBD-EX-GEN-005",
+            "role": "Direct artifact ID",
+            "expected_access": "DENY",
+            "expected_result": "Object protection",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-ISO-001",
+        "jira_url": "#TBD-MTD-ISO-001",
+        "summary": "Prevent cross-space agent visibility/access",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-ISO-001",
+        "features": [
+          {
+            "id": "EX-ISO-001",
+            "name": "Same-Space view/run",
+            "manual_test_id": "MTD-ISO-001",
+            "jira_key": "TBD-EX-ISO-001",
+            "jira_url": "#TBD-EX-ISO-001",
+            "role": "U-SU-A1",
+            "expected_access": "ALLOW",
+            "expected_result": "Same-Space view/run",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-ISO-002",
+            "name": "Cross-Space discovery blocked",
+            "manual_test_id": "MTD-ISO-001",
+            "jira_key": "TBD-EX-ISO-002",
+            "jira_url": "#TBD-EX-ISO-002",
+            "role": "U-SU-B",
+            "expected_access": "DENY",
+            "expected_result": "Cross-Space discovery blocked",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-ISO-003",
+            "name": "Direct access rejected",
+            "manual_test_id": "MTD-ISO-001",
+            "jira_key": "TBD-EX-ISO-003",
+            "jira_url": "#TBD-EX-ISO-003",
+            "role": "U-SU-B direct URL",
+            "expected_access": "DENY",
+            "expected_result": "Direct access rejected",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-ISO-004",
+            "name": "Execution rejected",
+            "manual_test_id": "MTD-ISO-001",
+            "jira_key": "TBD-EX-ISO-004",
+            "jira_url": "#TBD-EX-ISO-004",
+            "role": "U-SU-B direct runtime",
+            "expected_access": "DENY",
+            "expected_result": "Execution rejected",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-ISO-002",
+        "jira_url": "#TBD-MTD-ISO-002",
+        "summary": "Prevent cross-tenant agent access",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-ISO-002",
+        "features": [
+          {
+            "id": "EX-ISO-005",
+            "name": "Authorized use",
+            "manual_test_id": "MTD-ISO-002",
+            "jira_key": "TBD-EX-ISO-005",
+            "jira_url": "#TBD-EX-ISO-005",
+            "role": "U-SU-A1",
+            "expected_access": "ALLOW",
+            "expected_result": "Authorized use",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-ISO-006",
+            "name": "Cross-Tenant discovery blocked",
+            "manual_test_id": "MTD-ISO-002",
+            "jira_key": "TBD-EX-ISO-006",
+            "jira_url": "#TBD-EX-ISO-006",
+            "role": "U-SU-TB",
+            "expected_access": "DENY",
+            "expected_result": "Cross-Tenant discovery blocked",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-ISO-007",
+            "name": "Invocation blocked",
+            "manual_test_id": "MTD-ISO-002",
+            "jira_key": "TBD-EX-ISO-007",
+            "jira_url": "#TBD-EX-ISO-007",
+            "role": "U-SU-TB direct request",
+            "expected_access": "DENY",
+            "expected_result": "Invocation blocked",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-PUB-001",
+        "jira_url": "#TBD-MTD-PUB-001",
+        "summary": "Unpublished draft unavailable to normal consumer",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-PUB-001",
+        "features": [
+          {
+            "id": "EX-PUB-001",
+            "name": "Draft remains outside Marketplace",
+            "manual_test_id": "MTD-PUB-001",
+            "jira_key": "TBD-EX-PUB-001",
+            "jira_url": "#TBD-EX-PUB-001",
+            "role": "U-SD-A",
+            "expected_access": "ALLOW debug",
+            "expected_result": "Draft remains outside Marketplace",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-PUB-002",
+            "name": "Draft not discoverable/runnable by Space User",
+            "manual_test_id": "MTD-PUB-001",
+            "jira_key": "TBD-EX-PUB-002",
+            "jira_url": "#TBD-EX-PUB-002",
+            "role": "U-SU-A1",
+            "expected_access": "DENY consumption",
+            "expected_result": "Draft not discoverable/runnable by Space User",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-PUB-002",
+        "jira_url": "#TBD-MTD-PUB-002",
+        "summary": "Publish Agent version to the Space Agent Marketplace",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-PUB-002",
+        "features": [
+          {
+            "id": "EX-PUB-003",
+            "name": "Frozen v1 created",
+            "manual_test_id": "MTD-PUB-002",
+            "jira_key": "TBD-EX-PUB-003",
+            "jira_url": "#TBD-EX-PUB-003",
+            "role": "U-SD-A",
+            "expected_access": "ALLOW",
+            "expected_result": "Frozen v1 created",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-PUB-004",
+            "name": "Publication metadata persists",
+            "manual_test_id": "MTD-PUB-002",
+            "jira_key": "TBD-EX-PUB-004",
+            "jira_url": "#TBD-EX-PUB-004",
+            "role": "U-SD-A",
+            "expected_access": "ALLOW",
+            "expected_result": "Publication metadata persists",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-PUB-005",
+            "name": "Tenant Owner cannot publish from role alone",
+            "manual_test_id": "MTD-PUB-002",
+            "jira_key": "TBD-EX-PUB-005",
+            "jira_url": "#TBD-EX-PUB-005",
+            "role": "U-TO-A",
+            "expected_access": "DENY",
+            "expected_result": "Tenant Owner cannot publish from role alone",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-PUB-006",
+            "name": "Space Owner cannot publish from role alone",
+            "manual_test_id": "MTD-PUB-002",
+            "jira_key": "TBD-EX-PUB-006",
+            "jira_url": "#TBD-EX-PUB-006",
+            "role": "U-SO-A",
+            "expected_access": "DENY",
+            "expected_result": "Space Owner cannot publish from role alone",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-PUB-003",
+        "jira_url": "#TBD-MTD-PUB-003",
+        "summary": "Verify publication does not cross Space boundary",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-PUB-003",
+        "features": [
+          {
+            "id": "EX-PUB-007",
+            "name": "Agent published to Space A Marketplace",
+            "manual_test_id": "MTD-PUB-003",
+            "jira_key": "TBD-EX-PUB-007",
+            "jira_url": "#TBD-EX-PUB-007",
+            "role": "U-SD-A",
+            "expected_access": "ALLOW",
+            "expected_result": "Agent published to Space A Marketplace",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-PUB-008",
+            "name": "Same-Space consumer discovers/runs",
+            "manual_test_id": "MTD-PUB-003",
+            "jira_key": "TBD-EX-PUB-008",
+            "jira_url": "#TBD-EX-PUB-008",
+            "role": "U-SU-A1",
+            "expected_access": "ALLOW",
+            "expected_result": "Same-Space consumer discovers/runs",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-PUB-009",
+            "name": "Cross-Space consumer cannot discover/run",
+            "manual_test_id": "MTD-PUB-003",
+            "jira_key": "TBD-EX-PUB-009",
+            "jira_url": "#TBD-EX-PUB-009",
+            "role": "U-SU-B",
+            "expected_access": "DENY",
+            "expected_result": "Cross-Space consumer cannot discover/run",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-VER-001",
+        "jira_url": "#TBD-MTD-VER-001",
+        "summary": "Verify frozen release and V1 → draft → V2 lifecycle",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-VER-001",
+        "features": [
+          {
+            "id": "EX-VER-001",
+            "name": "Frozen V1 created",
+            "manual_test_id": "MTD-VER-001",
+            "jira_key": "TBD-EX-VER-001",
+            "jira_url": "#TBD-EX-VER-001",
+            "role": "U-SD-A",
+            "expected_access": "ALLOW",
+            "expected_result": "Frozen V1 created",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-VER-002",
+            "name": "V1 unchanged",
+            "manual_test_id": "MTD-VER-001",
+            "jira_key": "TBD-EX-VER-002",
+            "jira_url": "#TBD-EX-VER-002",
+            "role": "U-SD-A",
+            "expected_access": "ALLOW draft",
+            "expected_result": "V1 unchanged",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-VER-003",
+            "name": "Still receives V1",
+            "manual_test_id": "MTD-VER-001",
+            "jira_key": "TBD-EX-VER-003",
+            "jira_url": "#TBD-EX-VER-003",
+            "role": "U-SU-A1",
+            "expected_access": "ALLOW V1",
+            "expected_result": "Still receives V1",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-VER-004",
+            "name": "Frozen V2 created",
+            "manual_test_id": "MTD-VER-001",
+            "jira_key": "TBD-EX-VER-004",
+            "jira_url": "#TBD-EX-VER-004",
+            "role": "U-SD-A",
+            "expected_access": "ALLOW",
+            "expected_result": "Frozen V2 created",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-VER-005",
+            "name": "Receives V2",
+            "manual_test_id": "MTD-VER-001",
+            "jira_key": "TBD-EX-VER-005",
+            "jira_url": "#TBD-EX-VER-005",
+            "role": "U-SU-A1",
+            "expected_access": "ALLOW V2",
+            "expected_result": "Receives V2",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-MKT-001",
+        "jira_url": "#TBD-MTD-MKT-001",
+        "summary": "Verify authorized Space Marketplace discovery after publication",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-MKT-001",
+        "features": [
+          {
+            "id": "EX-MKT-001",
+            "name": "Opens permitted Space Marketplace set",
+            "manual_test_id": "MTD-MKT-001",
+            "jira_key": "TBD-EX-MKT-001",
+            "jira_url": "#TBD-EX-MKT-001",
+            "role": "U-SU-A1",
+            "expected_access": "ALLOW",
+            "expected_result": "Opens permitted Space Marketplace set",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-MKT-002",
+            "name": "Discoverable after Space Designer publishes",
+            "manual_test_id": "MTD-MKT-001",
+            "jira_key": "TBD-EX-MKT-002",
+            "jira_url": "#TBD-EX-MKT-002",
+            "role": "U-SU-A1",
+            "expected_access": "ALLOW",
+            "expected_result": "Discoverable after Space Designer publishes",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-MKT-003",
+            "name": "Correct published version opens",
+            "manual_test_id": "MTD-MKT-001",
+            "jira_key": "TBD-EX-MKT-003",
+            "jira_url": "#TBD-EX-MKT-003",
+            "role": "U-SU-A1",
+            "expected_access": "ALLOW",
+            "expected_result": "Correct published version opens",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          },
+          {
+            "id": "EX-MKT-004",
+            "name": "Unauthorized cross-Space listing absent",
+            "manual_test_id": "MTD-MKT-001",
+            "jira_key": "TBD-EX-MKT-004",
+            "jira_url": "#TBD-EX-MKT-004",
+            "role": "U-SU-B",
+            "expected_access": "DENY",
+            "expected_result": "Unauthorized cross-Space listing absent",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-E2E-001",
+        "jira_url": "#TBD-MTD-E2E-001",
+        "summary": "Governed agent build and consumption",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-E2E-001",
+        "features": [
+          {
+            "id": "EX-E2E-001",
+            "name": "Governed Build-to-Run",
+            "manual_test_id": "MTD-E2E-001",
+            "jira_key": "TBD-EX-E2E-001",
+            "jira_url": "#TBD-EX-E2E-001",
+            "role": "Governed role chain",
+            "expected_access": "ALLOW/DENY per step",
+            "expected_result": "Full governed creation-to-consumption journey completes with Space Marketplace boundaries enforced",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      },
+      {
+        "jira_key": "TBD-MTD-E2E-002",
+        "jira_url": "#TBD-MTD-E2E-002",
+        "summary": "Runtime with personal source and generated artifact",
+        "issue_type": "Test",
+        "priority": "P0",
+        "manual_test_id": "MTD-E2E-002",
+        "features": [
+          {
+            "id": "EX-E2E-002",
+            "name": "Runtime Source-to-Artifact",
+            "manual_test_id": "MTD-E2E-002",
+            "jira_key": "TBD-EX-E2E-002",
+            "jira_url": "#TBD-EX-E2E-002",
+            "role": "Space User + isolation user",
+            "expected_access": "ALLOW owner / DENY other user",
+            "expected_result": "Source-grounded runtime creates retrievable artifact without cross-user leakage",
+            "applicable_environments": [
+              "DEV",
+              "SIT",
+              "UAT"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "notes": "Reconciled 23 Sep 2026. 37 P0 MTDs and 111 dashboard-managed variants (109 functional + 2 E2E). Jira IDs/URLs and applicable environments are placeholders for replacement before import."
+}
