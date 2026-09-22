@@ -1,1 +1,431 @@
-{"schema_version":"ng-manual-definition-index-0.8","definitions":[{"manual_test_id":"MTD-PAT-001","title":"Verify required Patterns exist and are assignable","priority":"P0","scenario_ids":["GOV-PAT-001","GOV-PAT-002"],"jira_key":"TBD-MTD-PAT-001","jira_url":"#TBD-MTD-PAT-001"},{"manual_test_id":"MTD-PAT-002","title":"Verify shared Pattern rules govern downstream behaviour","priority":"P0","scenario_ids":["GOV-PAT-005","GOV-TEN-011","RUN-004"],"jira_key":"TBD-MTD-PAT-002","jira_url":"#TBD-MTD-PAT-002"},{"manual_test_id":"MTD-GOV-001","title":"Verify Low Risk Pattern is enabled for the tenant","priority":"P0","scenario_ids":["GOV-TEN-003"],"jira_key":"TBD-MTD-GOV-001","jira_url":"#TBD-MTD-GOV-001"},{"manual_test_id":"MTD-GOV-002","title":"Verify tenant controls permitted agent capabilities/types","priority":"P0","scenario_ids":["GOV-TEN-006","BLD-CFG-003","BLD-CFG-004"],"jira_key":"TBD-MTD-GOV-002","jira_url":"#TBD-MTD-GOV-002"},{"manual_test_id":"MTD-GOV-003","title":"Verify Tenant Owner creates a space and assigns Space Owner","priority":"P0","scenario_ids":["GOV-SPC-005","GOV-SPC-004"],"jira_key":"TBD-MTD-GOV-003","jira_url":"#TBD-MTD-GOV-003"},{"manual_test_id":"MTD-GOV-004","title":"Verify Space Owner assigns members and roles","priority":"P0","scenario_ids":["GOV-SPC-004"],"jira_key":"TBD-MTD-GOV-004","jira_url":"#TBD-MTD-GOV-004"},{"manual_test_id":"MTD-GOV-005","title":"Verify rollout tenants, default spaces and mandatory-space protection","priority":"P0","scenario_ids":["GOV-TEN-001","GOV-TEN-002","GOV-SPC-001"],"jira_key":"TBD-MTD-GOV-005","jira_url":"#TBD-MTD-GOV-005"},{"manual_test_id":"MTD-BLD-001","title":"Create an agent from an enabled pattern","priority":"P0","scenario_ids":["BLD-CRT-001","BLD-CRT-002","BLD-CRT-003"],"jira_key":"TBD-MTD-BLD-001","jira_url":"#TBD-MTD-BLD-001"},{"manual_test_id":"MTD-BLD-005","title":"Create agent through assisted natural-language idea","priority":"P0","scenario_ids":["BLD-CRT-004","BLD-CRT-005"],"jira_key":"TBD-MTD-BLD-005","jira_url":"#TBD-MTD-BLD-005"},{"manual_test_id":"MTD-BLD-006","title":"Create agent from scratch with required-field validation","priority":"P0","scenario_ids":["BLD-CRT-006","BLD-CRT-007"],"jira_key":"TBD-MTD-BLD-006","jira_url":"#TBD-MTD-BLD-006"},{"manual_test_id":"MTD-BLD-007","title":"Cancel agent creation without side effects","priority":"P0","scenario_ids":["BLD-CRT-008"],"jira_key":"TBD-MTD-BLD-007","jira_url":"#TBD-MTD-BLD-007"},{"manual_test_id":"MTD-BLD-002","title":"Configure agent instructions within Pattern governance","priority":"P0","scenario_ids":["BLD-CFG-002","GOV-TEN-011","SEC-RBAC-011"],"jira_key":"TBD-MTD-BLD-002","jira_url":"#TBD-MTD-BLD-002"},{"manual_test_id":"MTD-BLD-003","title":"Attach approved MCP tool / skill","priority":"P0","scenario_ids":["BLD-CFG-003","BLD-CFG-004","GOV-TEN-010"],"jira_key":"TBD-MTD-BLD-003","jira_url":"#TBD-MTD-BLD-003"},{"manual_test_id":"MTD-BLD-004","title":"Prevent unapproved MCP / skill / API use","priority":"P0","scenario_ids":["BLD-CFG-003","BLD-CFG-004","GOV-TEN-010","SEC-RBAC-009","SEC-RBAC-010"],"jira_key":"TBD-MTD-BLD-004","jira_url":"#TBD-MTD-BLD-004"},{"manual_test_id":"MTD-ACC-001","title":"Verify permitted roles can view same-space agents","priority":"P0","scenario_ids":["SEC-RBAC-003","SEC-RBAC-004"],"jira_key":"TBD-MTD-ACC-001","jira_url":"#TBD-MTD-ACC-001"},{"manual_test_id":"MTD-ACC-002","title":"Verify only Space Designer can edit same-space agent","priority":"P0","scenario_ids":["SEC-RBAC-003","SEC-RBAC-005","SEC-RBAC-006"],"jira_key":"TBD-MTD-ACC-002","jira_url":"#TBD-MTD-ACC-002"},{"manual_test_id":"MTD-RUN-001","title":"Space Designer executes a same-space agent","priority":"P0","scenario_ids":["RUN-001","RUN-002"],"jira_key":"TBD-MTD-RUN-001","jira_url":"#TBD-MTD-RUN-001"},{"manual_test_id":"MTD-RUN-002","title":"Space User executes a same-space agent","priority":"P0","scenario_ids":["RUN-001","RUN-002","SEC-RBAC-004"],"jira_key":"TBD-MTD-RUN-002","jira_url":"#TBD-MTD-RUN-002"},{"manual_test_id":"MTD-RUN-003","title":"Prevent Tenant Owner / Space Owner from executing agent","priority":"P0","scenario_ids":["SEC-RBAC-005","SEC-RBAC-006"],"jira_key":"TBD-MTD-RUN-003","jira_url":"#TBD-MTD-RUN-003"},{"manual_test_id":"MTD-RUN-004","title":"Verify own execution output/history isolation","priority":"P0","scenario_ids":["RUN-007"],"jira_key":"TBD-MTD-RUN-004","jira_url":"#TBD-MTD-RUN-004"},{"manual_test_id":"MTD-RUN-005","title":"Verify multi-turn runtime under inherited governance","priority":"P0","scenario_ids":["RUN-003","RUN-004"],"jira_key":"TBD-MTD-RUN-005","jira_url":"#TBD-MTD-RUN-005"},{"manual_test_id":"MTD-SRC-001","title":"Upload and use a valid personal source","priority":"P0","scenario_ids":["SRC-001","SRC-003","E2E-007"],"jira_key":"TBD-MTD-SRC-001","jira_url":"#TBD-MTD-SRC-001"},{"manual_test_id":"MTD-SRC-002","title":"Verify personal source is isolated from another user","priority":"P0","scenario_ids":["SRC-002"],"jira_key":"TBD-MTD-SRC-002","jira_url":"#TBD-MTD-SRC-002"},{"manual_test_id":"MTD-SRC-003","title":"Verify source selection changes runtime context","priority":"P0","scenario_ids":["SRC-009","SRC-010","SRC-012"],"jira_key":"TBD-MTD-SRC-003","jira_url":"#TBD-MTD-SRC-003"},{"manual_test_id":"MTD-GEN-001","title":"Generate output file","priority":"P0","scenario_ids":["GEN-001","E2E-008"],"jira_key":"TBD-MTD-GEN-001","jira_url":"#TBD-MTD-GEN-001"},{"manual_test_id":"MTD-GEN-002","title":"Retrieve and validate generated output","priority":"P0","scenario_ids":["GEN-002","GEN-009"],"jira_key":"TBD-MTD-GEN-002","jira_url":"#TBD-MTD-GEN-002"},{"manual_test_id":"MTD-ISO-001","title":"Prevent cross-space agent visibility/access","priority":"P0","scenario_ids":["MKT-004","SEC-RBAC-007","E2E-006"],"jira_key":"TBD-MTD-ISO-001","jira_url":"#TBD-MTD-ISO-001"},{"manual_test_id":"MTD-ISO-002","title":"Prevent cross-tenant agent access","priority":"P0","scenario_ids":["MKT-004","SEC-RBAC-008"],"jira_key":"TBD-MTD-ISO-002","jira_url":"#TBD-MTD-ISO-002"},{"manual_test_id":"MTD-PUB-001","title":"Unpublished draft unavailable to normal consumer","priority":"P0","scenario_ids":["PUB-001"],"jira_key":"TBD-MTD-PUB-001","jira_url":"#TBD-MTD-PUB-001"},{"manual_test_id":"MTD-PUB-002","title":"Publish/promote agent to permitted consumer scope","priority":"P0","scenario_ids":["PUB-003","PUB-010"],"jira_key":"TBD-MTD-PUB-002","jira_url":"#TBD-MTD-PUB-002"},{"manual_test_id":"MTD-PUB-003","title":"Verify Private Testing publication and visibility","priority":"P0","scenario_ids":["PUB-002","MKT-003","E2E-005"],"jira_key":"TBD-MTD-PUB-003","jira_url":"#TBD-MTD-PUB-003"},{"manual_test_id":"MTD-VER-001","title":"Verify frozen release and V1 → draft → V2 lifecycle","priority":"P0","scenario_ids":["PUB-009","VER-001","VER-002","VER-003","E2E-004"],"jira_key":"TBD-MTD-VER-001","jira_url":"#TBD-MTD-VER-001"},{"manual_test_id":"MTD-MKT-001","title":"Verify authorized Marketplace discovery after publication","priority":"P0","scenario_ids":["MKT-001","MKT-002"],"jira_key":"TBD-MTD-MKT-001","jira_url":"#TBD-MTD-MKT-001"},{"manual_test_id":"MTD-E2E-001","title":"Governed agent build and consumption","priority":"P0","scenario_ids":["E2E-001","E2E-002","E2E-003"],"jira_key":"TBD-MTD-E2E-001","jira_url":"#TBD-MTD-E2E-001"},{"manual_test_id":"MTD-E2E-002","title":"Runtime with personal source and generated artifact","priority":"P0","scenario_ids":["E2E-007","E2E-008"],"jira_key":"TBD-MTD-E2E-002","jira_url":"#TBD-MTD-E2E-002"}]}
+{
+  "schema_version": "ng-manual-definition-index-0.8",
+  "definitions": [
+    {
+      "manual_test_id": "MTD-PAT-001",
+      "title": "Verify required Patterns exist and are assignable",
+      "priority": "P0",
+      "scenario_ids": [
+        "GOV-PAT-001",
+        "GOV-PAT-002"
+      ],
+      "jira_key": "TBD-MTD-PAT-001",
+      "jira_url": "#TBD-MTD-PAT-001"
+    },
+    {
+      "manual_test_id": "MTD-PAT-002",
+      "title": "Verify shared Pattern rules govern downstream behaviour",
+      "priority": "P0",
+      "scenario_ids": [
+        "GOV-PAT-005",
+        "GOV-TEN-011",
+        "RUN-004"
+      ],
+      "jira_key": "TBD-MTD-PAT-002",
+      "jira_url": "#TBD-MTD-PAT-002"
+    },
+    {
+      "manual_test_id": "MTD-GOV-001",
+      "title": "Verify Low Risk Pattern is enabled for the tenant",
+      "priority": "P0",
+      "scenario_ids": [
+        "GOV-TEN-003"
+      ],
+      "jira_key": "TBD-MTD-GOV-001",
+      "jira_url": "#TBD-MTD-GOV-001"
+    },
+    {
+      "manual_test_id": "MTD-GOV-002",
+      "title": "Verify tenant controls permitted agent capabilities/types",
+      "priority": "P0",
+      "scenario_ids": [
+        "GOV-TEN-006",
+        "BLD-CFG-003",
+        "BLD-CFG-004"
+      ],
+      "jira_key": "TBD-MTD-GOV-002",
+      "jira_url": "#TBD-MTD-GOV-002"
+    },
+    {
+      "manual_test_id": "MTD-GOV-003",
+      "title": "Verify Tenant Owner creates a space and assigns Space Owner",
+      "priority": "P0",
+      "scenario_ids": [
+        "GOV-SPC-005",
+        "GOV-SPC-004"
+      ],
+      "jira_key": "TBD-MTD-GOV-003",
+      "jira_url": "#TBD-MTD-GOV-003"
+    },
+    {
+      "manual_test_id": "MTD-GOV-004",
+      "title": "Verify Space Owner assigns members and roles",
+      "priority": "P0",
+      "scenario_ids": [
+        "GOV-SPC-004",
+        "GOV-SPC-009"
+      ],
+      "jira_key": "TBD-MTD-GOV-004",
+      "jira_url": "#TBD-MTD-GOV-004"
+    },
+    {
+      "manual_test_id": "MTD-GOV-005",
+      "title": "Verify rollout tenants, default spaces and mandatory-space protection",
+      "priority": "P0",
+      "scenario_ids": [
+        "GOV-TEN-001",
+        "GOV-TEN-002",
+        "GOV-SPC-001"
+      ],
+      "jira_key": "TBD-MTD-GOV-005",
+      "jira_url": "#TBD-MTD-GOV-005"
+    },
+    {
+      "manual_test_id": "MTD-GOV-007",
+      "title": "Verify Space System Prompt governance hierarchy",
+      "priority": "P0",
+      "scenario_ids": [
+        "GOV-SPC-008",
+        "GOV-TEN-011",
+        "BLD-CFG-002",
+        "RUN-004"
+      ],
+      "jira_key": "TBD-MTD-GOV-007",
+      "jira_url": "#TBD-MTD-GOV-007"
+    },
+    {
+      "manual_test_id": "MTD-GOV-006",
+      "title": "Verify Tenant Member read-only tenant access and Space eligibility",
+      "priority": "P0",
+      "scenario_ids": [
+        "GOV-TEN-013",
+        "GOV-SPC-009"
+      ],
+      "jira_key": "TBD-MTD-GOV-006",
+      "jira_url": "#TBD-MTD-GOV-006"
+    },
+    {
+      "manual_test_id": "MTD-BLD-001",
+      "title": "Create an agent from an enabled pattern",
+      "priority": "P0",
+      "scenario_ids": [
+        "BLD-CRT-001",
+        "BLD-CRT-002",
+        "BLD-CRT-003"
+      ],
+      "jira_key": "TBD-MTD-BLD-001",
+      "jira_url": "#TBD-MTD-BLD-001"
+    },
+    {
+      "manual_test_id": "MTD-BLD-005",
+      "title": "Create agent through assisted natural-language idea",
+      "priority": "P0",
+      "scenario_ids": [
+        "BLD-CRT-004",
+        "BLD-CRT-005"
+      ],
+      "jira_key": "TBD-MTD-BLD-005",
+      "jira_url": "#TBD-MTD-BLD-005"
+    },
+    {
+      "manual_test_id": "MTD-BLD-006",
+      "title": "Create agent from scratch with required-field validation",
+      "priority": "P0",
+      "scenario_ids": [
+        "BLD-CRT-006",
+        "BLD-CRT-007"
+      ],
+      "jira_key": "TBD-MTD-BLD-006",
+      "jira_url": "#TBD-MTD-BLD-006"
+    },
+    {
+      "manual_test_id": "MTD-BLD-007",
+      "title": "Cancel agent creation without side effects",
+      "priority": "P0",
+      "scenario_ids": [
+        "BLD-CRT-008"
+      ],
+      "jira_key": "TBD-MTD-BLD-007",
+      "jira_url": "#TBD-MTD-BLD-007"
+    },
+    {
+      "manual_test_id": "MTD-BLD-002",
+      "title": "Configure agent instructions within Pattern governance",
+      "priority": "P0",
+      "scenario_ids": [
+        "BLD-CFG-002",
+        "GOV-TEN-011",
+        "SEC-RBAC-011"
+      ],
+      "jira_key": "TBD-MTD-BLD-002",
+      "jira_url": "#TBD-MTD-BLD-002"
+    },
+    {
+      "manual_test_id": "MTD-BLD-003",
+      "title": "Attach approved MCP tool / skill",
+      "priority": "P0",
+      "scenario_ids": [
+        "BLD-CFG-003",
+        "BLD-CFG-004",
+        "GOV-TEN-010",
+        "BLD-CFG-010"
+      ],
+      "jira_key": "TBD-MTD-BLD-003",
+      "jira_url": "#TBD-MTD-BLD-003"
+    },
+    {
+      "manual_test_id": "MTD-BLD-004",
+      "title": "Prevent unapproved MCP / skill / API use",
+      "priority": "P0",
+      "scenario_ids": [
+        "BLD-CFG-003",
+        "BLD-CFG-004",
+        "GOV-TEN-010",
+        "SEC-RBAC-009",
+        "SEC-RBAC-010"
+      ],
+      "jira_key": "TBD-MTD-BLD-004",
+      "jira_url": "#TBD-MTD-BLD-004"
+    },
+    {
+      "manual_test_id": "MTD-ACC-001",
+      "title": "Verify permitted roles can view same-space agents",
+      "priority": "P0",
+      "scenario_ids": [
+        "SEC-RBAC-003",
+        "SEC-RBAC-004"
+      ],
+      "jira_key": "TBD-MTD-ACC-001",
+      "jira_url": "#TBD-MTD-ACC-001"
+    },
+    {
+      "manual_test_id": "MTD-ACC-002",
+      "title": "Verify only Space Designer can edit same-space agent",
+      "priority": "P0",
+      "scenario_ids": [
+        "SEC-RBAC-003",
+        "SEC-RBAC-005",
+        "SEC-RBAC-006"
+      ],
+      "jira_key": "TBD-MTD-ACC-002",
+      "jira_url": "#TBD-MTD-ACC-002"
+    },
+    {
+      "manual_test_id": "MTD-RUN-001",
+      "title": "Space Designer executes a same-space agent",
+      "priority": "P0",
+      "scenario_ids": [
+        "RUN-001",
+        "RUN-002"
+      ],
+      "jira_key": "TBD-MTD-RUN-001",
+      "jira_url": "#TBD-MTD-RUN-001"
+    },
+    {
+      "manual_test_id": "MTD-RUN-002",
+      "title": "Space User executes a same-space agent",
+      "priority": "P0",
+      "scenario_ids": [
+        "RUN-001",
+        "RUN-002",
+        "SEC-RBAC-004"
+      ],
+      "jira_key": "TBD-MTD-RUN-002",
+      "jira_url": "#TBD-MTD-RUN-002"
+    },
+    {
+      "manual_test_id": "MTD-RUN-003",
+      "title": "Prevent Tenant Owner / Space Owner from executing agent",
+      "priority": "P0",
+      "scenario_ids": [
+        "SEC-RBAC-005",
+        "SEC-RBAC-006"
+      ],
+      "jira_key": "TBD-MTD-RUN-003",
+      "jira_url": "#TBD-MTD-RUN-003"
+    },
+    {
+      "manual_test_id": "MTD-RUN-004",
+      "title": "Verify own execution output/history isolation",
+      "priority": "P0",
+      "scenario_ids": [
+        "RUN-007"
+      ],
+      "jira_key": "TBD-MTD-RUN-004",
+      "jira_url": "#TBD-MTD-RUN-004"
+    },
+    {
+      "manual_test_id": "MTD-RUN-005",
+      "title": "Verify multi-turn runtime under inherited governance",
+      "priority": "P0",
+      "scenario_ids": [
+        "RUN-003",
+        "RUN-004"
+      ],
+      "jira_key": "TBD-MTD-RUN-005",
+      "jira_url": "#TBD-MTD-RUN-005"
+    },
+    {
+      "manual_test_id": "MTD-SRC-001",
+      "title": "Upload and use a valid personal source",
+      "priority": "P0",
+      "scenario_ids": [
+        "SRC-001",
+        "SRC-003",
+        "E2E-007"
+      ],
+      "jira_key": "TBD-MTD-SRC-001",
+      "jira_url": "#TBD-MTD-SRC-001"
+    },
+    {
+      "manual_test_id": "MTD-SRC-002",
+      "title": "Verify personal source is isolated from another user",
+      "priority": "P0",
+      "scenario_ids": [
+        "SRC-002"
+      ],
+      "jira_key": "TBD-MTD-SRC-002",
+      "jira_url": "#TBD-MTD-SRC-002"
+    },
+    {
+      "manual_test_id": "MTD-SRC-003",
+      "title": "Verify source selection changes runtime context",
+      "priority": "P0",
+      "scenario_ids": [
+        "SRC-009",
+        "SRC-010",
+        "SRC-012"
+      ],
+      "jira_key": "TBD-MTD-SRC-003",
+      "jira_url": "#TBD-MTD-SRC-003"
+    },
+    {
+      "manual_test_id": "MTD-GEN-001",
+      "title": "Generate output file",
+      "priority": "P0",
+      "scenario_ids": [
+        "GEN-001",
+        "E2E-008"
+      ],
+      "jira_key": "TBD-MTD-GEN-001",
+      "jira_url": "#TBD-MTD-GEN-001"
+    },
+    {
+      "manual_test_id": "MTD-GEN-002",
+      "title": "Retrieve and validate generated output",
+      "priority": "P0",
+      "scenario_ids": [
+        "GEN-002",
+        "GEN-009"
+      ],
+      "jira_key": "TBD-MTD-GEN-002",
+      "jira_url": "#TBD-MTD-GEN-002"
+    },
+    {
+      "manual_test_id": "MTD-ISO-001",
+      "title": "Prevent cross-space agent visibility/access",
+      "priority": "P0",
+      "scenario_ids": [
+        "MKT-004",
+        "SEC-RBAC-007",
+        "E2E-006"
+      ],
+      "jira_key": "TBD-MTD-ISO-001",
+      "jira_url": "#TBD-MTD-ISO-001"
+    },
+    {
+      "manual_test_id": "MTD-ISO-002",
+      "title": "Prevent cross-tenant agent access",
+      "priority": "P0",
+      "scenario_ids": [
+        "MKT-004",
+        "SEC-RBAC-008"
+      ],
+      "jira_key": "TBD-MTD-ISO-002",
+      "jira_url": "#TBD-MTD-ISO-002"
+    },
+    {
+      "manual_test_id": "MTD-PUB-001",
+      "title": "Unpublished draft unavailable to normal consumer",
+      "priority": "P0",
+      "scenario_ids": [
+        "PUB-001"
+      ],
+      "jira_key": "TBD-MTD-PUB-001",
+      "jira_url": "#TBD-MTD-PUB-001"
+    },
+    {
+      "manual_test_id": "MTD-PUB-002",
+      "title": "Publish Agent version to the Space Agent Marketplace",
+      "priority": "P0",
+      "scenario_ids": [
+        "PUB-002",
+        "PUB-003",
+        "PUB-010"
+      ],
+      "jira_key": "TBD-MTD-PUB-002",
+      "jira_url": "#TBD-MTD-PUB-002"
+    },
+    {
+      "manual_test_id": "MTD-PUB-003",
+      "title": "Verify publication does not cross Space boundary",
+      "priority": "P0",
+      "scenario_ids": [
+        "PUB-003",
+        "PUB-010",
+        "MKT-003",
+        "MKT-004"
+      ],
+      "jira_key": "TBD-MTD-PUB-003",
+      "jira_url": "#TBD-MTD-PUB-003"
+    },
+    {
+      "manual_test_id": "MTD-VER-001",
+      "title": "Verify frozen release and V1 → draft → V2 lifecycle",
+      "priority": "P0",
+      "scenario_ids": [
+        "PUB-009",
+        "VER-001",
+        "VER-002",
+        "VER-003",
+        "E2E-004"
+      ],
+      "jira_key": "TBD-MTD-VER-001",
+      "jira_url": "#TBD-MTD-VER-001"
+    },
+    {
+      "manual_test_id": "MTD-MKT-001",
+      "title": "Verify authorized Space Marketplace discovery after publication",
+      "priority": "P0",
+      "scenario_ids": [
+        "MKT-001",
+        "MKT-002"
+      ],
+      "jira_key": "TBD-MTD-MKT-001",
+      "jira_url": "#TBD-MTD-MKT-001"
+    },
+    {
+      "manual_test_id": "MTD-E2E-001",
+      "title": "Governed agent build and consumption",
+      "priority": "P0",
+      "scenario_ids": [
+        "E2E-001",
+        "E2E-002",
+        "E2E-003"
+      ],
+      "jira_key": "TBD-MTD-E2E-001",
+      "jira_url": "#TBD-MTD-E2E-001"
+    },
+    {
+      "manual_test_id": "MTD-E2E-002",
+      "title": "Runtime with personal source and generated artifact",
+      "priority": "P0",
+      "scenario_ids": [
+        "E2E-007",
+        "E2E-008"
+      ],
+      "jira_key": "TBD-MTD-E2E-002",
+      "jira_url": "#TBD-MTD-E2E-002"
+    }
+  ]
+}
